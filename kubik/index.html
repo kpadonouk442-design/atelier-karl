@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr" data-site="kubik">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KUBIK — Bureaux et modules dépliables</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="KUBIK, marque de modules dépliables et containers aménagés. dépliage, gammes, configurateur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f2; --surface:#ffffff; --wash:#eae8e1; --ink:#12161a; --mute:#5f666d;
+  --copper:#d6511c; --steel:#161b21; --line:rgba(18,22,26,.13);
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:clamp(16px,3.6vw,54px); color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.55 var(--body)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--copper);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+.tag{display:inline-flex;align-items:center;gap:10px;font:700 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--copper)}
+.tag::before{content:"";width:20px;height:2px;background:var(--copper)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.95em 1.6em;background:var(--copper);color:#fff;font-weight:600;font-size:.9rem;border:0;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .25s,transform .2s}
+.btn:hover{background:var(--steel)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{background:var(--steel);color:#fff;box-shadow:none}
+
+.demo{background:var(--steel);color:#b9c0c7;font-size:.76rem;padding:.5em var(--gut);text-align:center}
+.demo b{color:#fff}
+
+/* Nav + logo container réaliste */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px var(--gut);background:rgba(246,245,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px}
+.logo svg{width:42px;height:32px;flex:none}
+.logo span{font:700 1.32rem/1 var(--display);letter-spacing:-.02em;color:var(--steel)}
+.logo small{display:block;font:600 .62rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:2px}
+.nav ul{display:flex;gap:clamp(14px,2vw,28px);list-style:none;padding:0;font-size:.9rem;font-weight:600}
+.nav ul a{padding:4px 0;white-space:nowrap;color:var(--mute);transition:color .2s}
+.nav ul a:hover{color:var(--ink)}
+@media(max-width:920px){.nav ul{display:none}}
+
+/* Vrai Hero d'accueil en haut */
+.hero{padding:clamp(36px,5vw,74px) var(--gut) clamp(44px,6vw,84px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4.5vw,64px);align-items:center}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.9rem);margin-top:14px;color:var(--steel)}
+.hero h1 em{font-style:normal;color:var(--copper)}
+.hero p{color:var(--mute);font-size:1.06rem;max-width:46ch;margin:18px 0 26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-pic{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:var(--steel);box-shadow:0 32px 70px -28px rgba(18,22,26,.35)}
+.hero-pic img{width:100%;height:100%;object-fit:cover}
+.hero-badge{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-radius:12px;padding:11px 16px;font-size:.82rem;box-shadow:0 12px 28px -12px rgba(0,0,0,.3)}
+.hero-badge b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--steel)}
+.hero-badge span{color:var(--mute)}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+
+/* KPIs */
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;background:var(--steel);color:#fff;padding:28px var(--gut)}
+.kpi div b{display:block;font:700 clamp(1.7rem,3vw,2.6rem)/1 var(--display);font-variant-numeric:tabular-nums}
+.kpi div span{font-size:.8rem;color:#aeb6be;display:block;margin-top:4px}
+.kpi div b sup{color:var(--copper);font-size:.5em;vertical-align:top}
+@media(max-width:760px){.kpi{grid-template-columns:1fr 1fr}}
+
+/* Démonstration du dépliage (plus bas dans la page, avec de vraies photos) */
+.demo-seq{padding:clamp(60px,8vw,110px) var(--gut);background:#fff;border-block:1px solid var(--line);display:grid;gap:32px}
+.demo-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap}
+.demo-head h2{font-size:clamp(2rem,4.6vw,3.8rem);color:var(--steel)}
+.demo-head p{color:var(--mute);max-width:44ch}
+.unfold-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3.5vw,50px);align-items:center}
+.unfold-stage{position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:var(--steel);box-shadow:0 24px 60px -24px rgba(18,22,26,.35)}
+.unfold-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .5s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.unfold-stage img.on{opacity:1;transform:scale(1)}
+.unfold-cap{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;background:rgba(18,22,26,.86);backdrop-filter:blur(8px);color:#fff;border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.86rem}
+.unfold-cap b{color:var(--copper);text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.unfold-steps{display:grid;gap:10px}
+.ustep{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding:16px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s}
+.ustep:hover{border-color:var(--steel)}
+.ustep[aria-selected=true]{background:var(--steel);color:#fff;border-color:var(--steel)}
+.ustep small{font:700 .78rem/1 var(--display);color:var(--copper);padding-top:4px}
+.ustep h3{font-size:1.25rem}
+.ustep p{grid-column:2;font-size:.88rem;color:var(--mute)}
+.ustep[aria-selected=true] p{color:#c5ccd3}
+@media(max-width:860px){.unfold-grid{grid-template-columns:1fr}}
+
+/* Quatre gammes */
+.range{padding:clamp(60px,8vw,110px) var(--gut);display:grid;gap:28px}
+.range-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap}
+.range-head h2{font-size:clamp(2rem,4.6vw,3.8rem);color:var(--steel)}
+.range-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
+.mod{position:relative;overflow:hidden;border-radius:14px;background:var(--steel);color:#fff;display:grid;align-content:end;min-height:clamp(300px,34vw,390px);padding:20px;isolation:isolate}
+.mod img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;filter:brightness(.72);transition:filter .5s,transform .9s cubic-bezier(.16,1,.3,1)}
+.mod:hover img{filter:brightness(.88);transform:scale(1.06)}
+.mod::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(18,22,26,.92),transparent 62%)}
+.mod h3{font-size:1.55rem}
+.mod p{font-size:.88rem;color:#d6dce1;margin-top:6px}
+.mod .from{font-size:.78rem;color:#f3a888;font-weight:600;margin-bottom:4px}
+.mod .n{position:absolute;top:14px;left:14px;font:700 .74rem var(--display);background:var(--copper);padding:4px 10px;border-radius:999px;letter-spacing:.08em}
+@media(max-width:1024px){.range-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.range-grid{grid-template-columns:1fr}}
+
+/* Configurateur */
+.cfg{background:var(--steel);color:#fff;padding:clamp(60px,8vw,110px) var(--gut);display:grid;gap:34px}
+.cfg-head h2{font-size:clamp(2rem,4.6vw,3.8rem)}
+.cfg-head p{color:#b9c0c5;max-width:48ch;margin-top:10px}
+.cfg-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,54px);align-items:start}
+#cfg{display:grid;gap:22px}
+#cfg fieldset{border:0;padding:0;display:grid;gap:10px}
+#cfg legend{font:700 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#9aa2a8}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:inline-flex;align-items:center;gap:8px;padding:.7em 1.15em;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16);cursor:pointer;font-size:.9rem;font-weight:500;transition:background .2s,box-shadow .2s}
+.opt input:checked+span{background:var(--copper);box-shadow:inset 0 0 0 1.5px var(--copper);color:#fff}
+.qty{display:inline-flex;align-items:center;gap:12px}
+.qty button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.2rem;cursor:pointer}
+.qty button:hover{background:var(--copper)}
+.qty b{min-width:2ch;text-align:center;font:700 1.4rem var(--display);font-variant-numeric:tabular-nums}
+.quote{background:#fff;color:var(--ink);border-radius:16px;padding:clamp(20px,2.8vw,32px);position:sticky;top:84px;border-top:6px solid var(--copper);display:grid;gap:12px}
+.quote .prev{aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:var(--wash)}
+.quote .prev img{width:100%;height:100%;object-fit:cover}
+.quote h3{font-size:1.45rem;color:var(--steel)}
+.quote .big{font:700 clamp(1.9rem,3.4vw,2.6rem)/1 var(--display);color:var(--steel);font-variant-numeric:tabular-nums}
+.quote .per{font-size:.82rem;color:var(--mute);margin-top:-6px}
+.quote dl{display:grid;grid-template-columns:1fr auto;gap:0;font-size:.9rem}
+.quote dt,.quote dd{padding:8px 0;border-top:1px solid var(--line)}
+.quote dd{font-weight:600;font-variant-numeric:tabular-nums}
+.quote .note{font-size:.76rem;color:var(--mute)}
+@media(max-width:860px){.cfg-grid{grid-template-columns:1fr}}
+
+/* Caractéristiques simples */
+.spec{padding:clamp(60px,8vw,110px) var(--gut);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,4vw,60px);align-items:start}
+.spec h2{font-size:clamp(2rem,4.6vw,3.6rem);color:var(--steel)}
+.spec table{width:100%;border-collapse:collapse;font-size:.94rem;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.spec th,.spec td{padding:14px 18px;border-bottom:1px solid var(--line);text-align:left}
+.spec tr:last-child th,.spec tr:last-child td{border-bottom:0}
+.spec th{color:var(--mute);font-weight:500;width:42%}
+.spec td{font-weight:600;color:var(--steel)}
+@media(max-width:820px){.spec{grid-template-columns:1fr}}
+
+/* Modules en service : UNE SEULE LIGNE (4 colonnes) */
+.ref{padding:0 var(--gut) clamp(60px,8vw,110px);display:grid;gap:24px}
+.ref-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,20px)}
+.ref figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--steel)}
+.ref img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.ref figure:hover img{transform:scale(1.06)}
+.ref figcaption{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(18,22,26,.86);backdrop-filter:blur(6px);color:#fff;padding:8px 12px;border-radius:10px;font-size:.78rem;font-weight:600}
+@media(max-width:980px){.ref-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ref-grid{grid-template-columns:1fr}}
+
+/* CTA final */
+.cta{background:var(--wash);padding:clamp(54px,7vw,96px) var(--gut);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.cta h2{font-size:clamp(1.9rem,4vw,3.1rem);color:var(--steel);max-width:20ch}
+.cta p{color:var(--mute);margin-top:8px;max-width:46ch}
+
+footer{background:var(--steel);color:#aeb6be;padding:clamp(34px,5vw,60px) var(--gut) 22px;display:grid;gap:24px;font-size:.88rem}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px}
+.fgrid b{display:block;color:#fff;margin-bottom:7px;font-family:var(--display)}
+.legal{font-size:.74rem;border-top:1px solid rgba(255,255,255,.14);padding-top:15px}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+<link rel="stylesheet" href="../mobile-compact.css"><script src="../mobile-compact.js" defer></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="#top">
+    <svg viewBox="0 0 44 34" fill="none" aria-hidden="true">
+      <path d="M4 9 22 2l18 7v16l-18 7L4 25V9Z" fill="#161b21" stroke="#161b21" stroke-width="1.5"/>
+      <path d="M4 9 22 16l18-7" stroke="#d6511c" stroke-width="2"/>
+      <path d="M22 16v16" stroke="#d6511c" stroke-width="2"/>
+      <path d="M8 14v9M12 16v9M16 17.5v9" stroke="#f6f5f2" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M27 17.5l9-3.6v10l-9 3.6v-10Z" fill="#d6511c" fill-opacity=".9"/>
+    </svg>
+    <div><span>KUBIK</span><small>Containers dépliables</small></div>
+  </a>
+  <nav aria-label="Navigation"><ul>
+    <li><a href="#deplie">Comment ça se déplie</a></li><li><a href="#gammes">Modèles</a></li><li><a href="#configurateur">Configurateur</a></li><li><a href="#chantiers">En service</a></li>
+  </ul></nav>
+  <button class="btn" type="button" data-open-quote>Demander un devis</button>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div>
+    <span class="tag">Bureaux &amp; locaux modulaires · Cotonou</span>
+    <h1>Vos bureaux livrés <em>prêts à travailler</em> en 4 heures.</h1>
+    <p>Fini les mois de chantier. Nos modules en acier arrivent repliés par camion, se déplient sur votre terrain et sont raccordés dans la journée.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#deplie">Voir comment ça se déplie</a>
+      <a class="btn ghost" href="#configurateur">Calculer mon prix</a>
+    </div>
+  </div>
+  <div class="hero-pic">
+    <img src="img/real3.png" alt="Container bureau KUBIK installé avec grande baie vitrée">
+    <div class="hero-badge"><b>14 à 28 m²</b><span>Isolés, climatisés et garantis 5 ans</span></div>
+  </div>
+</section>
+
+<div class="kpi">
+  <div><b>4 h</b><span>d'installation sur site</span></div>
+  <div><b>3</b><span>modules par camion</span></div>
+  <div><b>14–28 m<sup>2</sup></b><span>de surface utile</span></div>
+  <div><b>10 j</b><span>de délai moyen</span></div>
+</div>
+
+<!-- Démonstration du dépliage (plus bas dans la page, avec vraies photos) -->
+<section class="demo-seq" id="deplie">
+  <div class="demo-head">
+    <div><span class="tag">Démonstration en 4 étapes</span><h2>Un vrai container qui se déplie</h2></div>
+    <p>Cliquez sur chaque étape pour voir comment un container standard se transforme en espace de travail vitré.</p>
+  </div>
+  <div class="unfold-grid">
+    <div class="unfold-stage" id="uStage">
+      <img src="img/hero.webp" alt="Containers fermés prêts pour le transport" class="on" data-u="0">
+      <img src="img/real4.jpg" alt="Container avec paroi latérale et auvent ouverts" data-u="1">
+      <img src="img/real3.png" alt="Module vitré et isolé posé sur gravier" data-u="2">
+      <img src="img/real5.png" alt="Ensemble modulaire de bureaux en service" data-u="3">
+      <div class="unfold-cap"><b id="uTag">Étape 01</b><span id="uCap">Transport compact par camion standard, portes verrouillées</span></div>
+    </div>
+    <div class="unfold-steps" id="uSteps" role="tablist" aria-label="Étapes de dépliage">
+      <button class="ustep" role="tab" aria-selected="true" data-u="0" data-cap="Transport compact par camion standard, portes verrouillées">
+        <small>01</small><h3>Livré fermé</h3>
+        <p>Le module arrive plié au format container classique. Un seul camion peut transporter jusqu'à trois unités d'un coup.</p>
+      </button>
+      <button class="ustep" role="tab" aria-selected="false" data-u="1" data-cap="Ouverture des parois et de l'auvent sans grue lourde">
+        <small>02</small><h3>Déplié sur place</h3>
+        <p>En 4 heures, les parois latérales s'ouvrent, le plancher se met à niveau et l'auvent se verrouille.</p>
+      </button>
+      <button class="ustep" role="tab" aria-selected="false" data-u="2" data-cap="Baies vitrées, isolation thermique et tableau électrique prêts">
+        <small>03</small><h3>Isolé et vitré</h3>
+        <p>Les grandes baies vitrées sont déjà montées, avec isolation contre la chaleur et prises électriques prêtes à brancher.</p>
+      </button>
+      <button class="ustep" role="tab" aria-selected="false" data-u="3" data-cap="Un ou plusieurs modules assemblés selon votre besoin">
+        <small>04</small><h3>Prêt à travailler</h3>
+        <p>Vous posez vos bureaux et vous commencez. Besoin d'agrandir ? On accole un deuxième module quand vous voulez.</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="range" id="gammes">
+  <div class="range-head"><div><span class="tag">Nos modèles</span><h2>Quatre usages prêts à l'emploi</h2></div><a class="btn ghost" href="#configurateur">Configurer le vôtre</a></div>
+  <div class="range-grid">
+    <article class="mod" tabindex="0"><img src="img/real3.png" alt="Bureau vitré KUBIK"><span class="n">K-01</span><span class="from">dès 7,5 M FCFA</span><h3>Bureau</h3><p>Bureau de direction, accueil ou salle de réunion lumineuse avec climatisation et prises réseau.</p></article>
+    <article class="mod" tabindex="0"><img src="img/sanitaire2.webp" alt="Bloc sanitaire carrelé"><span class="n">K-02</span><span class="from">dès 9,8 M FCFA</span><h3>Sanitaire</h3><p>Douches, WC et lavabos faciles à nettoyer, prêts à raccorder à votre arrivée d'eau.</p></article>
+    <article class="mod" tabindex="0"><img src="img/real6.jpg" alt="Base vie de chantier superposée"><span class="n">K-03</span><span class="from">dès 6,9 M FCFA</span><h3>Vestiaire</h3><p>Casiers, bancs et bonne aération pour accueillir vos équipes au sec toute l'année.</p></article>
+    <article class="mod" tabindex="0"><img src="img/real4.jpg" alt="Showroom avec auvent relevable"><span class="n">K-04</span><span class="from">dès 8,2 M FCFA</span><h3>Showroom / Café</h3><p>Grande ouverture avec auvent extérieur pour recevoir vos clients ou installer un point de vente.</p></article>
+  </div>
+</section>
+
+<section class="cfg" id="configurateur">
+  <div class="cfg-head"><span class="tag" style="color:#9aa2a8">Simulateur de prix</span><h2>Configurez votre module</h2><p>Choisissez votre usage, la taille et vos options pour obtenir un budget immédiat.</p></div>
+  <div class="cfg-grid">
+    <form id="cfg" novalidate>
+      <fieldset><legend>Usage</legend><div class="opts" id="fUsage"></div></fieldset>
+      <fieldset><legend>Surface souhaitée</legend><div class="opts" id="fSurf"></div></fieldset>
+      <fieldset><legend>Équipements en plus</legend><div class="opts" id="fOpt"></div></fieldset>
+      <fieldset><legend>Formule</legend><div class="opts" id="fMode"></div></fieldset>
+      <fieldset><legend>Quantité de modules</legend>
+        <div class="qty"><button type="button" id="qm" aria-label="Retirer un module">−</button><b id="qv" aria-live="polite">1</b><button type="button" id="qp" aria-label="Ajouter un module">+</button></div>
+      </fieldset>
+    </form>
+    <aside class="quote">
+      <div class="prev"><img src="img/real3.png" alt="Aperçu du module sélectionné" id="prevImg"></div>
+      <h3 id="qTitle">Bureau 14 m²</h3>
+      <div class="big" id="qPrice">—</div>
+      <div class="per" id="qPer">estimation indicative</div>
+      <dl id="qLines"></dl>
+      <button class="btn" type="button" data-open-quote>Recevoir ce devis</button>
+      <p class="note">Démonstration : les prix affichés sont des estimations pour le site.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="spec" id="specs">
+  <div><span class="tag">L'essentiel en clair</span><h2>Simple, solide et isolé</h2><p style="color:var(--mute);margin-top:14px;max-width:40ch">Chaque module est fabriqué sur commande et livré complet. Vous n'avez ni maçonnerie ni gros travaux à prévoir.</p></div>
+  <table>
+    <tbody>
+      <tr><th scope="row">Surface ouverte</th><td>14 m², 21 m² ou 28 m² selon modèle</td></tr>
+      <tr><th scope="row">Temps de montage</th><td>4 heures à 2 personnes</td></tr>
+      <tr><th scope="row">Isolation</th><td>Murs et toit isolés contre la chaleur</td></tr>
+      <tr><th scope="row">Électricité</th><td>Tableau électrique, 6 prises et éclairage LED inclus</td></tr>
+      <tr><th scope="row">Structure</th><td>Acier marin traité contre la rouille</td></tr>
+      <tr><th scope="row">Garantie</th><td>5 ans sur la structure, 2 ans sur les équipements</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="ref" id="chantiers">
+  <div class="range-head"><div><span class="tag">Réalisations</span><h2 style="font-size:clamp(2rem,4.4vw,3.4rem)">Modules en service</h2></div></div>
+  <div class="ref-grid">
+    <figure><img src="img/real3.png" alt="Bureau de direction vitré installé à Cotonou"><figcaption>Bureau de direction · Cotonou</figcaption></figure>
+    <figure><img src="img/real4.jpg" alt="Point de vente avec auvent relevé à Porto-Novo"><figcaption>Showroom avec auvent · Porto-Novo</figcaption></figure>
+    <figure><img src="img/real6.jpg" alt="Bureaux de chantier superposés à Abomey-Calavi"><figcaption>Base vie de chantier · Abomey-Calavi</figcaption></figure>
+    <figure><img src="img/sanitaire2.webp" alt="Bloc sanitaire carrelé à Parakou"><figcaption>Bloc sanitaire · Parakou</figcaption></figure>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div>
+    <h2>Un projet de bureau ou de base vie ?</h2>
+    <p>Expliquez-nous votre besoin en deux minutes : nous vous répondons sous 48 h avec un prix ferme.</p>
+  </div>
+  <button class="btn" type="button" data-open-quote>Demander un rappel</button>
+</section>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><b>KUBIK</b>Modules dépliables<br>Zone industrielle, Cotonou</div>
+    <div><b>Modèles</b>Bureau · Sanitaire<br>Vestiaire · Showroom</div>
+    <div><b>Formules</b>Location mensuelle<br>Achat · Livraison &amp; pose</div>
+    <div><b>Contact</b>contact@kubik.example<br>+229 00 00 00 00</div>
+  </div>
+</footer>
+
+<dialog id="quoteDlg" style="border:0;padding:0;max-width:min(540px,94vw);width:100%;margin:auto;background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--copper);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)" aria-labelledby="qdTitle">
+  <div style="padding:clamp(22px,4vw,34px);display:grid;gap:14px;position:relative">
+    <button type="button" id="qdX" aria-label="Fermer" style="position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:1.1rem">×</button>
+    <span class="tag">Devis &amp; rappel · KUBIK</span>
+    <h2 id="qdTitle" style="font-size:clamp(1.6rem,3.5vw,2.2rem)">Recevoir votre chiffrage</h2>
+    <p id="qdSummary" style="font-size:.9rem;background:var(--bg);padding:10px 12px;border-radius:8px;border-left:3px solid var(--copper)"></p>
+    <form id="qdForm" style="display:grid;gap:10px">
+      <label style="display:grid;gap:4px;font-size:.82rem;font-weight:600">Nom / Entreprise<input type="text" id="qdName" required placeholder="Votre nom ou société" style="padding:.7em .9em;border:1.5px solid var(--line);border-radius:8px;background:#fff"></label>
+      <label style="display:grid;gap:4px;font-size:.82rem;font-weight:600">Téléphone / WhatsApp<input type="tel" id="qdTel" required placeholder="+229 …" style="padding:.7em .9em;border:1.5px solid var(--line);border-radius:8px;background:#fff"></label>
+      <label style="display:grid;gap:4px;font-size:.82rem;font-weight:600">Ville d'installation<input type="text" id="qdCity" placeholder="Cotonou, Calavi, Parakou…" style="padding:.7em .9em;border:1.5px solid var(--line);border-radius:8px;background:#fff"></label>
+      <button class="btn" type="submit">Envoyer la demande</button>
+    </form>
+    <div id="qdDone" style="display:none;background:var(--bg);padding:14px;border-radius:8px;border-left:4px solid var(--copper);gap:6px">
+      <b id="qdRef" style="font-family:var(--display);font-size:1.25rem"></b>
+      <p style="font-size:.88rem;color:var(--mute)">Demande enregistrée en local (démonstration).</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/ | /g,' ')+' FCFA';
+
+/* Démo du dépliage (4 étapes avec vraies photos) */
+const uSteps=$$('#uSteps .ustep'), uImgs=$$('#uStage img');
+function setUnfold(i){
+  uSteps.forEach(b=>b.setAttribute('aria-selected',b.dataset.u===i));
+  uImgs.forEach(im=>im.classList.toggle('on',im.dataset.u===i));
+  $('#uTag').textContent='Étape 0'+(+i+1);
+  const active=uSteps.find(b=>b.dataset.u===i);
+  if(active) $('#uCap').textContent=active.dataset.cap;
+}
+uSteps.forEach(b=>b.addEventListener('click',()=>setUnfold(b.dataset.u)));
+
+/* Configurateur */
+const USAGE=[
+  {id:'bur',n:'Bureau',base:7500000,img:'real3'},
+  {id:'san',n:'Sanitaire',base:9800000,img:'sanitaire2'},
+  {id:'ves',n:'Vestiaire',base:6900000,img:'real6'},
+  {id:'sho',n:'Showroom / Café',base:8200000,img:'real4'}
+];
+const SURF=[{id:14,n:'14 m²',m:1},{id:21,n:'21 m²',m:1.35},{id:28,n:'28 m²',m:1.72}];
+const OPT=[{id:'clim',n:'Climatisation',p:925000},{id:'sol',n:'Panneaux solaires',p:2400000},{id:'terr',n:'Terrasse bois',p:1150000},{id:'pmr',n:'Rampe d’accès',p:550000}];
+const MODE=[{id:'buy',n:'Achat'},{id:'rent',n:'Location mensuelle'}];
+
+const S={u:'bur',s:14,opts:new Set(['clim']),m:'buy',qty:1};
+$('#fUsage').innerHTML=USAGE.map(u=>`<label class="opt"><input type="radio" name="u" value="${u.id}" ${u.id===S.u?'checked':''}><span>${u.n}</span></label>`).join('');
+$('#fSurf').innerHTML=SURF.map(s=>`<label class="opt"><input type="radio" name="s" value="${s.id}" ${s.id===S.s?'checked':''}><span>${s.n}</span></label>`).join('');
+$('#fOpt').innerHTML=OPT.map(o=>`<label class="opt"><input type="checkbox" value="${o.id}" ${S.opts.has(o.id)?'checked':''}><span>${o.n}</span></label>`).join('');
+$('#fMode').innerHTML=MODE.map(m=>`<label class="opt"><input type="radio" name="m" value="${m.id}" ${m.id===S.m?'checked':''}><span>${m.n}</span></label>`).join('');
+
+function renderQuote(){
+  const u=USAGE.find(x=>x.id===S.u), s=SURF.find(x=>x.id===S.s);
+  const ext=u.img==='sanitaire2'?'webp':(u.img==='real3'?'png':'jpg');
+  $('#prevImg').src=`img/${u.img}.${ext}`;
+  const unit=Math.round((u.base*s.m)/50000)*50000;
+  let opts=0; const rows=[];
+  S.opts.forEach(id=>{const o=OPT.find(x=>x.id===id);opts+=o.p;rows.push([o.n,fcfa(o.p*S.qty)]);});
+  const total=(unit+opts)*S.qty, rent=Math.round((total*0.024)/10000)*10000;
+  $('#qTitle').textContent=`${u.n} ${s.n}${S.qty>1?' × '+S.qty:''}`;
+  $('#qPrice').textContent=S.m==='buy'?fcfa(total):fcfa(rent)+'/mois';
+  $('#qPer').textContent=S.m==='buy'?'estimation achat TTC':'location · engagement 12 mois';
+  $('#qLines').innerHTML=`<dt>Module de base (${S.qty} × ${s.n})</dt><dd>${fcfa(unit*S.qty)}</dd>`+rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')+`<dt>Livraison Cotonou</dt><dd>Offerte</dd>`;
+}
+$('#fUsage').addEventListener('change',e=>{S.u=e.target.value;renderQuote();});
+$('#fSurf').addEventListener('change',e=>{S.s=+e.target.value;renderQuote();});
+$('#fOpt').addEventListener('change',e=>{e.target.checked?S.opts.add(e.target.value):S.opts.delete(e.target.value);renderQuote();});
+$('#fMode').addEventListener('change',e=>{S.m=e.target.value;renderQuote();});
+$('#qm').onclick=()=>{if(S.qty>1){S.qty--;$('#qv').textContent=S.qty;renderQuote();}};
+$('#qp').onclick=()=>{if(S.qty<12){S.qty++;$('#qv').textContent=S.qty;renderQuote();}};
+renderQuote();
+
+/* Modale devis */
+const quoteDlg=$('#quoteDlg');
+$$('[data-open-quote]').forEach(b=>b.addEventListener('click',()=>{
+  $('#qdSummary').textContent=$('#qTitle').textContent+' · '+$('#qPrice').textContent+' ('+$('#qPer').textContent+')';
+  $('#qdForm').style.display='grid'; $('#qdDone').style.display='none';
+  quoteDlg.showModal();
+}));
+$('#qdX').onclick=()=>quoteDlg.close();
+quoteDlg.addEventListener('click',e=>{if(e.target===quoteDlg)quoteDlg.close();});
+$('#qdForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const ref='KB-'+Math.floor(1000+Math.random()*9000);
+  $('#qdRef').textContent=`Demande ${ref} enregistrée · ${$('#qdName').value.trim()}`;
+  $('#qdForm').style.display='none'; $('#qdDone').style.display='grid'; e.target.reset();
+});
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:reduce?'auto':'smooth'});}}));
+})();
+</script>
+</body>
+</html>

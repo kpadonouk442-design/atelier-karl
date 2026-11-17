@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr" data-site="ebene">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hôtel Ébène Cotonou</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Hôtel Ébène, hôtel de charme à Cotonou. Chambres, suites, services et réservation en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ebony:#16120f; --ebony2:#211b16; --ivory:#f2ebe0; --sand:#e7ddcd; --brass:#b8925a; --coffee:#6b5d50;
+  --line:rgba(242,235,224,.18); --lineD:rgba(22,18,15,.14);
+  --display:"Cormorant Garamond","Times New Roman",serif; --body:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:clamp(16px,3.6vw,56px); --navh:68px; --r:14px; color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip}
+body{background:var(--ebony);color:var(--ivory);font:300 1.02rem/1.6 var(--body)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1;letter-spacing:-.01em;text-wrap:balance}
+em{font-style:italic;color:var(--brass)}
+.tag{font:500 .72rem/1 var(--body);letter-spacing:.28em;text-transform:uppercase;color:var(--brass)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7em;padding:.95em 1.75em;background:var(--brass);color:#1a1509;font-weight:600;border:0;border-radius:999px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:.76rem;transition:background .3s,color .3s,transform .2s}
+.btn:hover{background:var(--ivory)}
+.btn:active{transform:scale(.97)}
+.btn.line{background:none;color:inherit;box-shadow:inset 0 0 0 1px currentColor}
+.btn.line:hover{background:var(--ivory);color:var(--ebony);box-shadow:none}
+
+.demo{background:#000;color:#9d9183;font-size:.74rem;padding:.5em var(--gut);text-align:center;letter-spacing:.04em}
+.demo b{color:var(--ivory);font-weight:500}
+
+/* Nav */
+.nav{position:fixed;inset:28px 0 auto 0;z-index:48;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:12px var(--gut);transition:top .35s,background .35s,border-color .35s}
+.nav.solid{top:0;height:var(--navh);background:rgba(16,13,11,.94);backdrop-filter:blur(12px);padding-block:0;border-bottom:1px solid var(--line)}
+.brand{display:grid;justify-items:center;line-height:1}
+.brand b{font:300 1.7rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.brand small{font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:var(--brass);margin-top:3px}
+.nav ul{display:flex;gap:clamp(14px,2.4vw,34px);list-style:none;padding:0;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
+.nav ul a{position:relative;padding:4px 0}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.nav ul a:hover::after{transform:scaleX(1);transform-origin:left}
+@media(max-width:860px){.nav ul{display:none}.nav{top:24px}}
+@media(max-width:600px){:root{--navh:58px}}
+
+/* Hero avec curseur horaire */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;overflow:hidden;background:var(--ebony)}
+.hero-imgs{position:absolute;inset:0;will-change:transform}
+.hero-imgs figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .7s ease}
+.hero-imgs figure.on{opacity:1}
+.hero-imgs img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.go .hero-imgs figure.on img{transform:scale(1)}
+.hero-tint{position:absolute;inset:0;transition:background 1.1s ease;z-index:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(22,18,15,.55) 0%,rgba(22,18,15,.48) 45%,rgba(22,18,15,.92) 100%)}
+.hero-mid{position:relative;z-index:3;display:grid;place-items:center;text-align:center;padding:110px var(--gut) 20px;gap:18px;align-content:center}
+.hero .tag{color:var(--ivory);text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.hero h1{font-size:clamp(3.2rem,10vw,9rem);letter-spacing:.02em;text-shadow:0 4px 32px rgba(0,0,0,.55)}
+.hero h1 span{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 i{display:block;font-style:normal;transform:translateY(108%);transition:transform 1.15s cubic-bezier(.16,1,.3,1)}
+.go .hero h1 i{transform:none}
+.hero h1 i.it{font-style:italic;color:#e4c38e;transition-delay:.08s}
+.hero-mid p{max-width:48ch;color:#efe7d8;text-shadow:0 2px 18px rgba(10,8,6,.65)}
+.hero-bot{position:relative;z-index:3;padding:0 var(--gut) clamp(20px,3vw,40px);display:grid;gap:14px;justify-items:center}
+.scrub{width:min(100%,680px);display:grid;gap:10px;justify-items:center}
+.scrub .moment{font:300 clamp(1.1rem,2.2vw,1.7rem)/1.2 var(--display);font-style:italic;text-align:center;min-height:2.2em}
+.scrub input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:ew-resize}
+.scrub input[type=range]::-webkit-slider-runnable-track{height:2px;border-radius:999px;background:rgba(243,236,224,.35)}
+.scrub input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-7px;border-radius:50%;background:var(--brass);border:2px solid var(--ebony);box-shadow:0 0 0 4px rgba(201,162,39,.25);transition:transform .2s}
+.scrub input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.18)}
+.scrub input[type=range]::-moz-range-track{height:2px;border-radius:999px;background:rgba(243,236,224,.35)}
+.scrub input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--brass);border:2px solid var(--ebony)}
+.scrub .hours{display:flex;justify-content:space-between;width:100%;font-size:.7rem;letter-spacing:.2em;color:#b1a594}
+.scrub .lab{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass)}
+
+/* Barre de réservation + pilule flottante arrondie */
+.bookwrap{padding:0 var(--gut);margin-top:-28px;position:relative;z-index:20}
+.bookbar{background:var(--ivory);color:var(--ebony);color-scheme:light;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:0;align-items:center;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid rgba(201,162,39,.28)}
+.bookbar label{display:grid;gap:3px;padding:1em 1.3em;border-right:1px solid var(--lineD);min-width:0}
+.bookbar span{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--coffee);font-weight:500}
+.bookbar input,.bookbar select{border:0;background:none;padding:0;font-weight:500;width:100%;min-width:0;font-size:.95rem}
+.bookbar input:focus,.bookbar select:focus{outline:0}
+.bookbar .out{padding:1em 1.3em;display:grid;gap:3px}
+.bookbar .out b{font-family:var(--display);font-size:1.45rem;font-variant-numeric:tabular-nums;line-height:1}
+.bookbar .res{margin:8px 10px 8px 0;padding:1.05em 1.8em;border-radius:999px}
+@media(max-width:900px){.bookwrap{margin-top:0;padding:0}.bookbar{border-radius:0;grid-template-columns:1fr 1fr}.bookbar label,.bookbar .out{border-right:0;border-bottom:1px solid var(--lineD)}.bookbar .res{grid-column:1/-1;margin:10px 14px}}
+
+.bookpill{position:fixed;left:50%;bottom:18px;z-index:50;transform:translate(-50%,24px);opacity:0;pointer-events:none;background:rgba(20,16,13,.94);backdrop-filter:blur(12px);border:1px solid rgba(201,162,39,.42);border-radius:999px;color:var(--ivory);padding:7px 8px 7px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 20px 50px -14px rgba(0,0,0,.78);transition:opacity .35s,transform .4s cubic-bezier(.16,1,.3,1);max-width:calc(100vw - 24px)}
+.bookpill.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.bookpill .bp-info{display:flex;align-items:baseline;gap:10px;white-space:nowrap;font-size:.82rem;color:#cfc4b2}
+.bookpill .bp-info b{font-family:var(--display);font-size:1.15rem;color:var(--ivory);font-weight:500;font-variant-numeric:tabular-nums}
+.bookpill .bp-edit{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);padding:6px 4px;white-space:nowrap}
+.bookpill .btn{padding:.75em 1.4em;white-space:nowrap}
+@media(max-width:600px){.bookpill{padding:6px 6px 6px 14px;gap:10px}.bookpill .bp-edit{display:none}}
+
+/* Intro */
+.intro{padding:clamp(70px,10vw,150px) var(--gut);display:grid;grid-template-columns:.9fr 1.25fr;gap:clamp(24px,5vw,80px);align-items:center}
+.intro-media{display:grid;gap:12px}
+.intro-media figure{margin:0}
+.intro-media img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--ebony2);border:1px solid var(--line);border-radius:var(--r)}
+.intro-media figcaption{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#a89b89;margin-top:8px}
+.intro h2{font-size:clamp(2rem,4.6vw,4.2rem);margin-bottom:18px}
+.intro p{color:#cfc4b2;max-width:56ch}
+.intro p+p{margin-top:1em}
+@media(max-width:860px){.intro{grid-template-columns:1fr}}
+
+/* Chambres : défilement horizontal épinglé + flèches */
+.rooms{position:relative;padding:0}
+.rooms-s{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;gap:clamp(12px,2.4vh,26px);padding-top:calc(var(--navh) + 28px)}
+.rooms-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;padding:0 var(--gut)}
+.rooms-head h2{font-size:clamp(2rem,5vw,4.4rem)}
+.rooms-ctrl{display:flex;align-items:center;gap:12px}
+.arrows{display:flex;gap:8px}
+.arr{width:44px;height:44px;border-radius:50%;border:1px solid rgba(201,162,39,.45);background:rgba(27,22,18,.85);color:var(--ivory);display:grid;place-items:center;font-size:1.1rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s,opacity .25s}
+.arr:hover:not(:disabled){background:var(--brass);color:#1a1509;border-color:var(--brass)}
+.arr:disabled{opacity:.3;cursor:not-allowed}
+.rail{display:flex;gap:clamp(16px,2.4vw,34px);overflow:visible;width:max-content;will-change:transform;padding:0 var(--gut)}
+.room{flex:none;width:auto;cursor:pointer;text-align:left;background:none;border:0;padding:0;display:grid;gap:12px}
+.room .ph{height:clamp(220px,calc(100svh - var(--navh) - 310px),560px);aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ebony2);border-radius:var(--r)}
+.room .ph img{width:124%;max-width:none;height:100%;object-fit:cover;will-change:transform;transition:filter .6s;filter:brightness(.9)}
+.room:hover .ph img{filter:none}
+.room .ph::after{content:"Choisir cette chambre";position:absolute;left:12px;right:12px;bottom:12px;background:var(--brass);color:#1a1509;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85em;text-align:center;border-radius:999px;transform:translateY(140%);transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.room:hover .ph::after,.room:focus-visible .ph::after{transform:none}
+.room h3{font-size:1.9rem}
+.room .meta{display:flex;justify-content:space-between;gap:10px;align-items:baseline;border-top:1px solid var(--line);padding-top:9px}
+.room .meta small{color:#a89b89;font-size:.82rem}
+.room .meta b{font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums;font-weight:500}
+.room .num{position:absolute;left:12px;top:8px;z-index:2;font:300 clamp(2.8rem,5.5vw,5rem)/1 var(--display);color:transparent;-webkit-text-stroke:1px var(--brass)}
+.rooms-bar{height:2px;background:var(--line);margin:0 var(--gut);border-radius:999px;overflow:hidden}
+.rooms-bar i{display:block;height:100%;background:var(--brass);transform-origin:left;transform:scaleX(0)}
+@media(max-height:620px){.rooms-head h2{font-size:2rem}}
+
+/* Services avec visuels */
+.serv{background:var(--sand);color:var(--ebony);padding:clamp(60px,9vw,120px) var(--gut);display:grid;gap:34px}
+.serv h2{font-size:clamp(2.2rem,6vw,4.8rem)}
+.serv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,26px)}
+.serv-grid article{display:grid;gap:12px;align-content:start}
+.serv-grid .sph{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--ebony2)}
+.serv-grid .sph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.serv-grid article:hover .sph img{transform:scale(1.05)}
+.serv-grid h3{font-size:1.55rem}
+.serv-grid p{color:var(--coffee);font-size:.93rem}
+@media(max-width:960px){.serv-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.serv-grid{grid-template-columns:1fr}}
+
+/* Galerie avec animation de révélation fluide */
+.gal{padding:clamp(60px,9vw,130px) var(--gut);display:grid;gap:26px}
+.gal h2{font-size:clamp(2.2rem,6vw,5rem)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,18px)}
+.gal figure{position:relative;overflow:hidden;margin:0;background:var(--ebony2);border-radius:var(--r)}
+.gal figure:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:1}
+.gal figure:last-child{grid-column:span 2;aspect-ratio:2/1}
+.gal figure:not(:nth-child(1)):not(:last-child){aspect-ratio:1}
+.gal img{width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.08);transition:clip-path .55s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.gal figure.in img{clip-path:inset(0);transform:none}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;left:10px;bottom:10px;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;background:rgba(16,13,11,.76);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px}
+@media(max-width:760px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+.nojs .gal img{clip-path:none;transform:none}
+
+/* Accès */
+.loc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);padding:0 var(--gut) clamp(70px,10vw,140px);align-items:center}
+.loc h2{font-size:clamp(2rem,4.6vw,3.8rem)}
+.loc dl{display:grid;grid-template-columns:auto 1fr;gap:0;margin-top:18px;font-size:.95rem}
+.loc dt,.loc dd{padding:11px 0;border-top:1px solid var(--line)}
+.loc dt{color:#a89b89;padding-right:22px;letter-spacing:.06em}
+.loc .pic{aspect-ratio:4/3;overflow:hidden;border-radius:var(--r);border:1px solid var(--line)}
+.loc .pic img{width:100%;height:100%;object-fit:cover}
+@media(max-width:800px){.loc{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:clamp(34px,5vw,64px) var(--gut) 86px;display:grid;gap:24px;font-size:.88rem;color:#a89b89}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px}
+.fgrid b{display:block;color:var(--ivory);font-weight:400;margin-bottom:7px;letter-spacing:.1em;text-transform:uppercase;font-size:.74rem}
+.legal{font-size:.74rem;border-top:1px solid var(--line);padding-top:15px;color:#938779}
+
+/* Fiche chambre & réservation fonctionnelle */
+dialog{border:0;padding:0;background:var(--ebony2);color:var(--ivory);max-width:min(1000px,95vw);width:100%;max-height:92vh;overflow:auto;margin:auto;border-radius:18px;border:1px solid rgba(201,162,39,.25);box-shadow:0 36px 90px -20px rgba(0,0,0,.85)}
+dialog::backdrop{background:rgba(8,6,5,.82);backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.98)}}
+.sheet{display:grid;grid-template-columns:.95fr 1.05fr}
+.sheet .pic{min-height:320px;overflow:hidden;background:var(--ebony)}
+.sheet .pic img{width:100%;height:100%;object-fit:cover}
+.sheet .txt{padding:clamp(20px,3vw,38px);display:grid;gap:14px;align-content:start}
+.sheet h2{font-size:clamp(1.9rem,3.6vw,2.8rem)}
+.sheet ul{list-style:none;padding:0;display:grid;gap:6px;font-size:.9rem;color:#cfc4b2}
+.sheet li{display:flex;gap:10px}.sheet li::before{content:"—";color:var(--brass)}
+.sheet dl{display:grid;grid-template-columns:auto 1fr;gap:0;font-size:.9rem}
+.sheet dt,.sheet dd{padding:8px 0;border-top:1px solid var(--line)}
+.sheet dt{color:#a89b89;padding-right:18px}.sheet dd{text-align:right;font-variant-numeric:tabular-nums}
+.x{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;background:rgba(16,13,11,.85);border:1px solid var(--line);color:var(--ivory);font-size:1.1rem;cursor:pointer;z-index:5}
+
+.bk-form{display:grid;gap:11px;border-top:1px solid var(--line);padding-top:14px}
+.bk-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bk-form label{display:grid;gap:5px;font-size:.8rem;color:#cfc4b2}
+.bk-form input,.bk-form select,.bk-form textarea{padding:.68em .9em;border-radius:10px;border:1px solid var(--line);background:rgba(16,13,11,.7);color:var(--ivory);width:100%}
+.bk-form input:focus,.bk-form select:focus,.bk-form textarea:focus{border-color:var(--brass);outline:0}
+.bk-opts{display:flex;flex-wrap:wrap;gap:8px}
+.bk-opt{display:inline-flex;align-items:center;gap:7px;padding:.5em .85em;border-radius:999px;border:1px solid var(--line);font-size:.8rem;cursor:pointer;background:rgba(16,13,11,.5)}
+.bk-opt input{width:auto;accent-color:var(--brass)}
+.bk-done{background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.4);border-radius:14px;padding:18px;display:grid;gap:10px}
+.bk-done h3{font-size:1.7rem;color:var(--brass)}
+.bk-ref{font:600 .86rem/1 var(--body);letter-spacing:.14em;color:var(--ivory)}
+.bk-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+@media(max-width:760px){.sheet{grid-template-columns:1fr}.sheet .pic{aspect-ratio:16/10;min-height:0}.bk-row{grid-template-columns:1fr}}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.hero h1 i{transform:none}.gal img{clip-path:none;transform:none}}
+</style>
+<link rel="stylesheet" href="../mobile-compact.css"><script src="../mobile-compact.js" defer></script>
+</head>
+<body class="nojs">
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><b>Ébène</b><small>Cotonou</small></a>
+  <nav aria-label="Navigation"><ul><li><a href="#maison">La maison</a></li><li><a href="#chambres">Chambres</a></li><li><a href="#services">Services</a></li><li><a href="#acces">Accès</a></li></ul></nav>
+  <button class="btn line" id="navRes">Réserver</button>
+</header>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="hero-imgs" id="heroImgs"></div>
+  <div class="hero-tint" id="tint"></div>
+  <div class="hero-mid">
+    <span class="tag">Ganhi · Bord de lagune · Cotonou</span>
+    <h1><span><i>Hôtel</i></span><span><i class="it">Ébène</i></span></h1>
+    <p>Une maison de caractère face à la lagune de Cotonou. Bois sombre, brise du soir et un jardin où le temps ralentit.</p>
+  </div>
+  <div class="hero-bot">
+    <div class="scrub">
+      <span class="lab" id="hLab">07:00</span>
+      <p class="moment" id="hMoment"></p>
+      <input type="range" id="hour" min="0" max="4" step="1" value="0" aria-label="Choisir un moment de la journée">
+      <div class="hours"><span>MATIN</span><span>MIDI</span><span>APRÈS-MIDI</span><span>SOIR</span><span>NUIT</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="bookwrap">
+<form class="bookbar" id="bar" onsubmit="return false">
+  <label><span>Arrivée</span><input type="date" id="bIn"></label>
+  <label><span>Départ</span><input type="date" id="bOut"></label>
+  <label><span>Voyageurs</span><select id="bPax"><option value="1">1 personne</option><option value="2" selected>2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option></select></label>
+  <div class="out"><span>À partir de</span><b id="bTotal">—</b></div>
+  <button class="btn res" id="bGo">Réserver</button>
+</form>
+</div>
+
+<section class="intro" id="maison">
+  <div class="intro-media">
+    <span class="tag">La maison</span>
+    <figure><img src="img/h4.webp" alt="Salon véranda de l'Hôtel Ébène avec mobilier en bois et plantes" loading="lazy"><figcaption>Le salon véranda · Cotonou</figcaption></figure>
+  </div>
+  <div>
+    <h2>Dormir à Cotonou comme on dort chez <em>quelqu'un</em></h2>
+    <p>L'Ébène occupe une ancienne maison de commerce des années soixante, reprise pièce par pièce. Les persiennes d'origine sont restées, le bois a été poncé à la main, et la cour est devenue un jardin où le petit-déjeuner se prend jusqu'à onze heures.</p>
+    <p>Vingt-quatre chambres, pas une de plus. Une cuisine qui travaille le poisson du jour et les légumes du marché de Dantokpa. Un bar qui ferme quand le dernier client s'en va.</p>
+  </div>
+</section>
+
+<section class="rooms" id="chambres"><div class="rooms-s">
+  <div class="rooms-head">
+    <div><span class="tag">Chambres et suites</span><h2>Où vous dormirez</h2></div>
+    <div class="rooms-ctrl">
+      <span class="tag" id="roomsHint">Défilez ou utilisez les flèches</span>
+      <div class="arrows">
+        <button class="arr" id="prevRoom" type="button" aria-label="Chambre précédente">←</button>
+        <button class="arr" id="nextRoom" type="button" aria-label="Chambre suivante">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="rail" id="rail"></div>
+  <div class="rooms-bar"><i id="roomsBar"></i></div>
+</div></section>
+
+<section class="serv" id="services">
+  <div><span class="tag">L'art de recevoir</span><h2>Ce qui est compris</h2></div>
+  <div class="serv-grid">
+    <article><div class="sph"><img src="img/pool3.webp" alt="Petit-déjeuner et détente au jardin"></div><h3>Petit-déjeuner au jardin</h3><p>Servi de 6 h 30 à 11 h sous les manguiers : fruits de saison, pain au levain, omelettes à la commande.</p></article>
+    <article><div class="sph"><img src="img/pool2.webp" alt="Piscine et transats à l'ombre"></div><h3>Piscine et transats</h3><p>Bassin de 14 mètres à l'ombre l'après-midi, serviettes fournies, ouvert jusqu'à 21 h.</p></article>
+    <article><div class="sph"><img src="img/table.webp" alt="Table dressée au restaurant Baobab"></div><h3>Table du soir</h3><p>Le restaurant Baobab sert de 19 h à 22 h 30. Carte courte, poisson du jour, réservation conseillée.</p></article>
+    <article><div class="sph"><img src="img/h3.webp" alt="Salon d'accueil et conciergerie"></div><h3>Navette aéroport</h3><p>Transfert privé depuis Cadjèhoun sur demande, 24 h à l'avance, jour et nuit.</p></article>
+  </div>
+</section>
+
+<section class="gal">
+  <div><span class="tag">La maison en images</span><h2>Promenade</h2></div>
+  <div class="gal-grid">
+    <figure><img src="img/h1.webp" alt="Salon de l'hôtel éclairé le soir"><figcaption>Le salon</figcaption></figure>
+    <figure><img src="img/pool1.webp" alt="Piscine entourée de végétation"><figcaption>Le bassin</figcaption></figure>
+    <figure><img src="img/h3.webp" alt="Salle du restaurant"><figcaption>Le Baobab</figcaption></figure>
+    <figure><img src="img/bath.webp" alt="Salle de bain d'une chambre"><figcaption>Salle de bain</figcaption></figure>
+    <figure><img src="img/h4.webp" alt="Salon avec plantes et grandes fenêtres"><figcaption>La véranda</figcaption></figure>
+    <figure><img src="img/table.webp" alt="Table dressée avec une lampe"><figcaption>Le bar</figcaption></figure>
+    <figure><img src="img/pool3.webp" alt="Transats au bord de la piscine"><figcaption>Le jardin</figcaption></figure>
+    <figure><img src="img/r4.webp" alt="Chambre ouverte sur la végétation"><figcaption>Suite Jardin</figcaption></figure>
+  </div>
+</section>
+
+<section class="loc" id="acces">
+  <div>
+    <span class="tag">Accès</span>
+    <h2>À dix minutes de l'aéroport</h2>
+    <dl>
+      <dt>Adresse</dt><dd>Rue des Cocotiers, Ganhi, Cotonou</dd>
+      <dt>Aéroport</dt><dd>Cadjèhoun, 10 min en voiture</dd>
+      <dt>Arrivée</dt><dd>à partir de 14 h</dd>
+      <dt>Départ</dt><dd>jusqu'à 12 h</dd>
+      <dt>Réception</dt><dd>ouverte 24 h sur 24</dd>
+      <dt>Animaux</dt><dd>acceptés dans les suites</dd>
+    </dl>
+    <p style="margin-top:22px"><a class="btn line" href="https://maps.google.com/?q=Ganhi,Cotonou,Benin" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></p>
+  </div>
+  <div class="pic"><img src="img/h6.webp" alt="Grande salle lumineuse de l'hôtel" loading="lazy"></div>
+</section>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><b>Hôtel Ébène</b>Rue des Cocotiers, Ganhi<br>Cotonou, Bénin</div>
+    <div><b>Réservation</b>reservation@ebene.example<br>+229 00 00 00 00</div>
+    <div><b>Restaurant</b>Le Baobab · 19 h – 22 h 30<br>Réservation conseillée</div>
+    <div><b>Suivez-nous</b>Instagram · Facebook</div>
+  </div>
+</footer>
+
+<div class="bookpill" id="bookPill" aria-label="Accès rapide réservation">
+  <span class="bp-info"><span id="bpDates">—</span><b id="bpTotal">—</b></span>
+  <a class="bp-edit" href="#bar">Dates</a>
+  <button class="btn" id="bpRes" type="button">Réserver</button>
+</div>
+
+<dialog id="dlg" aria-labelledby="shName">
+  <button class="x" id="dlgX" aria-label="Fermer">×</button>
+  <div class="sheet">
+    <div class="pic"><img id="shImg" src="" alt=""></div>
+    <div class="txt">
+      <span class="tag" id="shTag"></span>
+      <h2 id="shName"></h2>
+      <p id="shDesc" style="color:#cfc4b2"></p>
+      <ul id="shList"></ul>
+
+      <form class="bk-form" id="bkForm">
+        <div class="bk-row">
+          <label>Chambre<select id="shRoom"></select></label>
+          <label>Voyageurs<select id="shPax"><option value="1">1 personne</option><option value="2">2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option></select></label>
+        </div>
+        <div class="bk-row">
+          <label>Arrivée<input type="date" id="shIn" required></label>
+          <label>Départ<input type="date" id="shOut" required></label>
+        </div>
+        <div class="bk-opts">
+          <label class="bk-opt"><input type="checkbox" id="optShuttle"> Navette aéroport (+25 000 F)</label>
+          <label class="bk-opt"><input type="checkbox" id="optLate"> Départ tardif 15 h (+15 000 F)</label>
+        </div>
+        <dl id="shLines"></dl>
+        <div class="bk-row">
+          <label>Nom complet<input type="text" id="shGuest" placeholder="Votre nom" required></label>
+          <label>Téléphone / WhatsApp<input type="tel" id="shTel" placeholder="+229 …" required></label>
+        </div>
+        <div class="bk-row">
+          <label>E-mail<input type="email" id="shEmail" placeholder="vous@exemple.com" required></label>
+          <label>Règlement<select id="shPay"><option>À l'arrivée (espèces / carte)</option><option>Mobile Money (MTN / Moov)</option><option>Carte bancaire en ligne</option></select></label>
+        </div>
+        <button class="btn" type="submit">Confirmer la réservation</button>
+      </form>
+
+      <div class="bk-done" id="bkDone" hidden>
+        <span class="tag">Réservation enregistrée</span>
+        <h3>Votre séjour est confirmé</h3>
+        <p class="bk-ref" id="bkRef"></p>
+        <p id="bkSummary" style="color:#cfc4b2;font-size:.92rem"></p>
+        <div class="bk-actions">
+          <button class="btn" type="button" id="bkNew">Modifier / Nouvelle réservation</button>
+          <button class="btn line" type="button" id="bkClose">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/ | /g,' ')+' F';
+document.body.classList.remove('nojs');
+requestAnimationFrame(()=>document.body.classList.add('go'));
+
+/* ---- Curseur horaire ---- */
+const MOMENTS=[
+ {h:'07:00',img:'pool1',alt:'Le bassin au petit matin',t:'Le petit-déjeuner se prend au jardin, avant que la chaleur ne monte.',tint:'linear-gradient(180deg,rgba(255,214,150,.22),rgba(16,13,11,.12))'},
+ {h:'12:00',img:'pool2',alt:'La piscine en plein jour',t:'À midi, tout le monde est au bord du bassin ou sous la véranda.',tint:'linear-gradient(180deg,rgba(180,220,255,.16),rgba(16,13,11,.08))'},
+ {h:'16:30',img:'h4',alt:'Le salon véranda l’après-midi',t:'Thé glacé et ventilateurs lents au salon, jusqu’à ce que le jour tombe.',tint:'linear-gradient(180deg,rgba(255,190,120,.18),rgba(16,13,11,.2))'},
+ {h:'19:30',img:'h3',alt:'La salle du restaurant le soir',t:'Le Baobab ouvre. Poisson du jour, quinze couverts, pas plus.',tint:'linear-gradient(180deg,rgba(255,140,60,.2),rgba(16,13,11,.4))'},
+ {h:'22:30',img:'h1',alt:'Le salon et son feu, la nuit',t:'Le bar reste ouvert tant qu’il reste quelqu’un pour parler.',tint:'linear-gradient(180deg,rgba(40,30,70,.4),rgba(16,13,11,.55))'}
+];
+$('#heroImgs').innerHTML=MOMENTS.map((m,i)=>`<figure class="${i?'':'on'}"><img src="img/${m.img}.webp" alt="${m.alt}" ${i?'':'fetchpriority="high"'}></figure>`).join('');
+const figs=$$('#heroImgs figure');
+function setMoment(i){
+  figs.forEach((f,k)=>f.classList.toggle('on',k===i));
+  $('#hLab').textContent=MOMENTS[i].h; $('#hMoment').textContent=MOMENTS[i].t; $('#tint').style.background=MOMENTS[i].tint;
+}
+const slider=$('#hour');
+slider.addEventListener('input',e=>{auto=false;setMoment(+e.target.value);});
+setMoment(0);
+let auto=true, idx=0;
+if(!reduce) setInterval(()=>{if(!auto)return;idx=(idx+1)%MOMENTS.length;slider.value=idx;setMoment(idx);},5200);
+
+/* ---- Chambres ---- */
+const R=[
+ {id:'ebene',n:'Chambre Ébène',img:'r1',p:85000,m2:24,pax:2,lit:'Lit double 160',vue:'Cour intérieure',d:"La chambre d'origine de la maison : parquet sombre, persiennes en bois et douche à l'italienne.",a:['Climatisation silencieuse','Douche à l’italienne','Bureau et prise USB','Coffre-fort','Wi-Fi fibre']},
+ {id:'lagune',n:'Chambre Lagune',img:'r5',p:110000,m2:30,pax:2,lit:'Lit double 180',vue:'Lagune',d:"Deux fenêtres plein ouest sur la lagune. La lumière du soir y entre jusqu'à dix-neuf heures.",a:['Vue lagune','Climatisation','Baignoire','Fauteuil de lecture','Wi-Fi fibre']},
+ {id:'baobab',n:'Suite Baobab',img:'r3',p:185000,m2:45,pax:3,lit:'Lit double 180 + canapé-lit',vue:'Jardin',d:"Une pièce à vivre séparée de la chambre, avec une table où l'on peut travailler à deux.",a:['Salon séparé','Machine à café','Peignoirs','Baignoire et douche','Petit-déjeuner compris']},
+ {id:'jardin',n:'Suite Jardin',img:'r4',p:220000,m2:55,pax:4,lit:'2 lits doubles',vue:'Jardin privatif',d:"La seule chambre avec sa terrasse privée, séparée du jardin commun par une haie de bambous.",a:['Terrasse privée','Deux chambres','Baignoire','Animaux acceptés','Petit-déjeuner compris']},
+ {id:'atelier',n:'Chambre Atelier',img:'r6',p:95000,m2:28,pax:2,lit:'Lit double 160',vue:'Patio',d:"Carreaux de ciment d'époque et voûte blanchie à la chaux. La plus fraîche de la maison.",a:['Carreaux de ciment','Climatisation','Douche','Bureau','Wi-Fi fibre']}
+];
+$('#rail').innerHTML=R.map(r=>`<button class="room" data-id="${r.id}"><div class="ph"><img src="img/${r.img}.webp" alt="${r.n}"></div><h3>${r.n}</h3><div class="meta"><small>${r.m2} m² · ${r.pax} personnes · ${r.vue}</small><b>${fcfa(r.p)}</b></div></button>`).join('');
+$('#shRoom').innerHTML=R.map(r=>`<option value="${r.id}">${r.n} (${fcfa(r.p)}/nuit)</option>`).join('');
+
+/* ---- Réservation complète et synchronisée ---- */
+const d2s=d=>d.toISOString().slice(0,10);
+const today=new Date();
+$('#bIn').value=d2s(new Date(today.getTime()+864e5*7));
+$('#bOut').value=d2s(new Date(today.getTime()+864e5*9));
+function nightsBetween(inVal,outVal){const a=new Date(inVal),b=new Date(outVal);const n=Math.round((b-a)/864e5);return n>0?n:0;}
+function updateBar(){
+  const n=nightsBetween($('#bIn').value,$('#bOut').value), pax=+$('#bPax').value, low=Math.min(...R.map(r=>r.p)), tot=n?fcfa(n*low+n*pax*2500):'—';
+  $('#bTotal').textContent=tot;
+  $('#bpDates').textContent=n?`${n} nuit${n>1?'s':''} · ${pax} pers.`:'Choisir vos dates';
+  $('#bpTotal').textContent=n?'dès '+tot:'';
+}
+['#bIn','#bOut','#bPax'].forEach(s=>$(s).addEventListener('change',updateBar));
+updateBar();
+
+const dlg=$('#dlg'); let cur=R[0];
+function syncRoomUI(r){
+  cur=r;
+  $('#shRoom').value=r.id;
+  $('#shImg').src=`img/${r.img}.webp`; $('#shImg').alt=r.n;
+  $('#shTag').textContent=`${r.m2} m² · ${r.pax} personnes max`;
+  $('#shName').textContent=r.n; $('#shDesc').textContent=r.d;
+  $('#shList').innerHTML=[r.lit,`Vue : ${r.vue.toLowerCase()}`,...r.a].map(x=>`<li>${x}</li>`).join('');
+  calcModal();
+}
+function calcModal(){
+  const n=nightsBetween($('#shIn').value,$('#shOut').value), pax=+$('#shPax').value;
+  const sub=n*cur.p, taxe=n*pax*2500;
+  const bfast=['baobab','jardin'].includes(cur.id)?0:6500*pax*n;
+  const shuttle=$('#optShuttle').checked?25000:0;
+  const late=$('#optLate').checked?15000:0;
+  const total=sub+taxe+bfast+shuttle+late;
+  $('#shLines').innerHTML=n
+    ?`<dt>${fcfa(cur.p)} × ${n} nuit${n>1?'s':''}</dt><dd>${fcfa(sub)}</dd>
+      <dt>Taxe de séjour (${pax} pers.)</dt><dd>${fcfa(taxe)}</dd>
+      <dt>Petit-déjeuner</dt><dd>${bfast===0?'compris':fcfa(bfast)}</dd>
+      ${shuttle?'<dt>Navette aéroport</dt><dd>25 000 F</dd>':''}
+      ${late?'<dt>Départ tardif 15 h</dt><dd>15 000 F</dd>':''}
+      <dt><b>Total du séjour</b></dt><dd><b>${fcfa(total)}</b></dd>`
+    :`<dt>Dates invalides (départ après l'arrivée)</dt><dd>—</dd>`;
+  return {n,pax,total};
+}
+function openBooking(roomId){
+  $('#shIn').value=$('#bIn').value;
+  $('#shOut').value=$('#bOut').value;
+  $('#shPax').value=$('#bPax').value;
+  $('#bkForm').hidden=false;
+  $('#bkDone').hidden=true;
+  syncRoomUI(R.find(r=>r.id===roomId)||R[0]);
+  dlg.showModal();
+}
+$('#rail').addEventListener('click',e=>{const b=e.target.closest('.room');if(b)openBooking(b.dataset.id);});
+$('#bGo').onclick=()=>openBooking(R[0].id);
+$('#navRes').onclick=()=>openBooking(R[0].id);
+$('#bpRes').onclick=()=>openBooking(R[0].id);
+$('#shRoom').addEventListener('change',e=>syncRoomUI(R.find(r=>r.id===e.target.value)));
+['#shIn','#shOut','#shPax','#optShuttle','#optLate'].forEach(s=>$(s).addEventListener('change',()=>{
+  if(['#shIn','#shOut','#shPax'].includes(s)){
+    $('#bIn').value=$('#shIn').value; $('#bOut').value=$('#shOut').value; $('#bPax').value=$('#shPax').value;
+    updateBar();
+  }
+  calcModal();
+}));
+$('#bkForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const {n,pax,total}=calcModal();
+  if(!n) return;
+  const code='EB-'+Math.floor(1000+Math.random()*9000);
+  const guest=$('#shGuest').value.trim();
+  const pay=$('#shPay').value;
+  try{localStorage.setItem('ebene_last_booking',JSON.stringify({code,room:cur.n,in:$('#shIn').value,out:$('#shOut').value,pax,total,guest,pay}));}catch{}
+  $('#bkRef').textContent=`Référence ${code} · ${cur.n}`;
+  $('#bkSummary').textContent=`${guest}, votre séjour pour ${pax} personne${pax>1?'s':''} (${n} nuit${n>1?'s':''}, du ${$('#shIn').value} au ${$('#shOut').value}) est enregistré pour un montant de ${fcfa(total)} (${pay}).`;
+  $('#bkForm').hidden=true;
+  $('#bkDone').hidden=false;
+});
+$('#bkNew').onclick=()=>{$('#bkDone').hidden=true;$('#bkForm').hidden=false;};
+$('#bkClose').onclick=()=>$('#dlg').close();
+$('#dlgX').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+
+/* ---- Scroll 3D portes + rail chambres avec flèches ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'280px 0px',threshold:.01});
+$$('.gal figure').forEach(f=>io.observe(f));
+
+const nav=$('#nav'), heroImgs=$('#heroImgs'), bar=$('#bar'), pill=$('#bookPill'), rooms=$('#chambres'), rail=$('#rail'), rBar=$('#roomsBar'), prevBtn=$('#prevRoom'), nextBtn=$('#nextRoom');
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+let curK=0;
+
+function sizeRooms(){
+  const max=Math.max(0,rail.scrollWidth-innerWidth);
+  rooms.style.height=(innerHeight+max)+'px';
+}
+let tk=false;
+function onScroll(){
+  tk=false; const vh=innerHeight;
+  nav.classList.toggle('solid',scrollY>40);
+  if(!reduce && scrollY<vh*1.2){
+    const k=cl(scrollY/vh);
+    heroImgs.style.transform=`translateY(${(k*80).toFixed(1)}px) scale(${(1+k*.05).toFixed(3)})`;
+  }
+  pill.classList.toggle('on',bar.getBoundingClientRect().bottom<72);
+
+  const r=rooms.getBoundingClientRect();
+  if(r.top<vh&&r.bottom>0){
+    const max=Math.max(0,rail.scrollWidth-innerWidth);
+    curK=reduce?0:cl(-r.top/(r.height-vh||1));
+    rail.style.transform=`translateX(${-curK*max}px)`;
+    rBar.style.transform=`scaleX(${curK})`;
+    prevBtn.disabled=curK<=0.02;
+    nextBtn.disabled=curK>=0.98;
+    if(!reduce) $$('.room .ph img',rail).forEach(im=>{const b=im.parentElement.getBoundingClientRect(); im.style.transform=`translateX(${-cl((b.left+b.width/2)/innerWidth,-.5,1.5)*16}%)`;});
+  }
+}
+function jumpRoom(dir){
+  const max=Math.max(0,rail.scrollWidth-innerWidth);
+  const top=rooms.getBoundingClientRect().top+scrollY;
+  const steps=R.length-1;
+  const curIdx=Math.round(curK*steps);
+  const nextIdx=Math.max(0,Math.min(steps,curIdx+dir));
+  scrollTo({top:top+(nextIdx/steps)*max,behavior:reduce?'auto':'smooth'});
+}
+prevBtn.onclick=()=>jumpRoom(-1);
+nextBtn.onclick=()=>jumpRoom(1);
+
+addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(onScroll);}},{passive:true});
+addEventListener('resize',()=>{sizeRooms();onScroll();});
+addEventListener('load',()=>{sizeRooms();onScroll();});
+sizeRooms(); onScroll();
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:reduce?'auto':'smooth'});}}));
+})();
+</script>
+</body>
+</html>

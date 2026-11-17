@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Karl Orphé Kpadonou · Développeur web</title>
+<meta name="description" content="Karl Orphé Kpadonou, développeur web. Sites vitrines, boutiques en ligne, plateformes et sites animés, pensés d'abord pour le téléphone.">
+<meta name="theme-color" content="#fdfdfc">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/goi-long.webp?v=6"><link rel="preload" as="image" href="img/kasa-long.webp?v=6"><link rel="preload" as="image" href="img/ebene-long.webp?v=6">
+<style>
+:root{--bg:#fdfdfc;--bg2:#f4f3ef;--bg3:#e9e8e3;--ink:#21201c;--mute:#63635e;--line:rgba(33,32,28,.12);
+--sky:#21201c;--coral:#21201c;--sun:#21201c;--mint:#21201c;--lilac:#21201c;--navy:#fdfdfc;
+--gut:clamp(18px,4vw,56px);--disp:"Inter",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+.tag{font:500 .72rem/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.c-sky{color:var(--sky)}.c-coral{color:var(--coral)}.c-sun{color:var(--sun)}.c-mint{color:var(--mint)}.c-lilac{color:var(--lilac)}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.95em 1.5em;border-radius:999px;background:var(--sun);color:var(--navy);font-weight:600;font-size:.98rem;transition:background .3s,color .3s;will-change:transform}
+.btn:hover{background:#3a3935}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn.dark{background:var(--navy);color:var(--ink)}.btn.dark:hover{background:var(--bg3)}
+.btn svg{width:1em;height:1em}
+
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px var(--gut);background:rgba(253,253,252,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .me{font-weight:600;letter-spacing:-.02em;font-size:1.02rem;display:flex;align-items:center;gap:10px}
+.nav .me i{font:600 1.05rem/1 var(--disp);font-style:normal;background:var(--sky);color:var(--navy);padding:.28em .4em .22em;border-radius:6px}
+.nav ul{display:flex;align-items:center;gap:clamp(14px,2.2vw,30px);list-style:none;padding:0;font-size:.94rem;font-weight:500}
+.nav ul a{position:relative;padding:4px 0;color:var(--mute);transition:color .25s}
+.nav ul a:hover,.nav ul a[aria-current]{color:var(--ink)}
+.nav ul a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--sun)}
+.nav .cta{background:var(--sun);color:var(--navy);padding:.6em 1.15em;border-radius:999px;font-weight:600;font-size:.92rem;white-space:nowrap;transition:background .25s}
+.nav .cta:hover{background:#3a3935}
+.burger{display:none;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);position:relative}
+.burger span{position:absolute;left:12px;right:12px;height:1.5px;background:var(--ink);transition:transform .35s var(--ease)}
+.burger span:first-child{top:16px}.burger span:last-child{top:24px}
+.menu-open .burger span:first-child{transform:translateY(4px) rotate(45deg)}.menu-open .burger span:last-child{transform:translateY(-4px) rotate(-45deg)}
+.right{display:flex;align-items:center;gap:clamp(14px,2vw,28px)}
+.mmenu{position:fixed;inset:0;z-index:99;background:var(--bg2);color:var(--ink);display:grid;align-content:center;gap:4px;padding:90px var(--gut) 40px;clip-path:inset(0 0 100% 0);transition:clip-path .6s var(--ease)}
+.menu-open .mmenu{clip-path:inset(0)}
+.mmenu a{font:600 clamp(2.6rem,12vw,4rem)/1.05 var(--disp)}
+.mmenu a[aria-current]{color:var(--sky)}
+@media(max-width:820px){.nav ul{display:none}.burger{display:block}.nav .me b{display:none}}
+
+.wipe{position:fixed;inset:0;z-index:250;background:#21201c;color:#fdfdfc;display:grid;place-items:center;transform:translateY(100%);pointer-events:none}
+.wipe b{font:600 clamp(3.5rem,14vw,11rem)/1 var(--disp)}
+.wipe.in{transform:translateY(0);transition:transform .5s var(--ease)}
+.wipe.out{transform:translateY(-100%);transition:transform .55s var(--ease)}
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--sky);transform-origin:left;transform:scaleX(0);z-index:120}
+.view{display:none}.view.on{display:block}
+
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;isolation:isolate}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:clamp(30px,5vw,80px);padding:110px var(--gut) 60px;height:auto;min-height:100svh}
+.h-txt h1{font:600 clamp(3.2rem,7.4vw,7.6rem)/.92 var(--disp);letter-spacing:-.055em;letter-spacing:-.01em;margin:18px 0 22px}
+.h-txt h1 .l{display:block;overflow:hidden}
+.h-txt h1 .l>span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+.ready .h-txt h1 .l>span{transform:none}
+.h-txt h1 .l:nth-child(2){color:var(--mute)}
+.h-txt p{max-width:32ch;color:var(--mute);font-size:1.12rem}
+.h-txt .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.h-deck{display:grid;justify-items:center;gap:22px}
+.deck{position:relative;width:clamp(210px,24vw,330px);aspect-ratio:3/5;cursor:pointer;touch-action:pan-y}
+.deck a{position:absolute;inset:0;border-radius:18px;overflow:hidden;background:var(--bg3);border:1px solid rgba(33,32,28,.12);box-shadow:0 40px 70px -30px rgba(33,32,28,.28);transition:transform .7s var(--ease),opacity .5s;transform-origin:50% 100%}
+.deck a img{width:100%;height:100%;object-fit:cover;object-position:top}
+.deck a.out{transform:translateX(-115%) rotate(-14deg)!important;opacity:0!important}
+.deck-cap{display:grid;justify-items:center;gap:6px;text-align:center;min-height:62px}
+.deck-cap b{display:block;font:600 1.6rem/1 var(--disp)}
+.deck-cap small{color:var(--mute)}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;padding-top:96px;gap:26px}
+  .h-deck{order:-1}
+  .deck{width:min(46vw,200px)}
+  .h-txt h1{font-size:clamp(2.8rem,13.5vw,4.2rem);margin:12px 0 14px}
+}
+
+}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 var(--gut)}
+.facts div{border-radius:20px;padding:22px;color:var(--ink);display:grid;gap:4px;background:var(--bg2)!important;border:1px solid var(--line)}
+.facts b{font:600 clamp(2.4rem,5vw,4rem)/1 var(--disp);color:var(--sky)}
+.facts span{font-weight:500;font-size:.95rem;color:var(--mute)}
+@media(max-width:800px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+[data-split] .w{display:inline-block;opacity:.15;transform:translateY(.25em);transition:opacity .6s var(--ease),transform .8s var(--ease)}
+[data-split].in .w{opacity:1;transform:none}
+.up{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .9s var(--ease)}
+.up.in{opacity:1;transform:none}
+
+section{position:relative}
+.sec{padding:clamp(80px,11vw,160px) var(--gut)}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,5vw,60px)}
+.sec-h h2{font:600 clamp(3rem,10vw,9rem)/.88 var(--disp)}
+.manifest{font-size:clamp(1.7rem,4.2vw,4rem);font-weight:500;letter-spacing:-.035em;line-height:1.08;max-width:22ch}
+.band{background:var(--bg2);color:var(--ink)}
+.band .tag{color:var(--sky)}
+
+.feat{display:grid;gap:clamp(40px,7vw,100px)}
+.fcard{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(18px,4vw,60px);align-items:end}
+.fcard:nth-child(even){grid-template-columns:1fr 1.6fr}.fcard:nth-child(even) .fimg{order:2}
+.fimg{border-radius:18px;overflow:hidden;aspect-ratio:16/10;background:var(--bg3);box-shadow:0 0 0 3px var(--c)}
+.fimg img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+.fcard:hover .fimg img{transform:scale(1.05)}
+.fcard h3{font:600 clamp(2.4rem,6vw,5.6rem)/.9 var(--disp);margin:14px 0}
+.fcard p{color:var(--mute);max-width:40ch}
+.chip{display:inline-block;background:var(--c);color:var(--navy);font:500 .7rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:.55em .8em;border-radius:6px}
+.more{display:inline-flex;align-items:center;gap:.5em;margin-top:18px;font-weight:600;color:var(--c,var(--sun))}
+@media(max-width:800px){.fcard,.fcard:nth-child(even){grid-template-columns:1fr}.fcard:nth-child(even) .fimg{order:0}}
+
+.slist{border-top:1px solid var(--line)}
+.acc{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;display:grid;grid-template-columns:4ch minmax(0,1.3fr) minmax(0,1fr) auto;gap:clamp(10px,3vw,40px);align-items:center;padding:clamp(20px,3vw,34px) 0;cursor:default}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary b{font:500 .8rem var(--mono);color:var(--c)}
+.acc summary h3{font:600 clamp(2rem,5vw,4.2rem)/.9 var(--disp)}
+.acc summary i{display:none;font-style:normal;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--navy);place-items:center;font-size:1rem;transition:transform .35s var(--ease)}
+.acc[open] summary i{transform:rotate(180deg)}
+.acc .body{color:var(--mute)}
+.acc .body.m{display:none}
+@media(max-width:700px){
+  .acc summary{grid-template-columns:3.5ch 1fr auto;cursor:pointer}
+  .acc summary i{display:grid}
+  .acc summary .body{display:none}
+  .acc[open] .body.m{display:block;padding:0 0 20px 0}
+}
+
+.cta{padding:clamp(100px,14vw,200px) var(--gut);text-align:center;display:grid;justify-items:center;gap:30px;background:var(--bg2);color:var(--ink);overflow:hidden;border-top:1px solid var(--line)}
+.cta h2{font:600 clamp(3rem,10vw,9rem)/.9 var(--disp)}
+.cta h2 em{font-size:.62em;display:block;margin-top:.1em;color:var(--sky)}
+
+
+.pg-h{padding:clamp(120px,15vw,190px) var(--gut) 0;display:grid;gap:14px}
+.pg-h h1{font:600 clamp(4.2rem,17vw,16rem)/.82 var(--disp)}
+.pg-h p{color:var(--mute);max-width:46ch}
+.ring-view{width:100%;height:clamp(440px,62vw,680px);perspective:1300px;display:grid;place-items:center;cursor:grab;touch-action:pan-y;user-select:none;overflow:hidden}
+.ring-view:active{cursor:grabbing}
+.ring{position:relative;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.ring a{position:absolute;left:calc(var(--cw)/-2);top:calc(var(--cw)*-0.83);width:var(--cw);height:calc(var(--cw)*1.66);border-radius:16px;overflow:hidden;background:var(--bg3);backface-visibility:hidden;box-shadow:0 0 0 3px var(--c),0 30px 50px -26px rgba(33,32,28,.22);-webkit-user-drag:none}
+.ring a img{width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+
+.ring a b{position:absolute;left:10px;bottom:10px;z-index:2;font:500 .62rem/1 var(--mono);letter-spacing:.12em;background:var(--navy);color:var(--sky);padding:.5em .6em;border-radius:5px}
+
+.ring-cap{display:grid;justify-items:center;gap:8px;text-align:center;padding:0 var(--gut) clamp(60px,8vw,100px)}
+.ring-cap b{font:600 clamp(2rem,5vw,3.4rem)/1 var(--disp)}
+.ring-cap small{color:var(--mute);margin-bottom:10px}
+
+.case-h{padding:clamp(120px,14vw,180px) var(--gut) clamp(30px,5vw,60px);display:grid;gap:20px}
+.case-h .tag{color:var(--sky)}
+.case-h h1{font:600 clamp(3.4rem,12vw,11rem)/.85 var(--disp)}
+.meta{display:flex;flex-wrap:wrap;gap:clamp(18px,4vw,60px);border-top:1px solid var(--line);padding-top:18px}
+.meta div{display:grid;gap:4px;font-weight:600}.meta small{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.case-f{padding:clamp(30px,5vw,60px) var(--gut)}
+.frame{border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--bg3);position:relative;box-shadow:0 0 0 3px var(--c)}
+.frame img{width:100%;position:absolute;top:0;left:0}
+.case-b{padding:0 var(--gut) clamp(40px,6vw,90px);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,6vw,90px)}
+.case-b h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:500}
+.case-b ul{list-style:none;padding:0}
+.case-b li{display:grid;grid-template-columns:3ch 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--line);color:#3a3935}
+.case-b li b{font:500 .8rem var(--mono);color:var(--c);padding-top:.25em}
+@media(max-width:800px){.case-b{grid-template-columns:1fr}}
+.shots{padding:0 var(--gut) clamp(40px,6vw,90px);display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,2vw,24px)}
+.shots figure{border-radius:14px;overflow:hidden}
+.shots figure:first-child{grid-column:1/-1}
+@media(max-width:640px){.shots{grid-template-columns:1fr}}
+.mdet>summary{display:none}
+@media(max-width:700px){
+  .mdet{border-top:1px solid var(--line);margin:0 var(--gut)}
+  .mdet:last-of-type{border-bottom:1px solid var(--line);margin-bottom:40px}
+  .mdet>summary{display:flex;justify-content:space-between;align-items:center;list-style:none;padding:18px 0;font-weight:600;cursor:pointer}
+  .mdet>summary::-webkit-details-marker{display:none}
+  .mdet>summary i{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--c);color:var(--navy);display:grid;place-items:center;transition:transform .35s}
+  .mdet[open]>summary i{transform:rotate(180deg)}
+  .mdet .shots,.mdet .case-b{padding-left:0;padding-right:0}
+}
+.next{display:block;padding:clamp(60px,9vw,120px) var(--gut);background:var(--bg2);text-align:center}
+.next b{display:block;font:600 clamp(3rem,11vw,9rem)/.9 var(--disp);margin-top:12px;transition:color .3s}
+.next:hover b{color:var(--sun)}
+
+.srv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:clamp(50px,7vw,90px) var(--gut)}
+.srv details{border-radius:22px;background:var(--bg2);color:var(--ink);padding:clamp(24px,3.5vw,44px);border:1px solid var(--line)}
+.srv summary{list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:start;cursor:default}
+.srv summary::-webkit-details-marker{display:none}
+.srv h3{font:600 clamp(2.2rem,4.6vw,4rem)/.9 var(--disp);margin-top:10px}
+.srv .tag{color:var(--sky)}
+.srv summary i{display:none;font-style:normal;width:36px;height:36px;border-radius:50%;background:var(--sky);color:var(--navy);place-items:center;flex:none;transition:transform .35s}
+.srv details[open] summary i{transform:rotate(180deg)}
+.srv p{font-size:1.05rem;margin-top:16px;color:#3a3935}
+.srv ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.srv li{padding:.45em .95em;border-radius:999px;background:rgba(33,32,28,.05);font-size:.88rem;font-weight:500}
+@media(max-width:800px){.srv{grid-template-columns:1fr}}
+@media(max-width:700px){.srv summary{cursor:pointer;align-items:center}.srv summary i{display:grid}}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.steps article{padding:26px;border-radius:20px;background:var(--bg2);border-top:4px solid var(--c);display:grid;gap:10px;align-content:start}
+.steps b{font:italic 400 3.2rem/1 var(--serif);color:var(--c)}
+.steps h3{font-size:1.3rem}.steps p{color:var(--mute);font-size:.96rem}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.steps{grid-template-columns:1fr}}
+.faq{max-width:900px}
+.faq details{border-top:1px solid var(--line);padding:22px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-size:clamp(1.1rem,2vw,1.4rem);font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--sun);font-size:1.5em;line-height:1;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--mute);margin-top:12px;max-width:60ch}
+
+.ab-h{padding:clamp(120px,14vw,180px) var(--gut) clamp(50px,7vw,90px);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(30px,6vw,100px);align-items:end}
+.ab-h h1{font-size:clamp(2.8rem,7.5vw,7.4rem);font-weight:600;letter-spacing:-.05em;line-height:.95}
+.ab-h .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.fiche{border-radius:22px;background:var(--bg2);border:1px solid var(--line);color:var(--ink);padding:8px 22px}
+.fiche>div{display:grid;grid-template-columns:7.5em 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fiche>div:last-child{border:0}
+.fiche small{font:500 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.fiche b{font-weight:600}
+.fiche .edu small{display:inline;margin-left:8px;font:400 .88rem var(--body);letter-spacing:0;text-transform:none}
+@media(max-width:860px){.ab-h{grid-template-columns:1fr}}
+.ab-b{padding:0 var(--gut) clamp(80px,10vw,140px);display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(24px,6vw,100px)}
+.ab-b p{color:#3a3935;font-size:1.1rem;max-width:44ch}.ab-b p+p{margin-top:1em}
+@media(max-width:860px){.ab-b{grid-template-columns:1fr}}
+
+.ct{padding:clamp(120px,14vw,180px) var(--gut) clamp(80px,10vw,140px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px)}
+.ct h1{font:600 clamp(3.6rem,11vw,10rem)/.85 var(--disp)}
+.mailbox{margin-top:28px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);color:var(--ink);padding:22px;display:grid;gap:6px}
+.mailbox small{font:500 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.mail{font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:600;word-break:break-all}
+.copy{justify-self:start;font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--sky);color:var(--navy);padding:.6em .9em;border-radius:999px;margin-top:6px}
+.ways{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ways span{padding:.5em .9em;border-radius:999px;background:var(--bg2);font-size:.9rem}
+.fbox{border-radius:22px;background:var(--bg2);padding:clamp(20px,3vw,34px);align-self:start}
+.fbox>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;font:600 1.8rem/1 var(--disp);cursor:default}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary i{display:none;font-style:normal;width:36px;height:36px;border-radius:50%;background:var(--sun);color:var(--navy);place-items:center;font-family:var(--body);font-size:1rem;transition:transform .35s}
+.fbox[open]>summary i{transform:rotate(180deg)}
+@media(max-width:700px){.fbox>summary{cursor:pointer}.fbox>summary i{display:grid}}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start;margin-top:20px}
+label{display:grid;gap:6px;font-size:.85rem;color:var(--mute)}
+label.full,.full{grid-column:1/-1}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.85em 1em;width:100%}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--sun);outline-offset:1px}
+.ok{display:none;color:var(--mint)}.ok.on{display:block}
+@media(max-width:800px){.ct{grid-template-columns:1fr}form{grid-template-columns:1fr}}
+
+footer{padding:40px var(--gut);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);color:var(--mute);font-size:.9rem}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}footer a:hover{color:var(--sun)}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.up,[data-split] .w{opacity:1;transform:none}.hero-b h1 .l>span{transform:none}}
+h1,h2,h3{letter-spacing:-.045em}
+.pg-h h1{font-size:clamp(3.4rem,12vw,11rem)!important;letter-spacing:-.06em}
+.sec-h h2{font-size:clamp(2.4rem,7vw,6.4rem)!important}
+.case-h h1{font-size:clamp(2.8rem,8.5vw,8rem)!important}
+.next b{font-size:clamp(2.4rem,7.5vw,6.5rem)!important}
+.ct h1{font-size:clamp(3rem,8vw,7.4rem)!important}
+em.s{color:var(--mute)!important}
+.tag{color:var(--mute)!important}
+.btn.line{color:var(--ink)}
+.deck-cap b{font-size:1.3rem}
+.ring-cap b{font-size:clamp(1.6rem,4vw,2.6rem)}
+.ab-b p.manifest{font-size:clamp(1.7rem,3.4vw,3rem);color:var(--ink);max-width:20ch}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wipe" id="wipe" aria-hidden="true"><b id="wipeT"></b></div>
+
+<header class="nav">
+  <a class="me" href="#accueil" aria-label="Accueil"><i>KK</i><b data-me="nom">Karl Orphé Kpadonou</b></a>
+  <div class="right">
+    <nav aria-label="Navigation"><ul>
+      <li><a href="#accueil">Accueil</a></li><li><a href="#projets">Projets</a></li><li><a href="#services">Services</a></li><li><a href="#apropos">À propos</a></li>
+    </ul></nav>
+    <a class="cta" href="#contact">Me contacter</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mmenu" id="mmenu" aria-label="Menu mobile">
+  <a href="#accueil">Accueil</a><a href="#projets">Projets</a><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#contact">Contact</a>
+</nav>
+
+<main>
+<div class="view on" data-view="accueil">
+  <section class="hero" id="hero">
+    <div class="h-txt">
+      <span class="tag c-sky">Développeur web · Créateur de sites</span>
+      <h1><span class="l"><span data-me="prenoms">Karl Orphé</span></span><span class="l"><span style="transition-delay:.1s" data-me="nomfam">Kpadonou</span></span></h1>
+      <p>Je crée des sites <em class="s c-sky">qui bougent</em>, pensés d'abord pour le téléphone.</p>
+      <div class="acts"><a class="btn" href="#projets" data-mag>Voir les projets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 18 18 6M8 6h10v10"/></svg></a><a class="btn line" href="#contact" data-mag>Me contacter</a></div>
+    </div>
+    <div class="h-deck">
+      <div class="deck" id="deck" aria-label="Projets récents"></div>
+      <div class="deck-cap"><span class="tag" id="deckN">01 / 07</span><a href="#goi" id="deckT"><b>Gros Œuvre International</b><small>Site vitrine · BTP</small></a></div>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div style="background:var(--sky)"><b>7</b><span>sites réalisés</span></div>
+    <div style="background:var(--sun)"><b>4</b><span>types de sites</span></div>
+    <div style="background:var(--mint)"><b>100 %</b><span>pensés mobile</span></div>
+    <div style="background:var(--coral)"><b>24 h</b><span>pour vous répondre</span></div>
+  </section>
+
+  <section class="sec band" style="margin-top:clamp(60px,9vw,120px)">
+    <span class="tag">En bref</span>
+    <p class="manifest" data-split style="margin-top:22px">Des sites qui se chargent vite, se lisent en un regard et donnent envie d'aller plus loin.</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>Projets <em class="s c-sky">choisis</em></h2><a class="more" href="#projets">Les 7 projets →</a></div>
+    <div class="feat" id="feat"></div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-h"><h2>Ce que <em class="s c-coral">je fais</em></h2><a class="more" href="#services">Tous les services →</a></div>
+    <div class="slist" id="slistHome"></div>
+  </section>
+
+  <section class="cta">
+    <h2>Un projet<em class="s">parlons-en.</em></h2>
+    <a class="btn" href="#contact" data-mag>Me contacter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+  </section>
+</div>
+
+<div class="view" data-view="projets">
+  <section class="pg-h"><span class="tag c-sun">Sélection · 7 projets</span><h1>Projets</h1><p>Faites tourner le manège et touchez un site pour l'ouvrir.</p></section>
+  <section class="ring-view" id="ringView" aria-label="Manège des projets"><div class="ring" id="ring"></div></section>
+  <div class="ring-cap"><span class="tag" id="ringN">01 / 07</span><b id="ringT">Gros Œuvre International</b><small id="ringK">Site vitrine · BTP</small><a class="btn" id="ringGo" href="#goi">Ouvrir le projet</a><span class="tag">Glissez pour faire tourner</span></div>
+</div>
+
+<div class="view" data-view="case" id="case"></div>
+
+<div class="view" data-view="services">
+  <section class="pg-h"><span class="tag c-mint">Services</span><h1>Services</h1><p>Quatre types de sites, une même exigence : rapides, clairs et pensés pour le téléphone.</p></section>
+  <section class="srv" id="srv"></section>
+  <section class="sec" style="padding-top:clamp(40px,6vw,80px)">
+    <div class="sec-h"><h2>Comment <em class="s c-sun">je travaille</em></h2></div>
+    <div class="steps">
+      <article class="up" style="--c:var(--sky)"><b>1</b><h3>J'écoute</h3><p>Vous me dites ce que le site doit faire et pour qui.</p></article>
+      <article class="up" style="--c:var(--sun)"><b>2</b><h3>Je maquette</h3><p>Vous voyez le site avant qu'il existe, et on ajuste ensemble.</p></article>
+      <article class="up" style="--c:var(--mint)"><b>3</b><h3>Je construis</h3><p>Pages, contenus et détails, testés sur de vrais téléphones.</p></article>
+      <article class="up" style="--c:var(--coral)"><b>4</b><h3>Je mets en ligne</h3><p>Publication, vérifications et prise en main du site.</p></article>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div class="sec-h"><h2>Questions</h2></div>
+    <div class="faq">
+      <details><summary>Combien de temps faut-il pour un site ?</summary><p>Cela dépend du nombre de pages et des contenus disponibles. Je vous donne un délai précis avec ma proposition, avant de commencer.</p></details>
+      <details><summary>Pouvez-vous gérer le nom de domaine et l'hébergement ?</summary><p>Oui. Je m'en occupe, à votre nom, pour que le site vous appartienne entièrement.</p></details>
+      <details><summary>Pourrai-je modifier le site moi-même ?</summary><p>Oui. Je vous montre comment changer les textes et les images, et je reste disponible si besoin.</p></details>
+      <details><summary>Le site fonctionnera-t-il bien sur téléphone ?</summary><p>C'est le point de départ de chaque projet : je conçois d'abord pour le téléphone, puis j'élargis à l'ordinateur.</p></details>
+    </div>
+  </section>
+  <section class="cta sky"><h2>Votre site<em class="s">commence ici.</em></h2><a class="btn" href="#contact" data-mag>Me contacter</a></section>
+</div>
+
+<div class="view" data-view="apropos">
+  <section class="ab-h">
+    <div><span class="tag c-lilac">À propos</span><h1 style="margin-top:18px">Je crée des sites <em class="s c-lilac">qui donnent envie.</em></h1>
+      <div class="acts"><a class="btn" href="#contact" data-mag>Me contacter</a><a class="btn line" href="#projets" data-mag>Voir les projets</a><a class="btn line" id="waBtn" href="#" target="_blank" rel="noopener" hidden>WhatsApp</a></div></div>
+    <div class="fiche">
+      <div><small>Nom</small><b data-me="nom">Karl Orphé Kpadonou</b></div>
+      <div><small>Métier</small><b>Développeur web</b></div>
+      <div><small>Je réalise</small><b>Vitrines · Boutiques · Plateformes</b></div>
+      <div id="eduWrap"><small>Formation</small><span class="edu" id="edu"></span></div>
+      <div><small>Réponse</small><b>Sous 24 heures</b></div>
+    </div>
+  </section>
+  <section class="ab-b">
+    <p class="manifest" data-split>Étudiant en école d'ingénieurs, je dessine et je code des sites web.</p>
+    <div><p>Je travaille avec l'intelligence artificielle pour aller vite, et je teste chaque page sur téléphone avant de la mettre en ligne.</p><p>Les sept sites de ce portfolio sont des projets de démonstration. Ouvrez-les : ils montrent ce que je sais faire.</p></div>
+  </section>
+  <section class="cta lilac"><h2>Parlons de<em class="s">votre projet.</em></h2><a class="btn" href="#contact" data-mag>Me contacter</a></section>
+</div>
+
+<div class="view" data-view="contact">
+  <section class="ct">
+    <div><span class="tag c-mint">Contact</span><h1 style="margin-top:16px">Parlons de votre <em class="s c-mint">site.</em></h1>
+      <div class="mailbox"><small>Écrivez-moi</small><a class="mail" id="mail" href="#">—</a><button class="copy" id="copy" type="button">Copier l'adresse</button></div>
+      <div class="ways" id="ways"></div></div>
+    <details class="fbox" id="fbox" open><summary>Décrire mon projet <i>▾</i></summary>
+    <form id="briefForm">
+      <label>Nom ou entreprise<input name="nom" required placeholder="Studio, entreprise…"></label>
+      <label>E-mail ou WhatsApp<input name="contact" required placeholder="vous@exemple.com"></label>
+      <label class="full">Type de projet<select name="type"><option>Site vitrine</option><option>Boutique en ligne</option><option>Plateforme</option><option>Site animé</option><option>Refonte</option></select></label>
+      <label class="full">Votre besoin en quelques lignes<textarea name="msg" placeholder="Activité, pages souhaitées, délai idéal…"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Préparer l'e-mail</button></div>
+      <p class="ok full" id="briefOk" role="status">Votre messagerie s'ouvre avec le message prêt à envoyer.</p>
+    </form></details>
+  </section>
+</div>
+</main>
+
+<footer><span>© 2026 <span data-me="nom">Karl Orphé Kpadonou</span></span><nav><a href="#projets">Projets</a><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav></footer>
+
+<script>
+/* ======================= VOS INFORMATIONS ======================= */
+const ME={
+  nom:"Karl Orphé Kpadonou",
+  email:"kpadonouk442@gmail.com",
+  tel:"",                       // numéro WhatsApp, ex. "+229 01 00 00 00 00" — vide = bouton masqué
+  formation:[
+    {t:"ECE", s:"École d'ingénieurs · en cours"}
+    // {t:"Nom de la certification", s:"Organisme · année"}
+  ],
+  liens:{goi:"../goi/",kasa:"../kasa/",ebene:"../ebene/",kubik:"../kubik/",baingres:"../baingres/",assise:"../shop/",meridien:"../studio/"}
+};
+/* ================================================================ */
+const C=Array(7).fill('var(--sky)');
+const PJ=[
+ {id:'goi',n:'Gros Œuvre International',kind:'Site vitrine · BTP',img:'goi',sec:'BTP',
+  d:'Site vitrine pour une entreprise de gros œuvre : six pages, formulaire de contact et WhatsApp sur chaque écran.',
+  brief:"Présenter les métiers et les chantiers d'une entreprise de gros œuvre, et donner envie de la contacter.",
+  pts:['Les quatre métiers se dévoilent photo par photo pendant le défilement.','Galerie de chantiers filtrable, avec fiche détaillée et curseur avant / après.','Formulaire de contact complet et bouton WhatsApp pré-rempli sur toutes les pages.']},
+ {id:'kasa',n:'Kasa',kind:'Place de marché · location',img:'kasa',sec:'Location courte durée',
+  d:'Plateforme de maisons et appartements à louer au Bénin : recherche, carte et réservation.',
+  brief:"Montrer qu'une place de marché complète — chercher, comparer, réserver — tient dans une seule page rapide.",
+  pts:['Photos en arches qui bougent avec la souris et manège 3D des destinations.','Recherche par ville, dates et voyageurs, avec filtres par type et budget.','Fiche logement avec galerie, équipements et calcul du séjour.']},
+ {id:'ebene',n:'Hôtel Ébène',kind:"Hôtellerie",img:'ebene',sec:'Hôtellerie',
+  d:"Site d'un hôtel de vingt-quatre chambres, avec barre de réservation et chambres détaillées.",
+  brief:"Faire ressentir un lieu avant de le vendre, puis rendre la réservation évidente.",
+  pts:["Deux portes d'ébène s'ouvrent en 3D sur l'hôtel quand on défile.","Un curseur fait passer la page du matin à la nuit.",'Barre de réservation qui calcule nuits, taxe et petit-déjeuner.']},
+ {id:'kubik',n:'Kubik',kind:'Industrie · conteneurs',img:'kubik',sec:'Modules industriels',
+  d:'Bureaux et cabines livrés pliés, avec configurateur de prix en direct.',
+  brief:"Expliquer un produit qu'on ne comprend qu'en le voyant se déplier, puis donner un prix tout de suite.",
+  pts:['Un conteneur en 3D se déplie au fil du défilement.','Configurateur : usage, surface et options donnent un prix et un délai.','Quatre gammes présentées en cartes qui s’ouvrent au survol.']},
+ {id:'baingres',n:'Bain & Grès',kind:'Boutique · salle de bain',img:'aquafer',sec:'Sanitaire & carrelage',
+  d:'Catalogue de robinetterie, vasques et carrelage : aperçu rapide, fiches produit et panier.',
+  brief:"Rendre un catalogue technique agréable à parcourir, avec une ambiance de salle d'exposition.",
+  pts:['Accueil éditorial clair, avec les univers de la salle de bain.','Catalogue filtrable et fiche produit en aperçu rapide.','Panier avec barre de livraison offerte et frais par ville.']},
+ {id:'assise',n:'Assise',kind:'Boutique · mobilier',img:'shop',sec:'Mobilier',
+  d:"Boutique de chaises : vitrine qui change d'univers, cartes en 3D et panier qui fonctionne.",
+  brief:"Prouver qu'un catalogue peut être vivant et que l'achat reste simple.",
+  pts:['La vitrine change de couleur par un cercle qui s’ouvre.','Les cartes produits s’inclinent en 3D sous la souris.','L’article vole vers le panier, qui recalcule le total.']},
+ {id:'meridien',n:'Studio Méridien',kind:'Architecture · immersif',img:'studio',sec:'Architecture',
+  d:"Site immersif pour un atelier d'architecture : les images réagissent à la souris et au défilement.",
+  brief:"Montrer jusqu'où peut aller l'animation d'images sans alourdir la page.",
+  pts:['Écran de chargement avec compteur et pile de photos.','Collage en profondeur qui suit la souris.','Une image s’ouvre en plein écran au fil du défilement.']}
+];
+PJ.forEach((p,i)=>p.c=C[i]);
+const SV=[
+ {t:'Sites vitrines',c:'var(--sky)',d:"Présenter une activité, rassurer et donner envie de vous contacter.",i:['Pages sur mesure','Formulaire de contact','Bouton WhatsApp','Référencement de base']},
+ {t:'Boutiques en ligne',c:'var(--sun)',d:"Un catalogue clair, un panier simple et une commande facile, sur téléphone comme sur ordinateur.",i:['Catalogue et filtres','Fiches produit','Panier','Prix en FCFA ou en euros']},
+ {t:'Plateformes',c:'var(--mint)',d:"Recherche, carte, réservation ou configurateur : des outils complets qui restent simples à utiliser.",i:['Recherche et filtres','Carte','Réservation','Calcul de prix']},
+ {t:'Sites animés',c:'var(--coral)',d:"Du mouvement, de la 3D et des effets d'image pour marquer les esprits, sans alourdir la page.",i:['Animations au défilement','Effets 3D','Transitions','Pages légères']}
+];
+
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches,mob=matchMedia('(max-width:700px)');
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t;
+const V='?v=6', ARW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 18 18 6M8 6h10v10"/></svg>';
+
+const _n=ME.nom.trim().split(/\s+/);ME.nomfam=_n.length>1?_n.pop():ME.nom;ME.prenoms=_n.join(' ')||ME.nom;
+$$('[data-me]').forEach(e=>e.textContent=ME[e.dataset.me]);
+$('#mail').textContent=ME.email;$('#mail').href='mailto:'+ME.email;
+$('#edu').innerHTML=ME.formation.map(f=>`<b>${f.t}</b><small>${f.s}</small>`).join('<br>');$('#eduWrap').hidden=!ME.formation.length;
+$('#ways').innerHTML=(ME.tel?`<span>WhatsApp · ${ME.tel}</span>`:'')+`<span>Réponse sous 24 h</span><span>Premier échange gratuit</span>`;
+if(ME.tel){const a=$('#waBtn');a.href='https://wa.me/'+ME.tel.replace(/\D/g,'')+'?text='+encodeURIComponent("Bonjour, j'aimerais échanger sur un projet de site web.");a.hidden=false;}
+
+$('#feat').innerHTML=PJ.slice(0,3).map(p=>`<a class="fcard up" href="#${p.id}" style="--c:${p.c}"><div class="fimg"><img src="img/${p.img}-1.webp${V}" alt="Site ${p.n}" decoding="async"></div><div><span class="chip">${p.kind}</span><h3>${p.n}</h3><p>${p.d}</p><span class="more">Voir le projet →</span></div></a>`).join('');
+$('#slistHome').innerHTML=SV.map((s,k)=>`<details class="acc" style="--c:${s.c}"><summary><b>0${k+1}</b><h3>${s.t}</h3><p class="body">${s.d}</p><i>▾</i></summary><p class="body m">${s.d} <a href="#services" style="color:${s.c};font-weight:600">En savoir plus →</a></p></details>`).join('');
+$('#srv').innerHTML=SV.map((s,k)=>`<details style="--c:${s.c}"><summary><div><span class="tag">0${k+1}</span><h3>${s.t}</h3></div><i>▾</i></summary><p>${s.d}</p><ul>${s.i.map(x=>`<li>${x}</li>`).join('')}</ul></details>`).join('');
+
+function syncAcc(){$$('.srv details,.fbox,.mdet').forEach(d=>d.open=!mob.matches);$$('.acc').forEach(d=>d.open=false);}
+document.addEventListener('click',e=>{const s=e.target.closest('.srv summary,.fbox>summary,.mdet>summary,.acc summary');if(s&&!mob.matches)e.preventDefault();},true);
+mob.addEventListener?mob.addEventListener('change',syncAcc):mob.addListener(syncAcc);
+
+$$('[data-split]').forEach(p=>{p.innerHTML=p.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w" style="transition-delay:${i*35}ms">${w}</span>`).join(' ');});
+
+/* ===== PILE DE PROJETS (accueil) ===== */
+const deck=$('#deck');
+deck.innerHTML=PJ.map(p=>`<a href="#${p.id}" aria-label="${p.n}"><img src="img/${p.img}-long.webp${V}" alt="" fetchpriority="high" decoding="async"></a>`).join('');
+const dc=$$('a',deck);let order=dc.map((_,i)=>i),dTimer=0,dPause=false;
+function layDeck(){order.forEach((ci,k)=>{const a=dc[ci];a.style.zIndex=20-k;a.style.opacity=k<4?1:0;a.style.transform=`translate(${k*16}px,${-k*14}px) rotate(${k*4}deg) scale(${1-k*.05})`;});
+  const p=PJ[order[0]];$('#deckN').textContent=String(order[0]+1).padStart(2,'0')+' / 0'+PJ.length;const t=$('#deckT');t.href='#'+p.id;t.innerHTML=`<b>${p.n}</b><small>${p.kind}</small>`;}
+function nextDeck(){const top=dc[order[0]];top.classList.add('out');setTimeout(()=>{top.classList.remove('out');order.push(order.shift());layDeck();},450);}
+layDeck();
+function autoDeck(){clearInterval(dTimer);if(reduce)return;dTimer=setInterval(()=>{if(!dPause&&cur_view==='accueil')nextDeck();},3200);}
+deck.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')dPause=true;});deck.addEventListener('pointerleave',()=>dPause=false);
+let dx0=null;deck.addEventListener('touchstart',e=>{dx0=e.touches[0].clientX;},{passive:true});
+deck.addEventListener('touchend',e=>{if(dx0===null)return;const dx=e.changedTouches[0].clientX-dx0;dx0=null;if(Math.abs(dx)>40){e.preventDefault();nextDeck();autoDeck();}});
+autoDeck();
+
+/* ===== MANÈGE DES PROJETS (même principe que Kasa) ===== */
+const ring=$('#ring'),rv=$('#ringView');
+ring.innerHTML=PJ.map((p,i)=>`<a href="#${p.id}" style="--c:${p.c}" draggable="false" aria-label="${p.n}"><img src="img/${p.img}-long.webp${V}" alt="" decoding="async" draggable="false"><b>0${i+1}</b></a>`).join('');let ringFront=-1;
+const rbs=$$('a',ring),RN=rbs.length;let rAng=0,rVel=-.25,rDrag=false,rLx=0,rMoved=0,rR=0;
+function ringSize(){const cw=Math.max(150,Math.min(260,innerWidth*.19));rR=cw*1.55;ring.style.setProperty('--cw',cw+'px');rbs.forEach((b,i)=>b.style.transform=`rotateY(${i*360/RN}deg) translateZ(${rR}px)`);}
+rv.addEventListener('pointerdown',e=>{rDrag=true;rLx=e.clientX;rMoved=0;});
+addEventListener('pointerup',()=>rDrag=false);addEventListener('pointercancel',()=>rDrag=false);
+addEventListener('pointermove',e=>{if(!rDrag||e.pointerType==='touch')return;const dx=e.clientX-rLx;rLx=e.clientX;rMoved+=Math.abs(dx);rVel=Math.max(-7,Math.min(7,dx*.22));rAng+=dx*.3;});
+rv.addEventListener('touchstart',e=>{rDrag=true;rLx=e.touches[0].clientX;rMoved=0;},{passive:true});
+rv.addEventListener('touchmove',e=>{const x=e.touches[0].clientX,dx=x-rLx;rLx=x;rMoved+=Math.abs(dx);rVel=Math.max(-7,Math.min(7,dx*.22));rAng+=dx*.3;},{passive:true});
+rv.addEventListener('touchend',()=>rDrag=false);
+ring.addEventListener('click',e=>{if(rMoved>8)e.preventDefault();});
+function drawRing(){if(!rDrag){rAng+=rVel;rVel+=((reduce?0:-.18)-rVel)*.07;}ring.style.transform=`translateZ(${-rR}px) rotateX(-5deg) rotateY(${rAng}deg)`;
+  const f=((Math.round(-rAng/(360/RN))%RN)+RN)%RN;if(f!==ringFront){ringFront=f;const p=PJ[f];$('#ringN').textContent='0'+(f+1)+' / 0'+RN;$('#ringT').textContent=p.n;$('#ringK').textContent=p.kind;$('#ringGo').href='#'+p.id;}}
+
+function buildCase(id){
+  const i=PJ.findIndex(p=>p.id===id),p=PJ[i],nx=PJ[(i+1)%PJ.length],url=ME.liens[id];
+  $('#case').style.setProperty('--c',p.c);
+  $('#case').innerHTML=`<section class="case-h"><span class="tag">${p.kind}</span><h1>${p.n}</h1>
+    <div class="meta"><div><small>Type</small>Projet de démonstration</div><div><small>Secteur</small>${p.sec}</div><div><small>Année</small>2026</div></div>
+    ${url?`<div><a class="btn" href="${url}" target="_blank" rel="noopener" data-mag>Ouvrir le site ${ARW}</a></div>`:''}</section>
+  <section class="case-f"><div class="frame" id="caseFrame"><img src="img/${p.img}-long.webp${V}" alt="Défilement du site ${p.n}"></div></section>
+  <details class="mdet"><summary>L'objectif et ce que fait le site <i>▾</i></summary>
+  <section class="case-b"><div><span class="tag" style="color:${p.c}">L'objectif</span><h2 style="margin-top:14px">${p.brief}</h2></div><ul>${p.pts.map((t,k)=>`<li><b>0${k+1}</b><span>${t}</span></li>`).join('')}</ul></section></details>
+  <details class="mdet"><summary>Captures d'écran <i>▾</i></summary>
+  <section class="shots">${[1,2,3].map(k=>`<figure><img src="img/${p.img}-${k}.webp${V}" alt="Écran ${k} du site ${p.n}" decoding="async"></figure>`).join('')}</section></details>
+  <a class="next" href="#${nx.id}"><span class="tag">Projet suivant</span><b>${nx.n} →</b></a>`;
+  const f=$('#caseFrame'),im=$('img',f);let dir=1;
+  const pan=()=>{if(!f.isConnected||reduce)return;const max=im.offsetHeight-f.offsetHeight;im.style.transition='transform 7s cubic-bezier(.45,0,.2,1)';im.style.transform=`translateY(${dir>0?-max:0}px)`;dir*=-1;setTimeout(pan,7600);};
+  im.complete?setTimeout(pan,800):im.addEventListener('load',()=>setTimeout(pan,800));
+}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+const watch=()=>$$('.view.on .up:not(.in),.view.on [data-split]:not(.in)').forEach(el=>io.observe(el));
+
+const mags=new Map();
+function bindMag(){if(!fine||reduce)return;$$('[data-mag]').forEach(b=>{if(mags.has(b))return;const s={x:0,y:0,tx:0,ty:0};mags.set(b,s);
+  b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();s.tx=(e.clientX-r.left-r.width/2)*.3;s.ty=(e.clientY-r.top-r.height/2)*.45;});
+  b.addEventListener('pointerleave',()=>{s.tx=s.ty=0;});});}
+
+const prog=$('#prog');
+function loop(){
+  const y=scrollY,vh=innerHeight,H=document.documentElement.scrollHeight-vh;
+  prog.style.transform=`scaleX(${H>0?clamp(y/H):0})`;
+  if(!reduce){
+    mags.forEach((s,b)=>{if(!b.isConnected){mags.delete(b);return;}s.x=lerp(s.x,s.tx,.18);s.y=lerp(s.y,s.ty,.18);b.style.transform=`translate(${s.x}px,${s.y}px)`;});
+  }
+  if(cur_view==='projets')drawRing();
+  requestAnimationFrame(loop);
+}
+
+const views=$$('.view'),wipe=$('#wipe'),LABEL={accueil:'Accueil',projets:'Projets',services:'Services',apropos:'À propos',contact:'Contact'};
+const WCOL={};
+let cur_view='accueil',cur_hash='accueil',t1=0,t2=0;
+const norm=h=>h==='profil'?'apropos':h;
+function apply(h){
+  const isCase=PJ.some(p=>p.id===h),v=isCase?'case':h;
+  if(isCase)buildCase(h);
+  views.forEach(x=>x.classList.toggle('on',x.dataset.view===v));
+  $$('.nav ul a,.mmenu a').forEach(a=>{const t=a.getAttribute('href').slice(1);(t===h||(t==='projets'&&isCase))?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current');});
+  cur_view=v;cur_hash=h;document.body.dataset.view=v;scrollTo(0,0);
+  if(v==='projets')ringSize();
+  syncAcc();watch();bindMag();
+}
+function go(h){
+  h=norm(h);if(!(h in LABEL)&&!PJ.some(p=>p.id===h))h='accueil';
+  document.body.classList.remove('menu-open');$('#burger').setAttribute('aria-expanded','false');
+  if(h===cur_hash){scrollTo({top:0,behavior:reduce?'auto':'smooth'});return;}
+  if(reduce){apply(h);return;}
+  clearTimeout(t1);clearTimeout(t2);
+  const pj=PJ.find(p=>p.id===h);
+  $('#wipeT').textContent=LABEL[h]||pj.n;
+  wipe.className='wipe in';
+  t1=setTimeout(()=>{apply(h);wipe.className='wipe out';t2=setTimeout(()=>wipe.className='wipe',600);},500);
+}
+addEventListener('hashchange',()=>go(location.hash.slice(1)||'accueil'));
+$('#burger').addEventListener('click',()=>{const o=document.body.classList.toggle('menu-open');$('#burger').setAttribute('aria-expanded',o);});
+$('#copy').addEventListener('click',async e=>{try{await navigator.clipboard.writeText(ME.email);e.target.textContent='Adresse copiée';}catch(_){e.target.textContent="Sélectionnez l'adresse";}setTimeout(()=>e.target.textContent="Copier l'adresse",1800);});
+$('#briefForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
+  const body=`Nom : ${f.get('nom')}\nContact : ${f.get('contact')}\nProjet : ${f.get('type')}\n\n${f.get('msg')||''}`;
+  location.href=`mailto:${ME.email}?subject=${encodeURIComponent('Projet de site — '+f.get('nom'))}&body=${encodeURIComponent(body)}`;$('#briefOk').classList.add('on');});
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(cur_view==='projets')ringSize();},120);});
+
+const h0=norm(location.hash.slice(1));apply((h0 in LABEL)||PJ.some(p=>p.id===h0)?h0:'accueil');
+requestAnimationFrame(()=>document.body.classList.add('ready'));
+addEventListener('load',()=>{PJ.forEach(p=>[1,2,3].forEach(k=>{const i=new Image();i.decoding='async';i.src=`img/${p.img}-${k}.webp${V}`;}));});
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

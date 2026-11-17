@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr" data-site="baingres">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bain &amp; Grès — Boutique Sanitaire, Robinetterie &amp; Carrelage</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Bain & Grès, boutique de salle de bain, robinetterie, douche et carrelage. catalogue, recherche, panier.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* DA : Showroom architectural de salle de bain & carrelage. Travertin chaud, blanc céramique, laiton brossé, anthracite mat. */
+:root{
+  --bg:#f6f3ed; --surface:#ffffff; --wash:#ebe5da; --deep:#171917; --deep2:#232723;
+  --brass:#b3833f; --brass2:#d8b478; --ink:#191815; --mute:#6e685f; --line:#e1dbd0;
+  --display:"Fraunces",Georgia,serif; --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:clamp(16px,3.6vw,52px); color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.55 var(--body)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.98;letter-spacing:-.02em;text-wrap:balance}
+.tag{font:700 .7rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.95em 1.55em;background:var(--deep);color:#fff;font-weight:600;font-size:.94rem;border:0;cursor:pointer;border-radius:999px;transition:background .28s,transform .25s,box-shadow .28s}
+.btn:hover{background:var(--brass);box-shadow:0 12px 26px -12px rgba(179,131,63,.65)}
+.btn:active{transform:scale(.97)}
+.btn.brass{background:var(--brass);color:#fff}
+.btn.brass:hover{background:#fff;color:var(--deep)}
+.btn.line{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.line:hover{background:var(--deep);color:#fff;box-shadow:none}
+
+.demo{background:var(--deep);color:#cfc9be;font-size:.76rem;padding:.5em var(--gut);text-align:center}
+.demo b{color:#fff}
+
+/* Barre utilitaire + nav */
+.util{background:var(--wash);color:var(--mute);font-size:.78rem;padding:.52em var(--gut);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.util b{color:var(--ink)}
+.nav{position:sticky;top:0;z-index:70;transform:translateZ(0);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(10px,2vw,28px);align-items:center;padding:12px var(--gut)}
+main{position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.45rem/1 var(--display);letter-spacing:-.02em;color:var(--deep)}
+.logo svg{width:26px;height:26px;flex:none;color:var(--brass)}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,26px);justify-self:center;font-size:.92rem;font-weight:600;color:var(--mute)}
+.nav-links a{padding:6px 2px;position:relative;transition:color .2s}
+.nav-links a:hover,.nav-links a[aria-current=page]{color:var(--deep)}
+.nav-links a[aria-current=page]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--brass);border-radius:2px}
+.navr{display:flex;align-items:center;gap:10px}
+.cartbtn{display:flex;align-items:center;gap:9px;background:var(--deep);color:#fff;font-weight:600;font-size:.9rem;padding:.72em 1.2em;border:0;border-radius:999px;cursor:pointer;transition:background .25s}
+.cartbtn:hover{background:var(--brass)}
+.cartbtn b{display:grid;place-items:center;min-width:22px;height:22px;border-radius:50%;background:var(--brass2);color:var(--deep);font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums}
+.cartbtn.bump b{animation:bump .5s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bump{40%{transform:scale(1.65)}}
+@media(max-width:760px){.nav{grid-template-columns:auto auto;grid-template-areas:"logo cart" "links links"}.logo{grid-area:logo}.navr{grid-area:cart}.nav-links{grid-area:links;justify-self:start;overflow-x:auto;max-width:100%}.util{display:none}}
+
+/* Hero Architectural — Split éditorial + 3 colonnes contre-défilantes (style Atrium / Atelier) */
+.hero{position:relative;padding:clamp(22px,3vw,38px) var(--gut) clamp(44px,5.5vw,72px);background:var(--bg);color:var(--ink);overflow:hidden}
+.hero-bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);padding-bottom:14px;position:relative;margin-bottom:clamp(24px,3.5vw,44px)}
+.hero-bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.go .hero-bar::after{transform:scaleX(1)}
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4.5vw,64px);align-items:center}
+.hero-copy{display:grid;gap:0;align-content:center}
+.hero h1{font-size:clamp(2.85rem,5.8vw,5.15rem);color:var(--deep);margin-top:12px;letter-spacing:-.025em;line-height:.95}
+.hero h1 .l{display:block;overflow:hidden;padding-bottom:.07em}
+.hero h1 .l>i{display:block;font-style:normal;transform:translateY(115%);transition:transform .95s cubic-bezier(.16,1,.3,1)}
+.go .hero h1 .l>i{transform:none}
+.hero h1 .l:nth-child(2)>i{transition-delay:.09s}.hero h1 .l:nth-child(3)>i{transition-delay:.18s}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--brass)}
+.hero-copy p{max-width:44ch;margin:20px 0 26px;color:var(--mute);font-size:1.02rem;line-height:1.58}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.spec-tbl{margin-top:clamp(26px,3.6vw,40px);border-top:1px solid var(--line);display:grid}
+.spec-tbl div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.84rem}
+.spec-tbl dt{color:var(--mute);font-weight:500}
+.spec-tbl dd{color:var(--deep);font-weight:600;text-align:right}
+
+/* 3 colonnes contre-défilantes en temps réel */
+.mosaic{position:relative;height:clamp(430px,68vh,630px);display:grid;grid-template-columns:repeat(3,1fr);gap:12px;overflow:hidden;mask-image:linear-gradient(180deg,transparent 0%,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.mcol{display:grid;gap:12px;align-content:start;will-change:transform}
+.mcol.up{animation:colUp 24s linear infinite}
+.mcol.dn{animation:colDn 28s linear infinite}
+.mosaic:hover .mcol{animation-play-state:paused}
+.mcol figure{margin:0;border-radius:10px;overflow:hidden;background:var(--wash);aspect-ratio:3/4;border:1px solid rgba(25,24,21,.08)}
+.mcol figure.tone{background:var(--deep);display:grid;place-items:end start;padding:16px;color:#fff;font-family:var(--display);font-size:1.15rem;line-height:1.1}
+.mcol figure.tone span{color:var(--brass2);font-family:var(--body);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:6px}
+.mcol img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.mcol figure:hover img{transform:scale(1.06)}
+@keyframes colUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes colDn{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+
+/* Bandeau défilant signature */
+.strip{background:var(--deep);color:#f3efe7;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;padding:15px 0;user-select:none}
+.strip-track{display:flex;width:max-content;gap:36px;animation:marquee 32s linear infinite;font-family:var(--display);font-size:1.15rem;letter-spacing:.04em}
+.strip:hover .strip-track{animation-play-state:paused}
+.strip-track span{display:inline-flex;align-items:center;gap:36px;white-space:nowrap}
+.strip-track em{color:var(--brass2);font-style:normal;font-size:.85rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Révélations au scroll & cartes */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.cat{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.cat:nth-child(2){transition-delay:.07s}.cat:nth-child(3){transition-delay:.14s}.cat:nth-child(4){transition-delay:.21s}
+.cats.in .cat{opacity:1;transform:none}
+.cat img{clip-path:inset(0 0 100% 0);transition:clip-path .75s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.cats.in .cat img{clip-path:inset(0)}
+.nojs .rv,.nojs .cat{opacity:1;transform:none}
+.nojs .cat img{clip-path:none}
+#featuredGrid{grid-template-columns:repeat(4,1fr)}
+.fly{position:fixed;z-index:100;border-radius:10px;object-fit:cover;pointer-events:none;transition:all .72s cubic-bezier(.5,-.15,.3,1)}
+.sel-cta{display:flex;justify-content:center;padding-top:8px}
+@media(max-width:960px){#featuredGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.mosaic{height:360px}}
+@media(max-width:600px){.mosaic{grid-template-columns:repeat(2,1fr);height:320px}.mcol:last-child{display:none}}
+@media(max-width:560px){#featuredGrid{grid-template-columns:1fr}}
+
+/* Indicateur 3D de progression showroom */
+.dial{position:fixed;right:18px;bottom:22px;z-index:55;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 12px 30px -12px rgba(25,24,21,.28);display:none;place-items:center;cursor:pointer;perspective:300px;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s,transform .25s}
+.dial.on{opacity:1;pointer-events:auto;transform:none}
+.dial svg{width:38px;height:38px;transform:rotate(var(--r,0deg));transition:transform .08s linear}
+.dial circle.fg{stroke:var(--brass);stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--k,0)*100);transition:stroke-dashoffset .1s linear}
+@media(min-width:1100px){.dial{display:grid}}
+.spark{position:fixed;z-index:120;width:8px;height:8px;border-radius:50%;background:var(--brass);pointer-events:none}
+
+/* Catégories */
+.cats{padding:clamp(28px,4.5vw,56px) var(--gut) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:14px}
+.cat{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;display:grid;align-items:end;padding:16px;color:#fff;cursor:pointer;border:0;text-align:left;background:var(--deep);transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,25,23,.08) 20%,rgba(23,25,23,.86) 100%)}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.cat:hover{transform:translateY(-4px);box-shadow:0 22px 42px -20px rgba(25,24,21,.4)}
+.cat:hover img{transform:scale(1.08)}
+.cat span,.cat small{position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.cat span{font:700 1.55rem/1.05 var(--display)}
+.cat small{display:block;font-size:.78rem;opacity:.88;margin-top:3px}
+
+/* Catalogue avec cartes 3D */
+.shop{padding:clamp(38px,5vw,70px) var(--gut) clamp(54px,8vw,110px);display:grid;gap:20px}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.shop-head h2{font-size:clamp(2rem,4.6vw,3.3rem);color:var(--deep);margin-top:6px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{padding:.52em 1.05em;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:.86rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.chips button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+select.sort{padding:.52em .9em;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:600;font-size:.86rem}
+.count{color:var(--mute);font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,245px),1fr));gap:clamp(14px,1.8vw,24px);perspective:1200px}
+.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;background:#fff;transform-style:preserve-3d;transition:box-shadow .35s,transform .22s ease-out,border-color .35s;will-change:transform}
+.card:hover{box-shadow:0 26px 48px -26px rgba(25,24,21,.34);border-color:#cfc6b6}
+.card .ph{position:relative;aspect-ratio:1;overflow:hidden;background:var(--wash);cursor:pointer}
+.card .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.28) 0%,transparent 45%,rgba(179,131,63,.12) 100%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover .ph::after{opacity:1}
+.card .ph img{width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.1);transition:clip-path .65s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.card.in .ph img{clip-path:inset(0);transform:none}
+.card:hover .ph img{transform:scale(1.06)}
+.card .flag{position:absolute;top:10px;left:10px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.35em .65em;border-radius:999px;background:var(--brass);color:#fff}
+.card .eye{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border:0;border-radius:999px;padding:.48em .9em;font-size:.78rem;font-weight:700;color:var(--deep);cursor:pointer;transform:translateY(140%);transition:transform .35s cubic-bezier(.7,0,.2,1)}
+.card:hover .eye,.card:focus-within .eye{transform:none}
+.card .body{padding:14px;display:grid;gap:7px;align-content:start}
+.card .ref{font-size:.7rem;color:var(--mute);letter-spacing:.08em}
+.card h3{font-size:1.22rem;line-height:1.12;color:var(--deep)}
+.card .stock{font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:6px;color:#236c45}
+.card .stock i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.card .stock.low{color:#b06214}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+.card .price{font:700 1.35rem/1 var(--display);color:var(--deep);font-variant-numeric:tabular-nums}
+.card .price s{display:block;font-family:var(--body);font-size:.62em;color:var(--mute);font-weight:500;margin-top:2px}
+.card .add{background:var(--deep);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:1.25rem;line-height:1;cursor:pointer;transition:background .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.card .add:hover{background:var(--brass);transform:rotate(90deg)}
+.card.hide{display:none}
+.empty{padding:50px 0;text-align:center;color:var(--mute)}
+.nojs .card .ph img{clip-path:none;transform:none}
+
+/* Bandeau Showroom / Projets */
+.pro{background:var(--deep);color:#f3efe7;border-radius:18px;margin:0 var(--gut) clamp(50px,8vw,100px);padding:clamp(24px,4.5vw,58px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3.5vw,54px);align-items:center;overflow:hidden;position:relative}
+.pro h2{font-size:clamp(1.9rem,4.2vw,3.1rem);color:#fff;margin-top:8px}
+.pro p{color:#c9c3b8;max-width:48ch;margin:12px 0 20px}
+.pro ul{list-style:none;padding:0;display:grid;gap:9px;font-size:.94rem}
+.pro li{display:flex;gap:10px;align-items:flex-start}
+.pro li::before{content:"✓";color:var(--brass2);font-weight:700}
+.pro .pic{border-radius:12px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 28px 60px -24px rgba(0,0,0,.6)}
+.pro .pic img{width:100%;height:100%;object-fit:cover}
+@media(max-width:800px){.pro{grid-template-columns:1fr}}
+
+/* Engagements boutique */
+.why{padding:0 var(--gut) clamp(50px,8vw,100px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}
+.why article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:8px;align-content:start}
+.why h3{font-size:1.38rem;color:var(--deep)}
+.why p{color:var(--mute);font-size:.92rem}
+.why b{font:700 2.1rem/1 var(--display);color:var(--brass)}
+
+/* Visite showroom + Google Maps */
+.visit{padding:0 var(--gut) clamp(50px,8vw,100px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(20px,4vw,52px);align-items:stretch}
+.visit-info{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,4vw,44px);display:grid;gap:18px;align-content:center}
+.visit-info h2{font-size:clamp(1.9rem,4vw,2.9rem);color:var(--deep)}
+.visit-info p{color:var(--mute)}
+.visit-dl{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.visit-dl div{display:grid;gap:2px}
+.visit-dl small{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--brass);font-weight:700}
+.visit-dl strong{color:var(--deep);font-weight:600}
+.map-wrap{position:relative;z-index:1;min-height:360px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--wash);box-shadow:0 24px 50px -28px rgba(25,24,21,.25)}
+.map-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.85) contrast(1.02)}
+.map-pin{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:.82rem;box-shadow:0 12px 28px -12px rgba(25,24,21,.28);pointer-events:none}
+.map-pin b{display:block;color:var(--deep)}
+.map-pin span{color:var(--mute)}
+@media(max-width:860px){.visit{grid-template-columns:1fr}.map-wrap{min-height:300px}}
+
+/* Nous contacter */
+.contact{padding:0 var(--gut) clamp(60px,9vw,115px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(22px,4vw,56px);align-items:start}
+.contact-side{display:grid;gap:16px}
+.contact-side h2{font-size:clamp(1.9rem,4vw,2.9rem);color:var(--deep)}
+.contact-side p{color:var(--mute);max-width:42ch}
+.cways{display:grid;gap:10px;margin-top:6px}
+.cway{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:2px}
+.cway small{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--brass);font-weight:700}
+.cway b{color:var(--deep);font-weight:600}
+.cform{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(22px,4vw,40px);display:grid;gap:14px}
+.cform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cform label{display:grid;gap:6px;font-size:.86rem;font-weight:600;color:var(--deep)}
+.cform input,.cform select,.cform textarea{width:100%;padding:.78em .95em;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);font:inherit;color:var(--ink);transition:border-color .25s,background .25s}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--brass);background:#fff;outline:0}
+.cform textarea{min-height:110px;resize:vertical}
+.cform .ok{font-size:.86rem;color:#236c45;font-weight:600;display:none}.cform .ok.on{display:block}
+@media(max-width:860px){.contact{grid-template-columns:1fr}.cform .row2{grid-template-columns:1fr}}
+
+footer{background:var(--deep);color:#c5bfb4;padding:clamp(36px,5vw,70px) var(--gut) 24px;display:grid;gap:28px;font-size:.9rem}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px}
+.fgrid b{display:block;color:#fff;margin-bottom:8px;font-family:var(--display);font-size:1.08rem}
+.fgrid a{display:block;padding:2px 0}.fgrid a:hover{color:#fff}
+.legal{font-size:.76rem;border-top:1px solid rgba(255,255,255,.14);padding-top:16px;color:#938d82}
+
+/* Fiche produit */
+dialog{border:0;padding:0;border-radius:16px;max-width:min(880px,94vw);width:100%;max-height:92vh;overflow:auto;background:#fff;color:var(--ink);margin:auto;box-shadow:0 36px 90px -24px rgba(25,24,21,.45)}
+dialog::backdrop{background:rgba(23,25,23,.58);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.qv{display:grid;grid-template-columns:1fr 1fr}
+.qv .pic{aspect-ratio:1;background:var(--wash)}
+.qv .pic img{width:100%;height:100%;object-fit:cover}
+.qv .txt{padding:clamp(20px,3vw,34px);display:grid;gap:12px;align-content:start}
+.qv h2{font-size:clamp(1.7rem,3.2vw,2.4rem);color:var(--deep)}
+.qv .price{font:700 2rem/1 var(--display);color:var(--deep);font-variant-numeric:tabular-nums}
+.qv dl{display:grid;grid-template-columns:auto 1fr;gap:0;font-size:.9rem}
+.qv dt,.qv dd{padding:8px 0;border-top:1px solid var(--line)}
+.qv dt{color:var(--mute);padding-right:16px}.qv dd{font-weight:600;text-align:right}
+.x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;background:var(--deep);color:#fff;border:0;font-size:1.1rem;cursor:pointer;z-index:4}
+@media(max-width:700px){.qv{grid-template-columns:1fr}.qv .pic{aspect-ratio:16/10}}
+
+/* Panier */
+.veil{position:fixed;inset:0;z-index:80;background:rgba(23,25,23,.48);opacity:0;pointer-events:none;transition:opacity .35s}
+.veil.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;inset:0 0 0 auto;z-index:90;width:min(100%,430px);background:#fff;display:grid;grid-template-rows:auto auto 1fr auto;transform:translateX(102%);transition:transform .5s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.drawer.on{transform:none;visibility:visible}
+.drawer>header{display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:1px solid var(--line)}
+.drawer>header h2{font-size:1.65rem;color:var(--deep)}
+.drawer>header button{width:38px;height:38px;border-radius:50%;background:var(--wash);border:0;font-size:1.1rem;cursor:pointer}
+.ship{padding:12px 18px;background:var(--bg);font-size:.84rem;display:grid;gap:7px}
+.ship .bar{height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+.ship .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brass),var(--deep));transform-origin:left;transform:scaleX(0);transition:transform .6s cubic-bezier(.3,1,.4,1)}
+.items{overflow:auto;padding:4px 18px;display:grid;align-content:start}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);animation:slide .4s cubic-bezier(.2,.8,.3,1)}
+@keyframes slide{from{opacity:0;transform:translateX(24px)}}
+.item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.item h3{font-size:1.05rem;color:var(--deep);line-height:1.15}
+.item small{color:var(--mute);font-size:.78rem}
+.qty{display:flex;align-items:center;gap:5px;margin-top:6px}
+.qty button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;line-height:1;font-weight:700}
+.qty span{min-width:2ch;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.item b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.drawer>footer{background:#fff;color:var(--ink);padding:18px;border-top:1px solid var(--line);display:grid;gap:12px}
+.lines{display:grid;gap:6px;font-size:.9rem}
+.lines div{display:flex;justify-content:space-between}
+.lines .tot{font:700 1.45rem/1 var(--display);color:var(--deep);padding-top:8px;border-top:1px solid var(--line);margin-top:4px}
+.lines b{font-variant-numeric:tabular-nums}
+.city{display:flex;gap:8px;align-items:center;font-size:.86rem}
+.city select{flex:1;padding:.55em .7em;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+.note{font-size:.8rem;color:var(--mute);display:none}.note.on{display:block}
+.fly{position:fixed;z-index:100;border-radius:10px;object-fit:cover;pointer-events:none;transition:all .75s cubic-bezier(.5,-.15,.3,1)}
+.emptyc{padding:36px 0;text-align:center;color:var(--mute)}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.card .ph img{clip-path:none;transform:none}.rig,.card{transform:none!important}}
+</style>
+<link rel="stylesheet" href="../mobile-compact.css"><script src="../mobile-compact.js" defer></script>
+</head>
+<body class="nojs">
+<div class="util"><span>Livraison <b>offerte</b> dès 150 000 FCFA à Cotonou</span><span>Showroom Haie Vive · Ouvert du lundi au samedi, 9 h – 19 h</span></div>
+
+<header class="nav">
+  <a class="logo" href="#top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><path d="M3 15a4 4 0 0 1 8 0v6H3v-6Z"/><circle cx="17" cy="17" r="4"/></svg>Bain &amp; Grès</a>
+  <nav class="nav-links" aria-label="Navigation principale">
+    <a href="index.html" aria-current="page">Accueil</a>
+    <a href="catalogue.html">Catalogue</a>
+    <a href="#visite">Showroom</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="navr"><button class="cartbtn" id="cartBtn">Panier <b id="cartN">0</b></button></div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="hero-bar"><span>Grès cérame &amp; Laiton</span><span>Showroom Haie Vive · Cotonou</span><span>Collection 2026</span></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="tag">Boutique sanitaire &amp; carrelage</span>
+      <h1><span class="l"><i>La salle de bain</i></span><span class="l"><i>dans ses plus</i></span><span class="l"><i><em>belles matières.</em></i></span></h1>
+      <p>Robinetterie en laiton brossé, colonnes de douche architecturales, vasques en céramique et grès cérame grand format disponibles immédiatement.</p>
+      <div class="hero-cta"><a class="btn" href="#selection">Voir la sélection</a><a class="btn line" href="catalogue.html">Tout le catalogue (13)</a></div>
+      <dl class="spec-tbl">
+        <div><dt>Matières en stock</dt><dd>Travertin R10 · Laiton PVD · Céramique</dd></div>
+        <div><dt>Disponibilité showroom</dt><dd>1 240 pièces prêtes à emporter</dd></div>
+        <div><dt>Livraison Cotonou</dt><dd>Offerte dès 150 000 FCFA · Sous 24 h</dd></div>
+      </dl>
+    </div>
+    <div class="mosaic" aria-hidden="true">
+      <div class="mcol up">
+        <figure><img src="img/p10.webp" alt="" fetchpriority="high"></figure>
+        <figure><img src="img/p1.webp" alt=""></figure>
+        <figure class="tone"><div><span>Finition 01</span>Laiton brossé PVD</div></figure>
+        <figure><img src="img/p10.webp" alt=""></figure>
+        <figure><img src="img/p1.webp" alt=""></figure>
+        <figure class="tone"><div><span>Finition 01</span>Laiton brossé PVD</div></figure>
+      </div>
+      <div class="mcol dn">
+        <figure><img src="img/p16.webp" alt=""></figure>
+        <figure><img src="img/p6.webp" alt=""></figure>
+        <figure><img src="img/p3.webp" alt=""></figure>
+        <figure><img src="img/p16.webp" alt=""></figure>
+        <figure><img src="img/p6.webp" alt=""></figure>
+        <figure><img src="img/p3.webp" alt=""></figure>
+      </div>
+      <div class="mcol up">
+        <figure><img src="img/p15.webp" alt=""></figure>
+        <figure><img src="img/p18.webp" alt=""></figure>
+        <figure><img src="img/p4.webp" alt=""></figure>
+        <figure><img src="img/p15.webp" alt=""></figure>
+        <figure><img src="img/p18.webp" alt=""></figure>
+        <figure><img src="img/p4.webp" alt=""></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span>ROBINETTERIE LAITON BROSSÉ <em>✦</em> COLONNES DE DOUCHE <em>✦</em> VASQUES CÉRAMIQUE <em>✦</em> GRÈS CÉRAME GRAND FORMAT <em>✦</em> SHOWROOM HAIE VIVE COTONOU <em>✦</em></span>
+    <span>ROBINETTERIE LAITON BROSSÉ <em>✦</em> COLONNES DE DOUCHE <em>✦</em> VASQUES CÉRAMIQUE <em>✦</em> GRÈS CÉRAME GRAND FORMAT <em>✦</em> SHOWROOM HAIE VIVE COTONOU <em>✦</em></span>
+  </div>
+</div>
+
+<button class="dial" id="dial" aria-label="Revenir en haut" title="Revenir en haut">
+  <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#e1dbd0" stroke-width="2.2"/><circle class="fg" cx="18" cy="18" r="15.9" fill="none" stroke-width="2.4" stroke-linecap="round" pathLength="100"/><path d="M18 22V14m-3.5 3.5L18 14l3.5 3.5" fill="none" stroke="#191815" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<section class="shop" id="univers" style="padding-bottom:clamp(28px,4vw,52px)">
+  <div class="shop-head rv">
+    <div><span class="tag">La boutique</span><h2>Nos quatre univers</h2></div>
+    <a class="btn line" href="catalogue.html">Ouvrir le catalogue complet (13)</a>
+  </div>
+  <div class="cats rv" style="padding:0" aria-label="Univers">
+    <a class="cat" href="catalogue.html?cat=robinetterie"><img src="img/p1.webp" alt=""><span>Robinetterie</span><small>Mitigeurs, mélangeurs</small></a>
+    <a class="cat" href="catalogue.html?cat=douche"><img src="img/p6.webp" alt=""><span>Douche</span><small>Colonnes, pommes, sets</small></a>
+    <a class="cat" href="catalogue.html?cat=sanitaire"><img src="img/p3.webp" alt=""><span>Sanitaire</span><small>Vasques, miroirs</small></a>
+    <a class="cat" href="catalogue.html?cat=carrelage"><img src="img/p15.webp" alt=""><span>Carrelage</span><small>Grès cérame, mosaïque</small></a>
+  </div>
+</section>
+
+<section class="shop" id="selection">
+  <div class="shop-head rv">
+    <div><span class="tag">Sélection du moment</span><h2>Pièces signature en stock</h2></div>
+    <span class="count">4 pièces phares · Retrait ou livraison 24 h</span>
+  </div>
+  <div class="grid" id="featuredGrid"></div>
+  <div class="sel-cta rv"><a class="btn" href="catalogue.html">Voir toute la collection (13 pièces) →</a></div>
+</section>
+
+<section class="pro" id="pro">
+  <div>
+    <span class="tag" style="color:var(--brass2)">Showroom &amp; projets</span>
+    <h2>Vous aménagez une maison ou un hôtel&nbsp;?</h2>
+    <p>Passez voir les matières en vrai : testez les finitions laiton ou noir mat, emportez des échantillons de carreaux et composez votre salle de bain avec nos conseillers.</p>
+    <ul><li>Échantillons de carrelage à emporter chez vous</li><li>Tarifs dégressifs pour architectes et chantiers</li><li>Livraison palettisée sur rendez-vous au Bénin</li><li>Retours acceptés 14 jours dans l'emballage d'origine</li></ul>
+    <p style="margin-top:20px"><a class="btn brass" href="catalogue.html">Composer ma sélection</a></p>
+  </div>
+  <div class="pic"><img src="img/p16.webp" alt="Douche à l'italienne en marbre et robinetterie noire au showroom" loading="lazy"></div>
+</section>
+
+<section class="why">
+  <article><b>24 h</b><h3>Livraison Cotonou</h3><p>Commande validée avant 15 h, livrée le lendemain à Cotonou et Abomey-Calavi.</p></article>
+  <article><b>2 ans</b><h3>Garantie finitions</h3><p>Cartouches céramique et traitements laiton ou noir mat garantis contre l'usure.</p></article>
+  <article><b>14 j</b><h3>Échange facile</h3><p>Article non posé, dans son carton : échangé ou remboursé en boutique.</p></article>
+  <article><b>Sur place</b><h3>Conseil matière</h3><p>Association carrelage, vasque et robinetterie préparée avec vous au showroom.</p></article>
+</section>
+
+<section class="visit" id="visite" aria-labelledby="visitTitle">
+  <div class="visit-info">
+    <span class="tag">Visiter la boutique</span>
+    <h2 id="visitTitle">Voir les matières en vrai au showroom</h2>
+    <p>Venez comparer nos carreaux, robinetteries en laiton brossé et vasques en céramique directement en boutique, avec conseil sur place.</p>
+    <div class="visit-dl">
+      <div><small>Adresse</small><strong>Quartier Haie Vive, Rue des Ambassades · Cotonou, Bénin</strong></div>
+      <div><small>Horaires</small><strong>Lundi – Samedi · 9 h 00 – 19 h 00</strong></div>
+      <div><small>Accès</small><strong>Parking réservé devant la boutique · Retrait de commandes</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn" href="https://maps.google.com/?q=Haie+Vive,Cotonou,Benin" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+      <a class="btn line" href="#contact">Prendre rendez-vous</a>
+    </div>
+  </div>
+  <div class="map-wrap">
+    <iframe title="Plan d'accès Showroom Bain &amp; Grès à Haie Vive, Cotonou" src="https://www.google.com/maps?q=Haie+Vive,Cotonou,Benin&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div class="map-pin"><b>Showroom Bain &amp; Grès</b><span>Haie Vive · Cotonou</span></div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contactTitle">
+  <div class="contact-side">
+    <span class="tag">Nous contacter</span>
+    <h2 id="contactTitle">Une question sur un produit ou un devis&nbsp;?</h2>
+    <p>Notre équipe vous répond pour vérifier un stock, préparer des échantillons de carrelage ou chiffrer votre salle de bain.</p>
+    <div class="cways">
+      <div class="cway"><small>Téléphone &amp; WhatsApp</small><b>+229 00 00 00 00</b></div>
+      <div class="cway"><small>E-mail</small><b>bonjour@baingres.example</b></div>
+      <div class="cway"><small>Réponse</small><b>Sous 24 heures ouvrées</b></div>
+    </div>
+  </div>
+  <form class="cform" id="cform">
+    <div class="row2">
+      <label>Nom complet<input type="text" name="nom" placeholder="Votre nom" required></label>
+      <label>Téléphone ou e-mail<input type="text" name="coord" placeholder="+229 … ou e-mail" required></label>
+    </div>
+    <label>Objet
+      <select name="sujet">
+        <option>Demande de devis</option>
+        <option>Échantillons de carrelage</option>
+        <option>Rendez-vous au showroom</option>
+        <option>Disponibilité d'un article</option>
+      </select>
+    </label>
+    <label>Votre message<textarea name="msg" placeholder="Précisez vos dimensions, finitions souhaitées ou références…" required></textarea></label>
+    <button class="btn" type="submit">Envoyer le message</button>
+    <p class="ok" id="cOk" role="status">Démonstration : message bien pris en compte en local (aucun envoi réel sur cette maquette).</p>
+  </form>
+</section>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><b>Bain &amp; Grès</b>Showroom Haie Vive<br>Cotonou, Bénin</div>
+    <div><b>Boutique</b><a href="catalogue.html?cat=robinetterie">Robinetterie</a><a href="catalogue.html?cat=douche">Douche</a><a href="catalogue.html?cat=sanitaire">Sanitaire</a><a href="catalogue.html?cat=carrelage">Carrelage</a></div>
+    <div><b>Services</b><a href="#visite">Visiter le showroom</a><a href="#pro">Projets &amp; pros</a><a href="#contact">Nous contacter</a></div>
+    <div><b>Contact</b>bonjour@baingres.example<br>+229 00 00 00 00</div>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgT"><button class="x" id="dlgX" aria-label="Fermer">×</button><div class="qv" id="qv"></div></dialog>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <header><h2>Votre sélection</h2><button id="drawerX" aria-label="Fermer">×</button></header>
+  <div class="ship"><span id="shipTxt"></span><div class="bar"><i id="shipBar"></i></div></div>
+  <div class="items" id="items"></div>
+  <footer>
+    <div class="city"><label for="ville">Livraison à</label><select id="ville"><option value="0">Cotonou</option><option value="2000">Abomey-Calavi</option><option value="3500">Porto-Novo</option><option value="9000">Parakou</option></select></div>
+    <div class="lines" id="lines"></div>
+    <button class="btn" id="order">Commander</button>
+    <p class="note" id="note" role="status">Démonstration : la commande n'est pas envoyée. Sur un vrai site, le paiement mobile money ou carte se ferait ici.</p>
+  </footer>
+</aside>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/ | /g,' ')+' F';
+document.body.classList.remove('nojs');
+requestAnimationFrame(()=>document.body.classList.add('go'));
+
+/* Indicateur de scroll */
+const dial=$('#dial');
+addEventListener('scroll',()=>{
+  const H=document.documentElement.scrollHeight-innerHeight,k=H>0?scrollY/H:0;
+  dial.classList.toggle('on',scrollY>240);
+  dial.style.setProperty('--k',k.toFixed(3));
+  dial.style.setProperty('--r',(k*360).toFixed(1)+'deg');
+},{passive:true});
+dial.onclick=()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+
+function sparkle(el){
+  if(reduce)return;
+  const r=el.getBoundingClientRect();
+  for(let i=0;i<9;i++){
+    const d=document.createElement('span');d.className='spark';
+    d.style.left=r.left+r.width/2+'px';d.style.top=r.top+r.height/2+'px';
+    document.body.appendChild(d);
+    const a=-Math.PI/2+(Math.random()-.5)*2.2,v=55+Math.random()*65;
+    d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v}px) scale(.9)`,opacity:1,offset:.45},{transform:`translate(${Math.cos(a)*v*1.25}px,${Math.sin(a)*v+95}px) scale(.3)`,opacity:0}],{duration:760+Math.random()*280,easing:'cubic-bezier(.3,.6,.6,1)'}).onfinish=()=>d.remove();
+  }
+}
+
+const P=[
+ {id:'r1',n:'Mitigeur lavabo haut',m:'Laiton brossé',c:'robinetterie',p:78500,old:92000,img:'p1',st:14,ref:'BG-RB-108',d:"Bec haut pour vasque à poser, cartouche céramique 35 mm, flexibles inox fournis.",sp:{Hauteur:'30 cm',Finition:'Laiton brossé',Raccord:'G 3/8″',Garantie:'2 ans'}},
+ {id:'r2',n:'Mélangeur mural à croisillons',m:'Chromé',c:'robinetterie',p:52000,img:'p2',st:6,ref:'BG-RB-044',d:"Modèle mural deux poignées, entraxe réglable 150 mm, clapets céramique.",sp:{Entraxe:'150 mm',Finition:'Chrome poli',Raccord:'G 1/2″',Garantie:'2 ans'}},
+ {id:'r3',n:'Mitigeur lavabo bas',m:'Noir mat',c:'robinetterie',p:64000,img:'p4',st:21,ref:'BG-RB-061',d:"Corps laiton revêtu noir mat, mousseur anticalcaire, limiteur de débit 5 l/min.",sp:{Hauteur:'16 cm',Finition:'Noir mat',Débit:'5 l/min',Garantie:'2 ans'}},
+ {id:'d1',n:'Mitigeur bain-douche',m:'Avec douchette',c:'douche',p:88000,img:'p5',st:9,ref:'BG-DO-212',d:"Mitigeur bain-douche complet : flexible 1,50 m, douchette trois jets et support orientable.",sp:{Flexible:'1,50 m',Jets:'3',Finition:'Chrome',Garantie:'2 ans'}},
+ {id:'d2',n:'Colonne de douche',m:'Chromée, pomme 20 cm',c:'douche',p:145000,old:168000,img:'p6',st:4,ref:'BG-DO-330',d:"Colonne réglable en hauteur, pomme de tête 20 cm et douchette à main, inverseur deux voies.",sp:{Hauteur:'80 à 120 cm',Pomme:'20 cm',Inverseur:'2 voies',Garantie:'2 ans'}},
+ {id:'d3',n:'Ensemble douche de tête',m:'Noir mat',c:'douche',p:210000,img:'p7',st:3,ref:'BG-DO-402',d:"Pomme de tête plafond 25 cm, mitigeur mural et douchette, finition noir mat uniforme.",sp:{Pomme:'25 cm',Pose:'Plafond',Finition:'Noir mat',Garantie:'2 ans'}},
+ {id:'d4',n:'Set de douche encastré',m:'Corps à sceller inclus',c:'douche',p:175000,img:'p8',st:5,ref:'BG-DO-451',d:"Kit complet pour douche encastrée : corps à sceller, plaque de finition et douchette.",sp:{Sorties:'2',Corps:'Inclus',Finition:'Chrome',Garantie:'2 ans'}},
+ {id:'s1',n:'Vasque à poser ronde',m:'Céramique blanche',c:'sanitaire',p:96000,img:'p3',st:11,ref:'BG-SA-070',d:"Vasque ronde 40 cm, émail blanc brillant, bonde clic-clac vendue séparément.",sp:{Diamètre:'40 cm',Matière:'Céramique',Bonde:'Non incluse',Garantie:'2 ans'}},
+ {id:'s2',n:'Miroir arche rétroéclairé',m:'LED 4000 K',c:'sanitaire',p:132000,img:'p18',st:7,ref:'BG-SA-155',d:"Miroir en arche avec rétroéclairage LED et interrupteur tactile, antibuée.",sp:{Dimensions:'70 × 110 cm',Éclairage:'LED 4000 K',Antibuée:'Oui',Garantie:'2 ans'}},
+ {id:'c1',n:'Carrelage Travertin Sable',m:'Grès cérame 60×60 cm · m²',c:'carrelage',p:18500,old:22000,img:'p15',st:85,ref:'BG-CR-204',d:"Dalle rectifiée imitation pierre travertin mat antidérapant R10, idéale sol et douche à l'italienne.",sp:{Format:'60 × 60 cm',Finition:'Mat R10',Épaisseur:'9 mm',Conditionnement:'1,44 m² / boîte'}},
+ {id:'c2',n:'Faïence Métro Biseautée',m:'Blanc brillant 10×20 cm · m²',c:'carrelage',p:14500,img:'p9',st:120,ref:'BG-CR-112',d:"Carreau mural en pâte blanche biseauté, pose droite ou décalée, facile d'entretien.",sp:{Format:'10 × 20 cm',Finition:'Émaillé brillant',Usage:'Mur intérieur',Conditionnement:'1 m² / boîte'}},
+ {id:'c3',n:'Mosaïque Hexa Marbre & Or',m:'Plaque 30×30 cm · pièce',c:'carrelage',p:12500,img:'p10',st:42,ref:'BG-CR-318',d:"Mosaïque hexagonale sur trame souple pour receveur de douche ou crédence de lavabo.",sp:{Format:'30 × 30 cm',Matière:'Marbre naturel',Pose:'Sol & mur',Épaisseur:'8 mm'}},
+ {id:'c4',n:'Carreau Graphique Indigo',m:'Grès porcelainé 20×20 cm · m²',c:'carrelage',p:24000,img:'p17',st:36,ref:'BG-CR-409',d:"Motif géométrique esprit carreau de ciment en grès cérame haute résistance, sans traitement.",sp:{Format:'20 × 20 cm',Matière:'Grès cérame',Antidérapant:'R9',Conditionnement:'1 m² / boîte'}}
+];
+
+/* Panier partagé via localStorage */
+const STORE='baingres_cart';
+function loadCart(){try{return new Map(JSON.parse(localStorage.getItem(STORE)||'[]'));}catch{return new Map();}}
+function saveCart(m){try{localStorage.setItem(STORE,JSON.stringify([...m]));}catch{}}
+const cart=loadCart(), drawer=$('#drawer'), veil=$('#veil'), cartBtn=$('#cartBtn'), SEUIL=150000;
+function render(){
+  let n=0,sub=0; const rows=[];
+  cart.forEach((q,id)=>{const p=P.find(x=>x.id===id);if(!p)return;n+=q;sub+=q*p.p;
+    rows.push(`<div class="item"><img src="img/${p.img}.webp" alt=""><div><h3>${p.n}</h3><small>${p.m} · ${p.ref}</small><div class="qty"><button data-q="-1" data-id="${id}" aria-label="Retirer">−</button><span>${q}</span><button data-q="1" data-id="${id}" aria-label="Ajouter">+</button></div></div><b>${fcfa(q*p.p)}</b></div>`);});
+  $('#items').innerHTML=rows.join('')||'<p class="emptyc">Votre sélection est vide. <a href="catalogue.html" style="color:var(--brass);text-decoration:underline">Parcourir le catalogue</a></p>';
+  $('#cartN').textContent=n;
+  const ville=+$('#ville').value;
+  const port=sub===0?0:(sub>=SEUIL?ville:ville+3000);
+  $('#lines').innerHTML=`<div><span>Sous-total</span><b>${fcfa(sub)}</b></div><div><span>Livraison</span><b>${port===0?(sub?'Offerte':'—'):fcfa(port)}</b></div><div class="tot"><span>Total</span><b>${fcfa(sub+port)}</b></div>`;
+  const k=Math.min(1,sub/SEUIL);
+  $('#shipBar').style.transform=`scaleX(${k})`;
+  $('#shipTxt').textContent=sub>=SEUIL?'Livraison offerte à Cotonou 🎉':`Plus que ${fcfa(SEUIL-sub)} pour la livraison offerte à Cotonou`;
+  $('#note').classList.remove('on');
+}
+function open(o){drawer.classList.toggle('on',o);veil.classList.toggle('on',o);drawer.setAttribute('aria-hidden',!o);if(o)$('#drawerX').focus();}
+cartBtn.onclick=()=>open(true); $('#drawerX').onclick=veil.onclick=()=>open(false);
+addEventListener('keydown',e=>{if(e.key==='Escape')open(false);});
+$('#items').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;const q=(cart.get(b.dataset.id)||0)+ +b.dataset.q;q>0?cart.set(b.dataset.id,q):cart.delete(b.dataset.id);saveCart(cart);render();});
+$('#ville').addEventListener('change',render);
+$('#order').onclick=()=>{if(cart.size)$('#note').classList.add('on');};
+$('#cform').addEventListener('submit',e=>{e.preventDefault();$('#cOk').classList.add('on');e.target.reset();});
+render();
+
+/* Sélection du moment (4 pièces phares avec aperçu + tilt 3D + fly-to-cart) */
+const FEATURED=['r1','d2','c1','s2'];
+const fgrid=$('#featuredGrid');
+fgrid.innerHTML=FEATURED.map(id=>{
+  const p=P.find(x=>x.id===id);
+  const low=p.st<=5?` low"><i></i>Derniers (${p.st})`:`"><i></i>En stock (${p.st})`;
+  return `<article class="card" data-id="${p.id}" data-c="${p.c}">
+    <div class="ph"><img src="img/${p.img}.webp" alt="${p.n} — ${p.m}">${p.old?'<span class="flag">Offre</span>':''}<button class="eye" type="button">Aperçu</button></div>
+    <div class="body"><span class="ref">${p.ref} · ${p.m}</span><h3>${p.n}</h3><span class="stock${low}</span>
+    <div class="foot"><span class="price">${fcfa(p.p)}${p.old?`<s>${fcfa(p.old)}</s>`:''}</span><button class="add" type="button" aria-label="Ajouter ${p.n}">+</button></div></div></article>`;
+}).join('');
+
+if(fine && !reduce){
+  fgrid.addEventListener('pointermove',e=>{
+    const c=e.target.closest('.card'); if(!c)return;
+    const r=c.getBoundingClientRect();
+    const rx=((e.clientY-r.top)/r.height-.5)*-7, ry=((e.clientX-r.left)/r.width-.5)*9;
+    c.style.transform=`rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+  });
+  fgrid.addEventListener('pointerout',e=>{const c=e.target.closest('.card'); if(c&&!c.contains(e.relatedTarget))c.style.transform='';});
+}
+
+const dlg=$('#dlg');
+function openQV(id){
+  const p=P.find(x=>x.id===id); if(!p)return;
+  $('#qv').innerHTML=`<div class="pic"><img src="img/${p.img}.webp" alt="${p.n}"></div>
+    <div class="txt"><span class="tag">${p.ref} · ${p.m}</span><h2 id="dlgT">${p.n}</h2>
+    <p style="color:var(--mute)">${p.d}</p><div class="price">${fcfa(p.p)}</div>
+    <dl>${Object.entries(p.sp).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+    <button class="btn" id="dlgAdd">Ajouter à la sélection</button></div>`;
+  $('#dlgAdd').onclick=()=>{addToCart(id,$('#dlgAdd'));dlg.close();};
+  dlg.showModal();
+}
+$('#dlgX').onclick=()=>dlg.close();
+dlg.onclick=e=>{if(e.target===dlg)dlg.close();};
+
+function addToCart(id,btn){
+  cart.set(id,(cart.get(id)||0)+1);
+  saveCart(cart);
+  render();
+  if(btn)sparkle(btn);
+  const src=btn?.closest('.card')?.querySelector('img')||$('#qv img');
+  if(!src||reduce)return;
+  const a=src.getBoundingClientRect(),b=cartBtn.getBoundingClientRect(),f=src.cloneNode();
+  f.className='fly'; Object.assign(f.style,{left:a.left+'px',top:a.top+'px',width:a.width+'px',height:a.height+'px'});
+  document.body.appendChild(f);
+  requestAnimationFrame(()=>Object.assign(f.style,{left:b.left+b.width/2-18+'px',top:b.top+b.height/2-18+'px',width:'36px',height:'36px',opacity:.2,transform:'scale(.4)'}));
+  f.addEventListener('transitionend',()=>f.remove(),{once:true});
+}
+fgrid.addEventListener('click',e=>{
+  const card=e.target.closest('.card'); if(!card)return;
+  if(e.target.closest('.add'))addToCart(card.dataset.id,e.target.closest('.add'));
+  else if(e.target.closest('.ph')||e.target.closest('.eye'))openQV(card.dataset.id);
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+}),{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+$$('.rv,.card').forEach(el=>io.observe(el));
+
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:reduce?'auto':'smooth'});}}));
+})();
+</script>
+</body>
+</html>

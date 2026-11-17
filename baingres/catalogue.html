@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr" data-site="baingres">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalogue — Bain &amp; Grès</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Catalogue complet Bain & Grès : robinetterie, douche, sanitaire et carrelage en stock au showroom de Cotonou.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ed; --surface:#ffffff; --wash:#ebe5da; --deep:#171917; --deep2:#232723;
+  --brass:#b3833f; --brass2:#d8b478; --ink:#191815; --mute:#6e685f; --line:#e1dbd0;
+  --display:"Fraunces",Georgia,serif; --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:clamp(16px,3.6vw,52px); color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.55 var(--body)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.98;letter-spacing:-.02em;text-wrap:balance}
+.tag{font:700 .7rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.9em 1.5em;background:var(--deep);color:#fff;font-weight:600;font-size:.92rem;border:0;cursor:pointer;border-radius:999px;transition:background .28s,transform .25s,box-shadow .28s}
+.btn:hover{background:var(--brass);box-shadow:0 12px 26px -12px rgba(179,131,63,.65)}
+.btn:active{transform:scale(.97)}
+.btn.line{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.line:hover{background:var(--deep);color:#fff;box-shadow:none}
+
+.demo{background:var(--deep);color:#cfc9be;font-size:.76rem;padding:.5em var(--gut);text-align:center}
+.demo b{color:#fff}
+.util{background:var(--wash);color:var(--mute);font-size:.78rem;padding:.52em var(--gut);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.util b{color:var(--ink)}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(12px,2.4vw,32px);align-items:center;padding:12px var(--gut)}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.45rem/1 var(--display);letter-spacing:-.02em;color:var(--deep)}
+.logo svg{width:26px;height:26px;flex:none;color:var(--brass)}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,26px);justify-self:center;font-size:.92rem;font-weight:600;color:var(--mute)}
+.nav-links a{padding:6px 2px;position:relative;transition:color .2s}
+.nav-links a:hover,.nav-links a[aria-current=page]{color:var(--deep)}
+.nav-links a[aria-current=page]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--brass);border-radius:2px}
+.navr{display:flex;align-items:center;gap:10px}
+.cartbtn{display:flex;align-items:center;gap:9px;background:var(--deep);color:#fff;font-weight:600;font-size:.9rem;padding:.72em 1.2em;border:0;border-radius:999px;cursor:pointer;transition:background .25s}
+.cartbtn:hover{background:var(--brass)}
+.cartbtn b{display:grid;place-items:center;min-width:22px;height:22px;border-radius:50%;background:var(--brass2);color:var(--deep);font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums}
+.cartbtn.bump b{animation:bump .5s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bump{40%{transform:scale(1.65)}}
+@media(max-width:760px){.nav{grid-template-columns:auto auto;grid-template-areas:"logo cart" "links links"}.logo{grid-area:logo}.navr{grid-area:cart}.nav-links{grid-area:links;justify-self:start;overflow-x:auto;max-width:100%}.util{display:none}}
+
+/* En-tête catalogue */
+.cat-hero{padding:clamp(32px,5vw,64px) var(--gut) clamp(26px,4vw,44px);background:radial-gradient(85% 90% at 88% 12%,#fff 0%,var(--bg) 62%,#eae3d6 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(18px,4vw,48px);align-items:end}
+.crumb{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--mute);margin-bottom:12px}
+.crumb a:hover{color:var(--deep)}
+.cat-hero h1{font-size:clamp(2.3rem,5.2vw,4.1rem);color:var(--deep)}
+.cat-hero h1 em{font-style:italic;font-weight:500;color:var(--brass)}
+.cat-hero p{color:var(--mute);max-width:48ch;margin-top:12px}
+.search-box{display:grid;gap:10px;justify-self:end;width:min(100%,440px)}
+.search{position:relative;display:flex;align-items:center}
+.search svg{position:absolute;left:15px;width:18px;height:18px;color:var(--mute);pointer-events:none}
+.search input{width:100%;padding:.85em 1.1em .85em 2.8em;border:1.5px solid var(--line);border-radius:999px;background:#fff;box-shadow:0 14px 32px -22px rgba(25,24,21,.25);transition:border-color .25s}
+.search input:focus{border-color:var(--brass);outline:0}
+.cat-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--mute);padding-left:6px}
+.cat-stats b{color:var(--deep)}
+@media(max-width:860px){.cat-hero{grid-template-columns:1fr}.search-box{justify-self:stretch;width:100%}}
+
+/* Barre de filtres organisée */
+.workspace{padding:clamp(24px,3.6vw,44px) var(--gut) clamp(60px,9vw,110px);display:grid;grid-template-columns:250px 1fr;gap:clamp(20px,3vw,42px);align-items:start}
+.sidebar{position:sticky;top:84px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:20px}
+.fgroup{display:grid;gap:9px}
+.fgroup h2{font:700 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
+.fbtn-list{display:grid;gap:5px}
+.fbtn{display:flex;justify-content:space-between;align-items:center;padding:.58em .85em;border-radius:10px;border:1px solid transparent;background:transparent;font-size:.9rem;font-weight:600;color:var(--ink);cursor:pointer;text-align:left;transition:background .2s,border-color .2s,color .2s}
+.fbtn:hover{background:var(--bg)}
+.fbtn[aria-pressed=true]{background:var(--deep);color:#fff}
+.fbtn small{font-size:.76rem;opacity:.7;font-variant-numeric:tabular-nums}
+.fin-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fin-chips button{padding:.42em .8em;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.8rem;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.fin-chips button[aria-pressed=true]{background:var(--brass);color:#fff;border-color:var(--brass)}
+.reset-btn{padding:.6em .9em;border-radius:10px;border:1px dashed var(--line);background:none;font-size:.82rem;font-weight:600;color:var(--mute);cursor:pointer}
+.reset-btn:hover{border-color:var(--deep);color:var(--deep)}
+@media(max-width:920px){.workspace{grid-template-columns:1fr}.sidebar{position:static}}
+
+/* Grille & cartes 3D */
+.catalog-main{display:grid;gap:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.count{color:var(--mute);font-size:.9rem;font-weight:500}
+select.sort{padding:.55em 1em;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:600;font-size:.86rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:clamp(14px,1.8vw,22px);perspective:1200px}
+.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;background:#fff;transform-style:preserve-3d;transition:box-shadow .35s,transform .22s ease-out,border-color .35s;will-change:transform}
+.card:hover{box-shadow:0 26px 48px -26px rgba(25,24,21,.34);border-color:#cfc6b6}
+.card .ph{position:relative;aspect-ratio:1;overflow:hidden;background:var(--wash);cursor:pointer}
+.card .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.28) 0%,transparent 45%,rgba(179,131,63,.12) 100%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover .ph::after{opacity:1}
+.card .ph img{width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.14);transition:clip-path .9s cubic-bezier(.7,0,.15,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.card.in .ph img{clip-path:inset(0);transform:none}
+.card:hover .ph img{transform:scale(1.06)}
+.card .flag{position:absolute;top:10px;left:10px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.35em .65em;border-radius:999px;background:var(--brass);color:#fff}
+.card .cat-pill{position:absolute;top:10px;right:10px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.32em .6em;border-radius:999px;background:rgba(255,255,255,.92);color:var(--deep)}
+.card .eye{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border:0;border-radius:999px;padding:.48em .9em;font-size:.78rem;font-weight:700;color:var(--deep);cursor:pointer;transform:translateY(140%);transition:transform .35s cubic-bezier(.7,0,.2,1)}
+.card:hover .eye,.card:focus-within .eye{transform:none}
+.card .body{padding:14px;display:grid;gap:7px;align-content:start}
+.card .ref{font-size:.7rem;color:var(--mute);letter-spacing:.08em}
+.card h3{font-size:1.2rem;line-height:1.12;color:var(--deep)}
+.card .stock{font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:6px;color:#236c45}
+.card .stock i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.card .stock.low{color:#b06214}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+.card .price{font:700 1.32rem/1 var(--display);color:var(--deep);font-variant-numeric:tabular-nums}
+.card .price s{display:block;font-family:var(--body);font-size:.62em;color:var(--mute);font-weight:500;margin-top:2px}
+.card .add{background:var(--deep);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:1.25rem;line-height:1;cursor:pointer;transition:background .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.card .add:hover{background:var(--brass);transform:rotate(90deg)}
+.card.hide{display:none}
+.empty{padding:56px 20px;text-align:center;color:var(--mute);background:#fff;border:1px solid var(--line);border-radius:14px}
+.nojs .card .ph img{clip-path:none;transform:none}
+.spark{position:fixed;z-index:120;width:8px;height:8px;border-radius:50%;background:var(--brass);pointer-events:none}
+
+footer{background:var(--deep);color:#c5bfb4;padding:clamp(36px,5vw,70px) var(--gut) 24px;display:grid;gap:28px;font-size:.9rem}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px}
+.fgrid b{display:block;color:#fff;margin-bottom:8px;font-family:var(--display);font-size:1.08rem}
+.fgrid a{display:block;padding:2px 0}.fgrid a:hover{color:#fff}
+.legal{font-size:.76rem;border-top:1px solid rgba(255,255,255,.14);padding-top:16px;color:#938d82}
+
+/* Fiche produit */
+dialog{border:0;padding:0;border-radius:16px;max-width:min(880px,94vw);width:100%;max-height:92vh;overflow:auto;background:#fff;color:var(--ink);margin:auto;box-shadow:0 36px 90px -24px rgba(25,24,21,.45)}
+dialog::backdrop{background:rgba(23,25,23,.58);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.qv{display:grid;grid-template-columns:1fr 1fr}
+.qv .pic{aspect-ratio:1;background:var(--wash)}
+.qv .pic img{width:100%;height:100%;object-fit:cover}
+.qv .txt{padding:clamp(20px,3vw,34px);display:grid;gap:12px;align-content:start}
+.qv h2{font-size:clamp(1.7rem,3.2vw,2.4rem);color:var(--deep)}
+.qv .price{font:700 2rem/1 var(--display);color:var(--deep);font-variant-numeric:tabular-nums}
+.qv dl{display:grid;grid-template-columns:auto 1fr;gap:0;font-size:.9rem}
+.qv dt,.qv dd{padding:8px 0;border-top:1px solid var(--line)}
+.qv dt{color:var(--mute);padding-right:16px}.qv dd{font-weight:600;text-align:right}
+.x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;background:var(--deep);color:#fff;border:0;font-size:1.1rem;cursor:pointer;z-index:4}
+@media(max-width:700px){.qv{grid-template-columns:1fr}.qv .pic{aspect-ratio:16/10}}
+
+/* Panier */
+.veil{position:fixed;inset:0;z-index:80;background:rgba(23,25,23,.48);opacity:0;pointer-events:none;transition:opacity .35s}
+.veil.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;inset:0 0 0 auto;z-index:90;width:min(100%,430px);background:#fff;display:grid;grid-template-rows:auto auto 1fr auto;transform:translateX(102%);transition:transform .5s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.drawer.on{transform:none;visibility:visible}
+.drawer>header{display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:1px solid var(--line)}
+.drawer>header h2{font-size:1.65rem;color:var(--deep)}
+.drawer>header button{width:38px;height:38px;border-radius:50%;background:var(--wash);border:0;font-size:1.1rem;cursor:pointer}
+.ship{padding:12px 18px;background:var(--bg);font-size:.84rem;display:grid;gap:7px}
+.ship .bar{height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+.ship .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brass),var(--deep));transform-origin:left;transform:scaleX(0);transition:transform .6s cubic-bezier(.3,1,.4,1)}
+.items{overflow:auto;padding:4px 18px;display:grid;align-content:start}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);animation:slide .4s cubic-bezier(.2,.8,.3,1)}
+@keyframes slide{from{opacity:0;transform:translateX(24px)}}
+.item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.item h3{font-size:1.05rem;color:var(--deep);line-height:1.15}
+.item small{color:var(--mute);font-size:.78rem}
+.qty{display:flex;align-items:center;gap:5px;margin-top:6px}
+.qty button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;line-height:1;font-weight:700}
+.qty span{min-width:2ch;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.item b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.drawer>footer{background:#fff;color:var(--ink);padding:18px;border-top:1px solid var(--line);display:grid;gap:12px}
+.lines{display:grid;gap:6px;font-size:.9rem}
+.lines div{display:flex;justify-content:space-between}
+.lines .tot{font:700 1.45rem/1 var(--display);color:var(--deep);padding-top:8px;border-top:1px solid var(--line);margin-top:4px}
+.lines b{font-variant-numeric:tabular-nums}
+.city{display:flex;gap:8px;align-items:center;font-size:.86rem}
+.city select{flex:1;padding:.55em .7em;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+.note{font-size:.8rem;color:var(--mute);display:none}.note.on{display:block}
+.fly{position:fixed;z-index:100;border-radius:10px;object-fit:cover;pointer-events:none;transition:all .75s cubic-bezier(.5,-.15,.3,1)}
+.emptyc{padding:36px 0;text-align:center;color:var(--mute)}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.card .ph img{clip-path:none;transform:none}.card{transform:none!important}}
+</style>
+<link rel="stylesheet" href="../mobile-compact.css"><script src="../mobile-compact.js" defer></script>
+</head>
+<body class="nojs">
+<div class="util"><span>Livraison <b>offerte</b> dès 150 000 FCFA à Cotonou</span><span>Showroom Haie Vive · Ouvert du lundi au samedi, 9 h – 19 h</span></div>
+
+<header class="nav">
+  <a class="logo" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><path d="M3 15a4 4 0 0 1 8 0v6H3v-6Z"/><circle cx="17" cy="17" r="4"/></svg>Bain &amp; Grès</a>
+  <nav class="nav-links" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="catalogue.html" aria-current="page">Catalogue</a>
+    <a href="index.html#visite">Showroom</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="navr"><button class="cartbtn" id="cartBtn">Panier <b id="cartN">0</b></button></div>
+</header>
+
+<main>
+<section class="cat-hero">
+  <div>
+    <div class="crumb"><a href="index.html">Accueil</a><span>/</span><span>Catalogue</span></div>
+    <h1>La collection <em>en stock.</em></h1>
+    <p>Robinetterie, colonnes de douche, vasques en céramique et carreaux grand format. Filtrez par univers ou par finition.</p>
+  </div>
+  <div class="search-box">
+    <form class="search" role="search" onsubmit="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Chercher un mitigeur, du travertin, une vasque…" aria-label="Chercher un produit"></form>
+    <div class="cat-stats"><span><b>13</b> références en ligne</span><span><b>4</b> univers</span><span>Retrait showroom Haie Vive</span></div>
+  </div>
+</section>
+
+<section class="workspace">
+  <aside class="sidebar" aria-label="Filtres du catalogue">
+    <div class="fgroup">
+      <h2>Univers</h2>
+      <div class="fbtn-list" id="chips" role="group" aria-label="Filtrer par univers">
+        <button class="fbtn" aria-pressed="true" data-f="tout"><span>Tous les produits</span><small id="n-tout">13</small></button>
+        <button class="fbtn" aria-pressed="false" data-f="robinetterie"><span>Robinetterie</span><small id="n-robinetterie">3</small></button>
+        <button class="fbtn" aria-pressed="false" data-f="douche"><span>Douche</span><small id="n-douche">4</small></button>
+        <button class="fbtn" aria-pressed="false" data-f="sanitaire"><span>Sanitaire</span><small id="n-sanitaire">2</small></button>
+        <button class="fbtn" aria-pressed="false" data-f="carrelage"><span>Carrelage</span><small id="n-carrelage">4</small></button>
+      </div>
+    </div>
+
+    <div class="fgroup">
+      <h2>Finition / Matière</h2>
+      <div class="fin-chips" id="fins" role="group" aria-label="Filtrer par finition">
+        <button aria-pressed="true" data-fin="tout">Toutes</button>
+        <button aria-pressed="false" data-fin="laiton">Laiton</button>
+        <button aria-pressed="false" data-fin="noir">Noir mat</button>
+        <button aria-pressed="false" data-fin="chrome">Chrome</button>
+        <button aria-pressed="false" data-fin="pierre">Céramique &amp; Grès</button>
+      </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn" type="button">Réinitialiser les filtres</button>
+  </aside>
+
+  <div class="catalog-main">
+    <div class="topbar">
+      <p class="count" id="count" role="status"></p>
+      <select class="sort" id="sort" aria-label="Trier"><option value="def">Tri : sélection</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>Aucun article ne correspond à ces critères. Essayez « mitigeur », « travertin » ou réinitialisez les filtres.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><b>Bain &amp; Grès</b>Showroom Haie Vive<br>Cotonou, Bénin</div>
+    <div><b>Boutique</b><a href="catalogue.html?cat=robinetterie">Robinetterie</a><a href="catalogue.html?cat=douche">Douche</a><a href="catalogue.html?cat=sanitaire">Sanitaire</a><a href="catalogue.html?cat=carrelage">Carrelage</a></div>
+    <div><b>Services</b><a href="index.html#visite">Visiter le showroom</a><a href="index.html#pro">Projets &amp; pros</a><a href="index.html#contact">Nous contacter</a></div>
+    <div><b>Contact</b>bonjour@baingres.example<br>+229 00 00 00 00</div>
+  </div>
+</footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <header><h2>Votre sélection</h2><button id="drawerX" aria-label="Fermer">×</button></header>
+  <div class="ship"><span id="shipTxt"></span><div class="bar"><i id="shipBar"></i></div></div>
+  <div class="items" id="items"></div>
+  <footer>
+    <div class="city"><label for="ville">Livraison à</label><select id="ville"><option value="0">Cotonou</option><option value="2000">Abomey-Calavi</option><option value="3500">Porto-Novo</option><option value="9000">Parakou</option></select></div>
+    <div class="lines" id="lines"></div>
+    <button class="btn" id="order">Commander</button>
+    <p class="note" id="note" role="status">Démonstration : la commande n'est pas envoyée. Sur un vrai site, le paiement mobile money ou carte se ferait ici.</p>
+  </footer>
+</aside>
+
+<dialog id="dlg" aria-labelledby="qvTitle">
+  <button class="x" id="dlgX" aria-label="Fermer">×</button>
+  <div class="qv">
+    <div class="pic"><img id="qvImg" src="" alt=""></div>
+    <div class="txt"><span class="tag" id="qvCat"></span><h2 id="qvTitle"></h2><p id="qvDesc" style="color:var(--mute)"></p><div class="price" id="qvPrice"></div><dl id="qvDl"></dl><button class="btn" id="qvAdd">Ajouter au panier</button></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/ | /g,' ')+' F';
+document.body.classList.remove('nojs');
+
+function sparkle(el){
+  if(reduce)return;
+  const r=el.getBoundingClientRect();
+  for(let i=0;i<9;i++){
+    const d=document.createElement('span');d.className='spark';
+    d.style.left=r.left+r.width/2+'px';d.style.top=r.top+r.height/2+'px';
+    document.body.appendChild(d);
+    const a=-Math.PI/2+(Math.random()-.5)*2.2,v=55+Math.random()*65;
+    d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v}px) scale(.9)`,opacity:1,offset:.45},{transform:`translate(${Math.cos(a)*v*1.25}px,${Math.sin(a)*v+95}px) scale(.3)`,opacity:0}],{duration:760+Math.random()*280,easing:'cubic-bezier(.3,.6,.6,1)'}).onfinish=()=>d.remove();
+  }
+}
+
+const P=[
+ {id:'r1',n:'Mitigeur lavabo haut',m:'Laiton brossé',c:'robinetterie',fin:'laiton',p:78500,old:92000,img:'p1',st:14,ref:'BG-RB-108',d:"Bec haut pour vasque à poser, cartouche céramique 35 mm, flexibles inox fournis.",sp:{Hauteur:'30 cm',Finition:'Laiton brossé',Raccord:'G 3/8″',Garantie:'2 ans'}},
+ {id:'r2',n:'Mélangeur mural à croisillons',m:'Chromé',c:'robinetterie',fin:'chrome',p:52000,img:'p2',st:6,ref:'BG-RB-044',d:"Modèle mural deux poignées, entraxe réglable 150 mm, clapets céramique.",sp:{Entraxe:'150 mm',Finition:'Chrome poli',Raccord:'G 1/2″',Garantie:'2 ans'}},
+ {id:'r3',n:'Mitigeur lavabo bas',m:'Noir mat',c:'robinetterie',fin:'noir',p:64000,img:'p4',st:21,ref:'BG-RB-061',d:"Corps laiton revêtu noir mat, mousseur anticalcaire, limiteur de débit 5 l/min.",sp:{Hauteur:'16 cm',Finition:'Noir mat',Débit:'5 l/min',Garantie:'2 ans'}},
+ {id:'d1',n:'Mitigeur bain-douche',m:'Avec douchette',c:'douche',fin:'chrome',p:88000,img:'p5',st:9,ref:'BG-DO-212',d:"Mitigeur bain-douche complet : flexible 1,50 m, douchette trois jets et support orientable.",sp:{Flexible:'1,50 m',Jets:'3',Finition:'Chrome',Garantie:'2 ans'}},
+ {id:'d2',n:'Colonne de douche',m:'Chromée, pomme 20 cm',c:'douche',fin:'chrome',p:145000,old:168000,img:'p6',st:4,ref:'BG-DO-330',d:"Colonne réglable en hauteur, pomme de tête 20 cm et douchette à main, inverseur deux voies.",sp:{Hauteur:'80 à 120 cm',Pomme:'20 cm',Inverseur:'2 voies',Garantie:'2 ans'}},
+ {id:'d3',n:'Ensemble douche de tête',m:'Noir mat',c:'douche',fin:'noir',p:210000,img:'p7',st:3,ref:'BG-DO-402',d:"Pomme de tête plafond 25 cm, mitigeur mural et douchette, finition noir mat uniforme.",sp:{Pomme:'25 cm',Pose:'Plafond',Finition:'Noir mat',Garantie:'2 ans'}},
+ {id:'d4',n:'Set de douche encastré',m:'Corps à sceller inclus',c:'douche',fin:'chrome',p:175000,img:'p8',st:5,ref:'BG-DO-451',d:"Kit complet pour douche encastrée : corps à sceller, plaque de finition et douchette.",sp:{Sorties:'2',Corps:'Inclus',Finition:'Chrome',Garantie:'2 ans'}},
+ {id:'s1',n:'Vasque à poser ronde',m:'Céramique blanche',c:'sanitaire',fin:'pierre',p:96000,img:'p3',st:11,ref:'BG-SA-070',d:"Vasque ronde 40 cm, émail blanc brillant, bonde clic-clac vendue séparément.",sp:{Diamètre:'40 cm',Matière:'Céramique',Bonde:'Non incluse',Garantie:'2 ans'}},
+ {id:'s2',n:'Miroir arche rétroéclairé',m:'LED 4000 K',c:'sanitaire',fin:'laiton',p:132000,img:'p18',st:7,ref:'BG-SA-155',d:"Miroir en arche avec rétroéclairage LED et interrupteur tactile, antibuée.",sp:{Dimensions:'70 × 110 cm',Éclairage:'LED 4000 K',Antibuée:'Oui',Garantie:'2 ans'}},
+ {id:'c1',n:'Carrelage Travertin Sable',m:'Grès cérame 60×60 cm · m²',c:'carrelage',fin:'pierre',p:18500,old:22000,img:'p15',st:85,ref:'BG-CR-204',d:"Dalle rectifiée imitation pierre travertin mat antidérapant R10, idéale sol et douche à l'italienne.",sp:{Format:'60 × 60 cm',Finition:'Mat R10',Épaisseur:'9 mm',Conditionnement:'1,44 m² / boîte'}},
+ {id:'c2',n:'Faïence Métro Biseautée',m:'Blanc brillant 10×20 cm · m²',c:'carrelage',fin:'pierre',p:14500,img:'p9',st:120,ref:'BG-CR-112',d:"Carreau mural en pâte blanche biseauté, pose droite ou décalée, facile d'entretien.",sp:{Format:'10 × 20 cm',Finition:'Émaillé brillant',Usage:'Mur intérieur',Conditionnement:'1 m² / boîte'}},
+ {id:'c3',n:'Mosaïque Hexa Marbre & Or',m:'Plaque 30×30 cm · pièce',c:'carrelage',fin:'laiton',p:12500,img:'p10',st:42,ref:'BG-CR-318',d:"Mosaïque hexagonale sur trame souple pour receveur de douche ou crédence de lavabo.",sp:{Format:'30 × 30 cm',Matière:'Marbre naturel',Pose:'Sol & mur',Épaisseur:'8 mm'}},
+ {id:'c4',n:'Carreau Graphique Indigo',m:'Grès porcelainé 20×20 cm · m²',c:'carrelage',fin:'pierre',p:24000,img:'p17',st:36,ref:'BG-CR-409',d:"Motif géométrique esprit carreau de ciment en grès cérame haute résistance, sans traitement.",sp:{Format:'20 × 20 cm',Matière:'Grès cérame',Antidérapant:'R9',Conditionnement:'1 m² / boîte'}}
+];
+const CAT={robinetterie:'Robinetterie',douche:'Douche',sanitaire:'Sanitaire',carrelage:'Carrelage'};
+const params=new URLSearchParams(location.search);
+let filt=CAT[params.get('cat')]?params.get('cat'):'tout';
+let fin='tout', term='', sort='def';
+
+const grid=$('#grid');
+grid.innerHTML=P.map(p=>`<article class="card" data-id="${p.id}" data-c="${p.c}" data-fin="${p.fin}" data-p="${p.p}" data-s="${(p.n+' '+p.m+' '+CAT[p.c]+' '+p.ref).toLowerCase()}">
+  <div class="ph" data-qv="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.n}">${p.old?'<span class="flag">Offre</span>':''}<span class="cat-pill">${CAT[p.c]}</span><img src="img/${p.img}.webp" alt="${p.n}, ${p.m}" loading="lazy"><button class="eye" data-qv="${p.id}">Aperçu</button></div>
+  <div class="body"><span class="ref">${p.ref}</span><h3>${p.n}</h3><span class="ref" style="letter-spacing:0">${p.m}</span>
+    <span class="stock${p.st<6?' low':''}"><i></i>${p.st<6?'Plus que '+p.st+' en stock':'En stock · '+p.st+(p.c==='carrelage'?' m²':' pièces')}</span>
+    <div class="foot"><span class="price">${fcfa(p.p)}${p.old?`<s>${fcfa(p.old)}</s>`:''}</span><button class="add" data-add="${p.id}" aria-label="Ajouter ${p.n} au panier">+</button></div></div></article>`).join('');
+
+if(fine && !reduce){
+  $$('.card').forEach(c=>{
+    c.addEventListener('pointermove',e=>{
+      const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform=`rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg) translateY(-4px)`;
+    });
+    c.addEventListener('pointerleave',()=>{c.style.transform='';});
+  });
+}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+$$('.card').forEach(c=>io.observe(c));
+
+function syncButtons(){
+  $$('#chips button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===filt));
+  $$('#fins button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.fin===fin));
+}
+
+function apply(){
+  let n=0;
+  const cards=$$('.card');
+  cards.forEach(c=>{
+    const ok=(filt==='tout'||c.dataset.c===filt)&&(fin==='tout'||c.dataset.fin===fin)&&(!term||c.dataset.s.includes(term));
+    c.classList.toggle('hide',!ok); if(ok){n++;c.classList.add('in');}
+  });
+  if(sort!=='def'){
+    const vis=cards.filter(c=>!c.classList.contains('hide')).sort((a,b)=>sort==='asc'?a.dataset.p-b.dataset.p:b.dataset.p-a.dataset.p);
+    vis.forEach(c=>grid.appendChild(c));
+  } else cards.slice().sort((a,b)=>P.findIndex(p=>p.id===a.dataset.id)-P.findIndex(p=>p.id===b.dataset.id)).forEach(c=>grid.appendChild(c));
+  $('#count').textContent=n+(n>1?' articles affichés':' article affiché');
+  $('#empty').hidden=n>0;
+}
+
+$('#q').addEventListener('input',e=>{term=e.target.value.trim().toLowerCase();apply();});
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filt=b.dataset.f;syncButtons();apply();});
+$('#fins').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fin=b.dataset.fin;syncButtons();apply();});
+$('#sort').addEventListener('change',e=>{sort=e.target.value;apply();});
+$('#resetBtn').addEventListener('click',()=>{filt='tout';fin='tout';term='';sort='def';$('#q').value='';$('#sort').value='def';syncButtons();apply();});
+syncButtons();
+apply();
+
+/* Fiche produit */
+const dlg=$('#dlg'); let qvId=null;
+function openQV(id){
+  const p=P.find(x=>x.id===id); qvId=id;
+  $('#qvImg').src=`img/${p.img}.webp`; $('#qvImg').alt=p.n; $('#qvCat').textContent=CAT[p.c];
+  $('#qvTitle').textContent=p.n+' · '+p.m; $('#qvDesc').textContent=p.d; $('#qvPrice').textContent=fcfa(p.p);
+  $('#qvDl').innerHTML=`<dt>Référence</dt><dd>${p.ref}</dd>`+Object.entries(p.sp).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')+`<dt>Stock</dt><dd>${p.st} ${p.c==='carrelage'?'m²':'pièces'}</dd>`;
+  dlg.showModal();
+}
+document.addEventListener('click',e=>{
+  const qv=e.target.closest('[data-qv]'); if(qv){openQV(qv.dataset.qv);return;}
+  const ad=e.target.closest('[data-add]'); if(ad){sparkle(ad);add(ad.dataset.add,ad.closest('.card').querySelector('.ph'));}
+});
+grid.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset.qv){e.preventDefault();openQV(e.target.dataset.qv);}});
+$('#dlgX').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+$('#qvAdd').onclick=()=>{add(qvId,$('#qvImg'));dlg.close();};
+
+/* Panier partagé via localStorage */
+const STORE='baingres_cart';
+function loadCart(){try{return new Map(JSON.parse(localStorage.getItem(STORE)||'[]'));}catch{return new Map();}}
+function saveCart(m){try{localStorage.setItem(STORE,JSON.stringify([...m]));}catch{}}
+const cart=loadCart(), drawer=$('#drawer'), veil=$('#veil'), cartBtn=$('#cartBtn'), SEUIL=150000;
+function render(){
+  let n=0,sub=0; const rows=[];
+  cart.forEach((q,id)=>{const p=P.find(x=>x.id===id);if(!p)return;n+=q;sub+=q*p.p;
+    rows.push(`<div class="item"><img src="img/${p.img}.webp" alt=""><div><h3>${p.n}</h3><small>${p.m} · ${p.ref}</small><div class="qty"><button data-q="-1" data-id="${id}" aria-label="Retirer">−</button><span>${q}</span><button data-q="1" data-id="${id}" aria-label="Ajouter">+</button></div></div><b>${fcfa(q*p.p)}</b></div>`);});
+  $('#items').innerHTML=rows.join('')||'<p class="emptyc">Votre sélection est vide.</p>';
+  $('#cartN').textContent=n;
+  const ville=+$('#ville').value;
+  const port=sub===0?0:(sub>=SEUIL?ville:ville+3000);
+  $('#lines').innerHTML=`<div><span>Sous-total</span><b>${fcfa(sub)}</b></div><div><span>Livraison</span><b>${port===0?(sub?'Offerte':'—'):fcfa(port)}</b></div><div class="tot"><span>Total</span><b>${fcfa(sub+port)}</b></div>`;
+  const k=Math.min(1,sub/SEUIL);
+  $('#shipBar').style.transform=`scaleX(${k})`;
+  $('#shipTxt').textContent=sub>=SEUIL?'Livraison offerte à Cotonou 🎉':`Plus que ${fcfa(SEUIL-sub)} pour la livraison offerte à Cotonou`;
+  $('#note').classList.remove('on');
+}
+function add(id,from){
+  cart.set(id,(cart.get(id)||0)+1); saveCart(cart); render();
+  cartBtn.classList.remove('bump'); void cartBtn.offsetWidth; cartBtn.classList.add('bump');
+  if(reduce||!from) return;
+  const p=P.find(x=>x.id===id), a=from.getBoundingClientRect(), b=cartBtn.getBoundingClientRect(), f=new Image();
+  const s=Math.min(a.width,a.height,200);
+  f.src=`img/${p.img}.webp`; f.className='fly'; f.alt='';
+  Object.assign(f.style,{left:a.left+a.width/2-s/2+'px',top:a.top+a.height/2-s/2+'px',width:s+'px',height:s+'px',opacity:1});
+  document.body.appendChild(f); void f.offsetWidth;
+  Object.assign(f.style,{left:b.left+b.width/2-12+'px',top:b.top+b.height/2-12+'px',width:'24px',height:'24px',opacity:.3});
+  setTimeout(()=>f.remove(),780);
+}
+function open(o){drawer.classList.toggle('on',o);veil.classList.toggle('on',o);drawer.setAttribute('aria-hidden',!o);if(o)$('#drawerX').focus();}
+cartBtn.onclick=()=>open(true); $('#drawerX').onclick=veil.onclick=()=>open(false);
+addEventListener('keydown',e=>{if(e.key==='Escape')open(false);});
+$('#items').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;const q=(cart.get(b.dataset.id)||0)+ +b.dataset.q;q>0?cart.set(b.dataset.id,q):cart.delete(b.dataset.id);saveCart(cart);render();});
+$('#ville').addEventListener('change',render);
+$('#order').onclick=()=>{if(cart.size)$('#note').classList.add('on');};
+render();
+})();
+</script>
+</body>
+</html>

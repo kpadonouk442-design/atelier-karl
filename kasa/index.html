@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr" data-site="kasa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasa Locations au Bénin</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Kasa, place de marché de guest houses, maisons et appartements à louer au Bénin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: vert de palmier sur papier crème, un jaune de taxi pour les prix. Deux colonnes : les annonces à gauche, la carte à droite qui répond au survol. */
+:root{
+  --cream:#f4ecdc; --paper:#fff; --ink:#14161a; --mute:#64686e;
+  --green:#0f4a3a; --green2:#0b4435; --yellow:#f0a22e; --line:#e3d9c6;
+  --display:"Gabarito",system-ui,sans-serif; --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:clamp(14px,3.2vw,46px); color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip}
+body{background:var(--cream);color:var(--ink);font:400 1rem/1.5 var(--body)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;letter-spacing:-.02em;text-wrap:balance}
+.tag{font:600 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.9em 1.4em;background:var(--green);color:#fff;font-weight:600;border:0;border-radius:999px;cursor:pointer;transition:background .25s,transform .25s}
+.btn:hover{background:var(--ink)}.btn:active{transform:scale(.97)}
+.btn.line{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.line:hover{background:var(--ink);color:#fff;box-shadow:none}
+
+.demo{background:var(--ink);color:#b6bac0;font-size:.76rem;padding:.5em var(--gut);text-align:center}
+.demo b{color:#fff}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px var(--gut)}
+.logo{display:flex;align-items:center;gap:8px;font:800 1.7rem/1 var(--display);color:var(--green);letter-spacing:-.03em}
+.logo svg{width:26px;height:26px;color:var(--yellow)}
+.nav ul{display:flex;gap:20px;list-style:none;padding:0;font-size:.93rem;font-weight:500}
+.nav ul a:hover{color:var(--green)}
+.navr{display:flex;align-items:center;gap:10px}
+.fav{display:flex;align-items:center;gap:7px;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.6em 1em;font-weight:600;cursor:pointer;font-size:.9rem;transition:background .2s,color .2s,border-color .2s}
+.fav svg{width:17px;height:17px}
+.fav.on{border-color:var(--green);color:var(--green)}
+.fav.active{background:var(--green);color:#fff;border-color:var(--green)}
+@media(max-width:780px){.nav ul{display:none}}
+@media(max-width:560px){.nav .btn{display:none}.logo{font-size:1.45rem}.fav{padding:.55em .8em}}
+
+/* Hero aux arches */
+.hero{position:relative;background:radial-gradient(110% 80% at 50% 0%,#17604b 0%,#0c3b2e 55%,#07261e 100%);color:#f6eedd;padding:clamp(26px,4vw,56px) var(--gut) clamp(70px,9vw,120px);overflow:hidden;display:grid;gap:clamp(18px,3vw,34px);justify-items:center;text-align:center}
+.hero .tag{color:var(--yellow)}
+.hero h1{font-size:clamp(2.4rem,7.4vw,6.6rem);max-width:15ch;position:relative;z-index:3;text-shadow:0 4px 40px rgba(4,25,19,.6)}
+.hero h1 .l{display:block;overflow:hidden;padding-top:.06em}
+.hero h1 .l>i{display:block;font-style:normal;transform:translateY(108%);transition:transform 1.1s cubic-bezier(.7,0,.15,1)}
+.go .hero h1 .l>i{transform:none}.hero h1 .l:nth-child(2)>i{transition-delay:.12s}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero>p{color:#bcd6c9;max-width:52ch;position:relative;z-index:3}
+.arches{display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,1.6vw,22px);width:100%;max-width:1240px;margin-top:clamp(20px,4vw,60px);perspective:1200px}
+.arch{flex:1;max-width:240px;aspect-ratio:3/5;border-radius:999px 999px 16px 16px;overflow:hidden;position:relative;transform:translateY(120%);transition:transform 1.3s cubic-bezier(.2,.8,.2,1);will-change:transform;box-shadow:0 30px 60px -30px #000}
+.go .arch{transform:translateY(var(--y,0))}
+.arch:nth-child(1){--y:6%;transition-delay:.15s}.arch:nth-child(2){--y:-8%;transition-delay:.25s}.arch:nth-child(3){--y:-22%;transition-delay:.35s;max-width:280px}.arch:nth-child(4){--y:-8%;transition-delay:.45s}.arch:nth-child(5){--y:6%;transition-delay:.55s}
+.arch .in{position:absolute;inset:-8%;will-change:transform}
+.arch img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.arch:hover img{transform:scale(1.1)}
+.arch span{position:absolute;left:0;right:0;bottom:12px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 1px 10px #000}
+.arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,30,22,.75));pointer-events:none}
+.sun{position:absolute;left:50%;top:38%;width:min(70vw,760px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(240,162,46,.5),rgba(240,162,46,.12) 45%,transparent 68%);pointer-events:none;will-change:transform}
+@media(max-width:700px){.arch:nth-child(1),.arch:nth-child(5){display:none}.arches{margin-top:-10px}}
+.hero .bar{width:100%;max-width:980px;position:relative;z-index:4;margin-top:clamp(-70px,-5vw,-30px);text-align:left;color:var(--ink)}
+
+/* Manège des destinations */
+.ring-sec{background:var(--cream);padding:clamp(40px,6vw,80px) 0 clamp(20px,3vw,40px);overflow:hidden;display:grid;gap:10px;justify-items:center;text-align:center}
+.ring-sec h2{font-size:clamp(1.8rem,4.4vw,3.6rem)}
+.ring-sec p{color:var(--mute);font-size:.92rem}
+.ring-view{width:100%;height:clamp(310px,40vw,470px);perspective:1100px;display:grid;place-items:center;cursor:grab;touch-action:pan-y;user-select:none}
+.ring-view:active{cursor:grabbing}
+.ring{position:relative;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.ring button{position:absolute;left:calc(var(--cw)/-2);top:calc(var(--cw)*-0.72);width:var(--cw);height:calc(var(--cw)*1.44);border:0;padding:0;border-radius:999px 999px 14px 14px;overflow:hidden;cursor:pointer;background:#0c3b2e;color:#fff;backface-visibility:hidden;box-shadow:0 24px 44px -26px rgba(0,0,0,.7)}
+.ring button img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ring button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(5,30,22,.82))}
+.ring button b{position:absolute;left:0;right:0;bottom:30px;z-index:2;font:800 1.25rem/1 var(--display)}
+.ring button small{position:absolute;left:0;right:0;bottom:12px;z-index:2;font-size:.72rem;opacity:.85}
+.ring button[aria-pressed=true]{outline:4px solid var(--yellow);outline-offset:-4px}
+
+.bar{display:grid;grid-template-columns:1.3fr 1fr 1fr .9fr auto;gap:0;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px;align-items:center;box-shadow:0 12px 30px -22px rgba(0,0,0,.5)}
+.bar label{display:grid;gap:1px;padding:.5em 1em;border-right:1px solid var(--line);min-width:0}
+.bar label:nth-child(4){border-right:0}
+.bar span{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.bar input,.bar select{border:0;padding:0;background:none;font-weight:600;width:100%;min-width:0}
+.bar input:focus,.bar select:focus{outline:0}
+.bar .btn{border-radius:999px;padding:.9em 1.6em;margin-left:6px}
+@media(max-width:900px){.bar{grid-template-columns:1fr 1fr;border-radius:18px;padding:8px}.bar label{border-right:0;border-bottom:1px solid var(--line)}.bar .btn{grid-column:1/-1;margin:6px 0 0}}
+
+/* Filtres */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:16px var(--gut) 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{padding:.5em 1em;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:.88rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.chips button[aria-pressed=true]{background:var(--green);color:#fff;border-color:var(--green)}
+.rangef{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:.4em 1em;font-size:.88rem;font-weight:600}
+.rangef input{accent-color:var(--green);width:clamp(90px,14vw,160px)}
+
+/* Split */
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(14px,2vw,30px);padding:18px var(--gut) clamp(50px,8vw,100px);align-items:start}
+@media(max-width:980px){.split{grid-template-columns:1fr}.mapwrap{order:-1;position:relative!important;top:auto!important;height:340px!important}}
+.list{display:grid;gap:14px}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.list-head h2{font-size:1.5rem}
+.list-head span{color:var(--mute);font-size:.9rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:clamp(12px,1.6vw,20px)}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:140px 140px 16px 16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;cursor:pointer;text-align:left;padding:0;transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s,border-color .3s}
+.card:hover,.card.hl{transform:translateY(-4px);box-shadow:0 22px 40px -26px rgba(0,0,0,.5);border-color:var(--green)}
+.card .ph{position:relative;aspect-ratio:1/1.05;overflow:hidden;background:var(--line)}
+.card .ph img{width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.14);transition:clip-path .9s cubic-bezier(.7,0,.15,1),transform 1.3s cubic-bezier(.2,.7,.2,1)}
+.card.in .ph img{clip-path:inset(0);transform:none}
+.card:hover .ph img{transform:scale(1.07)}
+.card .heart{position:absolute;top:22%;right:10%;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);border:0;display:grid;place-items:center;cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.card .heart:hover{transform:scale(1.14)}
+.card .heart svg{width:17px;height:17px;fill:none;stroke:var(--ink);stroke-width:2}
+.card .heart.on svg{fill:#e5484d;stroke:#e5484d}
+.card .kind{position:absolute;left:50%;transform:translateX(-50%);bottom:9px;background:rgba(20,22,26,.82);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35em .6em;border-radius:999px}
+.card .body{padding:12px 13px 14px;display:grid;gap:5px;align-content:start}
+.card .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card h3{font-size:1.15rem}
+.card .note{font-weight:600;font-size:.86rem;white-space:nowrap;display:flex;align-items:center;gap:3px}
+.card .note svg{width:13px;height:13px;fill:var(--yellow)}
+.card .where{color:var(--mute);font-size:.88rem}
+.card .feat{color:var(--mute);font-size:.82rem}
+.card .price{margin-top:4px;font-weight:600}
+.card .price b{font:800 1.2rem var(--display);font-variant-numeric:tabular-nums}
+.card.hide{display:none}
+.nojs .card .ph img{clip-path:none;transform:none}
+.none{padding:40px 0;text-align:center;color:var(--mute)}
+
+/* Carte Google Maps */
+.mapwrap{position:sticky;top:84px;height:calc(100svh - 110px);border-radius:16px;overflow:hidden;border:1.5px solid var(--line);background:#e7ece5;display:grid;grid-template-rows:1fr}
+.mapwrap iframe{width:100%;height:100%;border:0}
+.map-top{position:absolute;left:12px;right:12px;top:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
+.map-badge{background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.82rem;font-weight:600;color:var(--ink);box-shadow:0 10px 24px -12px rgba(0,0,0,.35);pointer-events:auto}
+.map-ext{background:var(--green);color:#fff;border-radius:999px;padding:7px 14px;font-size:.78rem;font-weight:600;box-shadow:0 10px 24px -12px rgba(0,0,0,.35);pointer-events:auto;white-space:nowrap}
+.map-ext:hover{background:var(--ink)}
+.map-pins{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.pin{flex:none;background:rgba(255,255,255,.95);border:1.5px solid var(--line);border-radius:999px;padding:.38em .78em;font-size:.76rem;font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.45);transition:background .2s,color .2s,border-color .2s,transform .2s}
+.pin:hover,.pin.hl{background:var(--green);color:#fff;border-color:var(--green);transform:translateY(-2px)}
+.pin.hide{display:none}
+
+/* Devenir hôte */
+.host{margin:0 var(--gut) clamp(50px,8vw,100px);background:var(--green);color:#fff;border-radius:18px;padding:clamp(22px,4vw,56px);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(18px,3vw,48px);align-items:center}
+.host h2{font-size:clamp(1.9rem,4.4vw,3.4rem)}
+.host p{color:#bfded3;margin:10px 0 18px;max-width:46ch}
+.host .btn{background:var(--yellow);color:var(--ink)}
+.host .btn:hover{background:#fff}
+.host .pics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.host .pics figure{border-radius:12px;overflow:hidden;aspect-ratio:3/4;margin:0}
+.host .pics figure:nth-child(2){margin-top:26px}
+.host .pics img{width:100%;height:100%;object-fit:cover}
+@media(max-width:800px){.host{grid-template-columns:1fr}}
+
+footer{background:var(--ink);color:#9ba0a7;padding:clamp(32px,5vw,64px) var(--gut) 20px;display:grid;gap:24px;font-size:.9rem}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px}
+.fgrid b{display:block;color:#fff;margin-bottom:7px}
+.fgrid a{display:block;padding:2px 0}.fgrid a:hover{color:#fff}
+.legal{font-size:.76rem;border-top:1px solid rgba(255,255,255,.15);padding-top:15px}
+
+/* Fiche */
+dialog{border:0;padding:0;border-radius:18px;max-width:min(980px,95vw);width:100%;max-height:92vh;overflow:auto;background:#fff;margin:auto}
+dialog::backdrop{background:rgba(20,22,26,.6);backdrop-filter:blur(3px)}
+dialog[open]{animation:iris .8s cubic-bezier(.7,0,.2,1)}
+@keyframes iris{from{clip-path:circle(0% at var(--ox,50%) var(--oy,50%))}to{clip-path:circle(150% at var(--ox,50%) var(--oy,50%))}}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}}
+.x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;background:#fff;border:0;font-size:1.1rem;cursor:pointer;z-index:5;box-shadow:0 4px 12px -4px rgba(0,0,0,.4)}
+.sheet{display:grid}
+.gal{display:grid;grid-template-columns:2fr 1fr;gap:5px;height:clamp(220px,34vh,330px)}
+.gal>*{overflow:hidden}.gal img{width:100%;height:100%;object-fit:cover}
+.gal .side{display:grid;grid-template-rows:1fr 1fr;gap:5px}
+.sheet-b{padding:clamp(18px,3vw,34px);display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(18px,3vw,40px);align-items:start}
+@media(max-width:760px){.sheet-b{grid-template-columns:1fr}.gal{grid-template-columns:1fr}.gal .side{display:none}}
+.sheet h2{font-size:clamp(1.6rem,3.4vw,2.6rem)}
+.sheet .sub{color:var(--mute);margin:4px 0 14px}
+.amen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:16px 0;list-style:none;padding:0}
+.amen li{display:flex;gap:8px;align-items:center;font-size:.92rem}
+.amen li::before{content:"●";color:var(--green);font-size:.6em}
+.hostbox{display:flex;gap:12px;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.hostbox i{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.book{border:1.5px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;position:sticky;top:10px}
+.book .p{font:800 1.6rem var(--display);font-variant-numeric:tabular-nums}
+.book .p small{font:400 .85rem var(--body);color:var(--mute)}
+.book .dates{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.book label{display:grid;gap:3px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.book input,.book select{border:1.5px solid var(--line);border-radius:8px;padding:.5em .6em;font-weight:600}
+.book dl{display:grid;grid-template-columns:1fr auto;gap:0;font-size:.9rem;margin-top:4px}
+.book dt,.book dd{padding:7px 0;border-top:1px solid var(--line)}
+.book dd{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.book .tot{font-weight:800;font-size:1.05rem}
+.bk-fields{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.bk-done{background:var(--cream);border:1.5px solid var(--green);border-radius:12px;padding:14px;display:grid;gap:8px}
+.bk-done h3{font-size:1.35rem;color:var(--green)}
+.bk-done small{color:var(--mute);font-size:.86rem}
+.host-dlg{max-width:min(620px,95vw);padding:clamp(22px,4vw,38px)}
+.host-form{display:grid;gap:12px;margin-top:14px}
+.host-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.host-form label{display:grid;gap:4px;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.host-form input,.host-form select,.host-form textarea{border:1.5px solid var(--line);border-radius:10px;padding:.65em .8em;font:400 .95rem var(--body);color:var(--ink);background:#fff;width:100%}
+.host-form textarea{min-height:86px;resize:vertical}
+@media(max-width:600px){.host-form .row2{grid-template-columns:1fr}}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.card .ph img{clip-path:none;transform:none}}
+</style>
+<link rel="stylesheet" href="../mobile-compact.css"><script src="../mobile-compact.js" defer></script>
+</head>
+<body class="nojs">
+
+<header class="nav">
+  <a class="logo" href="#top"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11 12 3l9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11Z"/></svg>kasa</a>
+  <nav aria-label="Navigation"><ul><li><a href="#annonces">Louer</a></li><li><a href="#hote">Devenir hôte</a></li><li><a href="#annonces">Aide</a></li></ul></nav>
+  <div class="navr"><button class="fav" id="favBtn" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.6-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6C19 15.4 12 20 12 20Z"/></svg>Favoris <b id="favN">0</b></button><button class="btn" id="openHostNav" type="button">Mettre mon logement</button></div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="sun" id="sun"></div>
+  <span class="tag">Guest houses, maisons et appartements</span>
+  <h1><span class="l"><i>Dormez chez quelqu'un,</i></span><span class="l"><i><em>pas n'importe où.</em></i></span></h1>
+  <p>Des logements vérifiés à Cotonou, Calavi, Ouidah, Porto-Novo et sur la côte. Paiement à l'arrivée possible chez la plupart des hôtes.</p>
+  <div class="arches" id="arches">
+    <div class="arch" data-d="26"><div class="in"><img src="img/l1.webp" alt="Chambre avec balcon"></div><span>Fidjrossè</span></div>
+    <div class="arch" data-d="-18"><div class="in"><img src="img/v3.webp" alt="Terrasse et piscine"></div><span>Calavi</span></div>
+    <div class="arch" data-d="34"><div class="in"><img src="img/v1.webp" alt="Villa au coucher du soleil" fetchpriority="high"></div><span>Grand-Popo</span></div>
+    <div class="arch" data-d="-18"><div class="in"><img src="img/a2.webp" alt="Salon lumineux"></div><span>Haie Vive</span></div>
+    <div class="arch" data-d="26"><div class="in"><img src="img/v4.webp" alt="Piscine et transats"></div><span>Avlékété</span></div>
+  </div>
+  <form class="bar" id="bar" onsubmit="return false">
+    <label><span>Destination</span><select id="fVille"><option value="">Partout au Bénin</option><option>Cotonou</option><option>Abomey-Calavi</option><option>Porto-Novo</option><option>Ouidah</option><option>Grand-Popo</option><option>Avlékété</option><option>Tanguiéta</option></select></label>
+    <label><span>Arrivée</span><input type="date" id="fIn"></label>
+    <label><span>Départ</span><input type="date" id="fOut"></label>
+    <label><span>Voyageurs</span><input type="number" id="fPax" min="1" max="12" value="2"></label>
+    <button class="btn" id="go">Rechercher</button>
+  </form>
+</section>
+
+<section class="ring-sec" aria-label="Destinations">
+  <span class="tag">Où partez-vous ?</span>
+  <h2>Faites tourner les destinations</h2>
+  <p>Glissez pour tourner, cliquez une ville pour filtrer les logements.</p>
+  <div class="ring-view" id="ringView"><div class="ring" id="ring"></div></div>
+</section>
+
+
+<div class="filters">
+  <div class="chips" id="chips" role="group" aria-label="Type de logement">
+    <button aria-pressed="true" data-f="tout">Tous</button><button aria-pressed="false" data-f="guest">Guest house</button><button aria-pressed="false" data-f="appart">Appartement</button><button aria-pressed="false" data-f="villa">Villa</button><button aria-pressed="false" data-f="studio">Studio</button>
+  </div>
+  <label class="rangef">Jusqu'à <output id="maxOut">130 000 F</output><input type="range" id="fMax" min="10000" max="130000" step="5000" value="130000" aria-label="Prix maximum par nuit"></label>
+</div>
+
+<section class="split" id="annonces">
+  <div class="list">
+    <div class="list-head"><h2 id="resTitle">Logements disponibles</h2><span id="resSub"></span></div>
+    <div class="cards" id="cards"></div>
+    <p class="none" id="none" hidden>Aucun logement ne correspond. Élargissez la date, la ville ou le budget.</p>
+  </div>
+  <div class="mapwrap">
+    <iframe id="gmap" title="Carte Google Maps des logements au Bénin" src="https://www.google.com/maps?q=Cotonou,Benin&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div class="map-top">
+      <span class="map-badge" id="mapFocus">Cotonou, Bénin</span>
+      <a class="map-ext" id="mapExt" href="https://maps.google.com/?q=Cotonou,Benin" target="_blank" rel="noopener">Ouvrir Google Maps ↗</a>
+    </div>
+    <div class="map-pins" id="map" aria-label="Accès rapide par logement sur la carte"></div>
+  </div>
+</section>
+
+<section class="host" id="hote">
+  <div>
+    <span class="tag" style="color:var(--yellow)">Devenir hôte</span>
+    <h2>Votre chambre d'amis peut payer vos factures</h2>
+    <p>Publiez gratuitement, fixez votre prix et vos règles. Kasa prélève 7 % seulement sur les séjours réellement réservés.</p>
+    <button class="btn" id="openHostSec" type="button">Publier un logement</button>
+  </div>
+  <div class="pics"><figure><img src="img/a2.webp" alt="Salon lumineux d'un appartement" loading="lazy"></figure><figure><img src="img/v6.webp" alt="Piscine d'une villa" loading="lazy"></figure></div>
+</section>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><b>kasa</b>Locations courte durée<br>Cotonou, Bénin</div>
+    <div><b>Voyageurs</b><a href="#annonces">Rechercher</a><a href="#annonces">Favoris</a><a href="#annonces">Aide</a></div>
+    <div><b>Hôtes</b><a href="#hote">Publier</a><a href="#hote">Tarifs</a><a href="#hote">Règles</a></div>
+    <div><b>Contact</b>bonjour@kasa.example<br>+229 00 00 00 00</div>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="shTitle">
+  <button class="x" id="dlgX" aria-label="Fermer">×</button>
+  <div class="sheet">
+    <div class="gal"><div id="g1"></div><div class="side"><div id="g2"></div><div id="g3"></div></div></div>
+    <div class="sheet-b">
+      <div>
+        <h2 id="shTitle"></h2>
+        <p class="sub" id="shSub"></p>
+        <p id="shDesc"></p>
+        <ul class="amen" id="shAmen"></ul>
+        <div class="hostbox"><i id="shInit"></i><div><b id="shHost"></b><br><small style="color:var(--mute)" id="shHostSub"></small></div></div>
+      </div>
+      <div class="book">
+        <div class="p" id="bkP"></div>
+        <form id="bkForm" style="display:grid;gap:10px">
+          <div class="dates"><label>Arrivée<input type="date" id="bkIn" required></label><label>Départ<input type="date" id="bkOut" required></label></div>
+          <label>Voyageurs<select id="bkPax"></select></label>
+          <dl id="bkLines"></dl>
+          <div class="bk-fields">
+            <label>Nom complet<input type="text" id="bkName" placeholder="Votre nom" required></label>
+            <label>Téléphone / WhatsApp<input type="tel" id="bkTel" placeholder="+229 …" required></label>
+            <label>Règlement<select id="bkPay"><option>À l'arrivée</option><option>Mobile Money (MTN / Moov)</option><option>Carte bancaire</option></select></label>
+          </div>
+          <button class="btn" id="bkGo" type="submit">Confirmer la réservation</button>
+        </form>
+        <div class="bk-done" id="bkDone" hidden>
+          <h3>Séjour confirmé</h3>
+          <b id="bkRef" style="font-size:.9rem"></b>
+          <small id="bkRecap"></small>
+          <button class="btn line" id="bkAgain" type="button">Modifier les dates</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="hostDlg" class="host-dlg" aria-labelledby="hostDlgTitle">
+  <button class="x" id="hostDlgX" aria-label="Fermer">×</button>
+  <span class="tag">Espace hôte</span>
+  <h2 id="hostDlgTitle" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-top:6px">Publier un logement sur Kasa</h2>
+  <p style="color:var(--mute);font-size:.92rem;margin-top:4px">Votre annonce apparaît immédiatement dans le catalogue et sur la carte.</p>
+  <form class="host-form" id="hostForm">
+    <label>Titre du logement<input type="text" id="hTitle" placeholder="Ex. Villa Cocotier avec terrasse" required></label>
+    <div class="row2">
+      <label>Type<select id="hKind"><option value="guest">Guest house</option><option value="appart">Appartement</option><option value="villa">Villa</option><option value="studio">Studio</option></select></label>
+      <label>Ville<select id="hCity"><option>Cotonou</option><option>Abomey-Calavi</option><option>Porto-Novo</option><option>Ouidah</option><option>Grand-Popo</option><option>Avlékété</option><option>Tanguiéta</option></select></label>
+    </div>
+    <div class="row2">
+      <label>Quartier<input type="text" id="hQuartier" placeholder="Ex. Haie Vive" required></label>
+      <label>Prix par nuit (FCFA)<input type="number" id="hPrice" min="5000" step="1000" value="45000" required></label>
+    </div>
+    <div class="row2">
+      <label>Voyageurs max<input type="number" id="hPax" min="1" max="16" value="4" required></label>
+      <label>Chambres<input type="number" id="hCh" min="1" max="10" value="2" required></label>
+    </div>
+    <label>Nom de l'hôte<input type="text" id="hHost" placeholder="Votre prénom" required></label>
+    <label>Description<textarea id="hDesc" placeholder="Décrivez l'ambiance, les atouts et la localisation…" required></textarea></label>
+    <button class="btn" type="submit">Publier l'annonce</button>
+  </form>
+</dialog>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/ | /g,' ')+' F';
+document.body.classList.remove('nojs');
+
+const KIND={guest:'Guest house',appart:'Appartement',villa:'Villa',studio:'Studio'};
+const L=[
+ {id:1,n:'Les Cocotiers',k:'guest',ville:'Cotonou',q:'Fidjrossè',p:28000,pax:4,ch:2,note:4.8,img:['l1','a1','l5'],x:44,y:62,h:'Adjo',d:"Deux chambres dans une maison familiale à cinq minutes de la plage. Petit-déjeuner compris, cuisine à partager.",a:['Wi-Fi fibre','Climatisation','Petit-déjeuner','Parking dans la cour','Eau chaude']},
+ {id:2,n:'Appartement vue lagune',k:'appart',ville:'Cotonou',q:'Ganhi',p:42000,pax:2,ch:1,note:4.9,img:['l2','a4','a1'],x:49,y:56,h:'Rodrigue',d:"Au sixième étage, fenêtres plein ouest sur la lagune. Idéal pour un séjour de travail.",a:['Wi-Fi fibre','Climatisation','Bureau','Ascenseur','Groupe électrogène']},
+ {id:3,n:'Villa Sable Blanc',k:'villa',ville:'Grand-Popo',q:'Bord de mer',p:115000,pax:8,ch:4,note:4.9,img:['v1','v4','l6'],x:16,y:74,h:'Mireille',d:"Villa les pieds dans le sable, piscine privée et terrasse abritée. Gardien présent jour et nuit.",a:['Piscine privée','Accès plage','Cuisine équipée','Gardien 24 h','Climatisation']},
+ {id:4,n:'Studio Akpakpa',k:'studio',ville:'Cotonou',q:'Akpakpa',p:18000,pax:2,ch:1,note:4.5,img:['l3','a1','l8'],x:54,y:60,h:'Serge',d:"Studio simple et propre, à dix minutes du pont. Entrée indépendante, idéal courts séjours.",a:['Wi-Fi','Ventilateur','Entrée indépendante','Eau chaude']},
+ {id:5,n:"Maison d'hôtes de l'Atacora",k:'guest',ville:'Tanguiéta',q:'Centre',p:35000,pax:6,ch:3,note:4.7,img:['l4','l7','v5'],x:30,y:12,h:'Fatou',d:"Point de départ pour le parc de la Pendjari. Repas du soir sur demande, départ possible à 5 h.",a:['Repas sur demande','Parking 4×4','Terrasse','Moustiquaires','Guide sur place']},
+ {id:6,n:'Appartement Haie Vive',k:'appart',ville:'Cotonou',q:'Haie Vive',p:55000,pax:4,ch:2,note:4.8,img:['l5','a2','a3'],x:41,y:58,h:'Nadia',d:"Deux chambres, grande cuisine ouverte et balcon. Commerces et restaurants à pied.",a:['Wi-Fi fibre','Climatisation','Cuisine équipée','Lave-linge','Balcon']},
+ {id:7,n:'Villa piscine Calavi',k:'villa',ville:'Abomey-Calavi',q:'Zinvié',p:95000,pax:10,ch:5,note:4.6,img:['v3','v2','l6'],x:38,y:48,h:'Pascal',d:"Grande villa pour les familles et les séminaires, piscine éclairée et paillote au fond du jardin.",a:['Piscine','Paillote','Cuisine équipée','Parking 6 places','Groupe électrogène']},
+ {id:8,n:"Chambre chez l'habitant",k:'guest',ville:'Porto-Novo',q:'Oganla',p:12000,pax:2,ch:1,note:4.4,img:['l7','l3','a4'],x:66,y:54,h:'Célestine',d:"Une chambre dans une maison afro-brésilienne du vieux Porto-Novo. Accueil en français et en goun.",a:['Petit-déjeuner','Ventilateur','Cour ombragée','Marché à 300 m']},
+ {id:9,n:'Loft des Pêcheurs',k:'appart',ville:'Ouidah',q:'Route des pêches',p:48000,pax:4,ch:2,note:4.7,img:['a3','l2','v6'],x:28,y:66,h:'Kossi',d:"Ancien entrepôt transformé en loft, hauts plafonds et lumière du matin. Vélos à disposition.",a:['Wi-Fi','Vélos','Cuisine équipée','Terrasse','Climatisation']},
+ {id:10,n:'Studio Cadjèhoun',k:'studio',ville:'Cotonou',q:'Cadjèhoun',p:22000,pax:2,ch:1,note:4.6,img:['l8','l1','a1'],x:46,y:53,h:'Blaise',d:"À deux pas de l'aéroport, pour une escale ou un vol tôt le matin. Arrivée autonome par boîte à clés.",a:['Arrivée autonome','Climatisation','Wi-Fi','Navette aéroport']},
+ {id:11,n:'Villa Océan',k:'villa',ville:'Avlékété',q:'Bord de mer',p:130000,pax:12,ch:6,note:5.0,img:['v4','v1','l6'],x:22,y:72,h:'Hortense',d:"Six chambres face à l'océan, grande table sous la paillote, cuisinière disponible sur demande.",a:['Accès plage privé','Piscine','Cuisinière sur demande','Gardien 24 h','Parking 8 places']},
+ {id:12,n:'Appart-hôtel Jéricho',k:'appart',ville:'Cotonou',q:'Jéricho',p:38000,pax:3,ch:1,note:4.5,img:['a4','l5','a2'],x:43,y:55,h:'Ismaël',d:"Appartement de standing avec ménage tous les deux jours et réception à l'entrée de la résidence.",a:['Ménage inclus','Réception','Climatisation','Wi-Fi fibre','Salle de sport']}
+];
+const star='<svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.5 7L12 17.8 5.7 21.2l1.5-7L2 9.4l7-.8Z"/></svg>';
+const heart='<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6C19 15.4 12 20 12 20Z"/></svg>';
+
+const cards=$('#cards'), map=$('#map');
+function loadJSON(k,def){try{return JSON.parse(localStorage.getItem(k)||'null')??def;}catch{return def;}}
+function saveJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+const favs=new Set(loadJSON('kasa_favs',[]));
+const custom=loadJSON('kasa_custom',[]);
+custom.forEach(item=>L.push(item));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+function renderListings(){
+  cards.innerHTML=L.map(l=>`<button class="card" data-id="${l.id}" data-k="${l.k}" data-v="${l.ville}" data-p="${l.p}" data-x="${l.pax}">
+   <div class="ph"><span class="kind">${KIND[l.k]}</span><img src="img/${l.img[0]}.webp" alt="${l.n}, ${l.ville}" loading="lazy"><span class="heart${favs.has(l.id)?' on':''}" data-fav="${l.id}" role="button" tabindex="0" aria-label="Ajouter ${l.n} aux favoris">${heart}</span></div>
+   <div class="body"><div class="top"><h3>${l.n}</h3><span class="note">${star}${l.note.toFixed(1)}</span></div>
+   <span class="where">${l.q}, ${l.ville}</span><span class="feat">${l.pax} voyageurs · ${l.ch} chambre${l.ch>1?'s':''}</span>
+   <span class="price"><b>${fcfa(l.p)}</b> la nuit</span></div></button>`).join('');
+  map.innerHTML=L.map(l=>`<button class="pin" data-id="${l.id}" aria-label="${l.n}, ${fcfa(l.p)} la nuit">${l.q} · ${Math.round(l.p/1000)} K</button>`).join('');
+  $$('.card').forEach(c=>io.observe(c));
+}
+function focusMap(q,reload=true){
+  const query=q?q+', Bénin':'Cotonou, Bénin';
+  $('#mapFocus').textContent=query;
+  $('#mapExt').href='https://maps.google.com/?q='+encodeURIComponent(query);
+  if(reload) $('#gmap').src='https://www.google.com/maps?q='+encodeURIComponent(query)+'&output=embed';
+}
+renderListings();
+$('#favN').textContent=favs.size; $('#favBtn').classList.toggle('on',favs.size>0);
+
+const d2s=d=>d.toISOString().slice(0,10);
+$('#fIn').value=d2s(new Date(Date.now()+864e5*7));
+$('#fOut').value=d2s(new Date(Date.now()+864e5*10));
+
+let filt='tout', ville='', pax=2, max=130000, favOnly=false;
+function apply(){
+  let n=0;
+  $$('.card').forEach(c=>{
+    const l=L.find(x=>x.id==c.dataset.id);
+    const ok=(filt==='tout'||l.k===filt)&&(!ville||l.ville===ville)&&l.pax>=pax&&l.p<=max&&(!favOnly||favs.has(l.id));
+    c.classList.toggle('hide',!ok); if(ok){n++;c.classList.add('in');}
+    $(`.pin[data-id="${l.id}"]`,map).classList.toggle('hide',!ok);
+  });
+  $('#resTitle').textContent=favOnly?'Vos logements favoris':(ville?`Logements à ${ville}`:'Logements disponibles');
+  $('#resSub').textContent=`${n} résultat${n>1?'s':''} · ${pax} voyageur${pax>1?'s':''}`;
+  $('#none').textContent=(favOnly&&!favs.size)?"Vous n'avez aucun logement en favori pour le moment. Cliquez sur le cœur d'une annonce pour l'ajouter.":"Aucun logement ne correspond. Élargissez la date, la ville ou le budget.";
+  $('#none').hidden=n>0;
+  focusMap(ville||'Cotonou',true);
+}
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filt=b.dataset.f;$$('#chips button').forEach(x=>x.setAttribute('aria-pressed',x===b));apply();});
+$('#fMax').addEventListener('input',e=>{max=+e.target.value;$('#maxOut').textContent=fcfa(max);apply();});
+$('#fVille').addEventListener('change',e=>{ville=e.target.value;apply();});
+$('#fPax').addEventListener('change',e=>{pax=Math.max(1,+e.target.value||1);apply();});
+$('#go').addEventListener('click',()=>{ville=$('#fVille').value;pax=Math.max(1,+$('#fPax').value||1);apply();$('#annonces').scrollIntoView({behavior:reduce?'auto':'smooth'});});
+$('#maxOut').textContent=fcfa(max);
+apply();
+
+let lastClick={x:innerWidth/2,y:innerHeight/2};
+addEventListener('pointerdown',e=>{lastClick={x:e.clientX,y:e.clientY};},true);
+requestAnimationFrame(()=>document.body.classList.add('go'));
+
+/* Arches : profondeur à la souris et au défilement */
+(function(){
+  const hero=$('#hero'), ar=$$('.arch .in'), sun=$('#sun'); let mx=0,my=0,cx=0,cy=0;
+  hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
+  (function loop(){requestAnimationFrame(loop); if(reduce||scrollY>innerHeight*1.3)return; cx+=(mx-cx)*.07; cy+=(my-cy)*.07; const sc=scrollY/innerHeight;
+    ar.forEach(a=>{const d=+a.parentElement.dataset.d; a.style.transform=`translate3d(${-cx*d}px,${-cy*d*.7-sc*d*1.6}px,0)`;});
+    sun.style.transform=`translate(-50%,-50%) translate3d(${cx*60}px,${cy*40-sc*120}px,0)`;})();
+})();
+
+/* Manège 3D des villes */
+(function(){
+  const CITIES=[['','Partout','12 logements','v6'],['Cotonou','Cotonou','6 logements','a1'],['Ouidah','Ouidah','Route des pêches','a3'],['Grand-Popo','Grand-Popo','Bord de mer','v1'],['Abomey-Calavi','Calavi','Villas et jardins','v3'],['Porto-Novo','Porto-Novo','Vieille ville','l7'],['Avlékété','Avlékété','Face à l’océan','v4'],['Tanguiéta','Tanguiéta','Porte de la Pendjari','l4']];
+  const ring=$('#ring'), view=$('#ringView'), n=CITIES.length; let ang=0, vel=-.28, drag=false, lx=0, moved=0, on=true, R=0;
+  ring.innerHTML=CITIES.map(c=>`<button data-v="${c[0]}" aria-pressed="${c[0]===''}"><img src="img/${c[3]}.webp" alt="" loading="lazy"><b>${c[1]}</b><small>${c[2]}</small></button>`).join('');
+  const btns=$$('button',ring);
+  function size(){const cw=Math.max(150,Math.min(250,innerWidth*.2)); R=cw*1.36; ring.style.setProperty('--cw',cw+'px'); btns.forEach((b,i)=>b.style.transform=`rotateY(${i*360/n}deg) translateZ(${R}px)`);}
+  size(); addEventListener('resize',size);
+  view.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;moved=0;});
+  addEventListener('pointerup',()=>drag=false);
+  addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;moved+=Math.abs(dx);vel=dx*.25;ang+=vel;});
+  ring.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||moved>8)return; btns.forEach(x=>x.setAttribute('aria-pressed',x===b)); $('#fVille').value=b.dataset.v; ville=b.dataset.v; apply(); $('#annonces').scrollIntoView({behavior:reduce?'auto':'smooth'});});
+  new IntersectionObserver(es=>on=es[0].isIntersecting).observe(view);
+  (function loop(){requestAnimationFrame(loop); if(!on)return; if(!drag){ang+=vel; vel+=((reduce?0:-.28)-vel)*.02;} ring.style.transform=`translateZ(${-R}px) rotateX(-6deg) rotateY(${ang}deg)`;})();
+})();
+
+/* Lien carte ↔ cartes */
+function link(id,on){
+  const c=$(`.card[data-id="${id}"]`), p=$(`.pin[data-id="${id}"]`);
+  c&&c.classList.toggle('hl',on); p&&p.classList.toggle('hl',on);
+  if(on){const l=L.find(x=>x.id==id); if(l) focusMap(`${l.q}, ${l.ville}`,false);}
+}
+cards.addEventListener('pointerover',e=>{const c=e.target.closest('.card');if(c)link(c.dataset.id,true);});
+cards.addEventListener('pointerout',e=>{const c=e.target.closest('.card');if(c)link(c.dataset.id,false);});
+map.addEventListener('pointerover',e=>{const p=e.target.closest('.pin');if(p)link(p.dataset.id,true);});
+map.addEventListener('pointerout',e=>{const p=e.target.closest('.pin');if(p)link(p.dataset.id,false);});
+map.addEventListener('click',e=>{const p=e.target.closest('.pin');if(!p)return;const l=L.find(x=>x.id==p.dataset.id);if(l)focusMap(`${l.q}, ${l.ville}`,true);openSheet(+p.dataset.id);});
+
+/* Favoris */
+function toggleFav(id,el){
+  id=+id; favs.has(id)?favs.delete(id):favs.add(id);
+  el.classList.toggle('on',favs.has(id));
+  saveJSON('kasa_favs',[...favs]);
+  $('#favN').textContent=favs.size; $('#favBtn').classList.toggle('on',favs.size>0);
+  if(favOnly) apply();
+}
+cards.addEventListener('click',e=>{
+  const f=e.target.closest('[data-fav]');
+  if(f){e.stopPropagation();toggleFav(f.dataset.fav,f);return;}
+  const c=e.target.closest('.card'); if(c)openSheet(+c.dataset.id);
+});
+$('#favBtn').onclick=()=>{
+  favOnly=!favOnly;
+  $('#favBtn').classList.toggle('active',favOnly);
+  $('#favBtn').setAttribute('aria-pressed',favOnly);
+  apply();
+  $('#annonces').scrollIntoView({behavior:reduce?'auto':'smooth'});
+};
+
+/* Fiche + réservation fonctionnelle */
+const dlg=$('#dlg'); let cur=null;
+function openSheet(id){
+  const l=L.find(x=>x.id===id); cur=l;
+  $('#g1').innerHTML=`<img src="img/${l.img[0]}.webp" alt="${l.n}">`;
+  $('#g2').innerHTML=`<img src="img/${l.img[1]}.webp" alt="">`;
+  $('#g3').innerHTML=`<img src="img/${l.img[2]}.webp" alt="">`;
+  $('#shTitle').textContent=l.n;
+  $('#shSub').textContent=`${KIND[l.k]} · ${l.q}, ${l.ville} · ${l.pax} voyageurs · ${l.ch} chambre${l.ch>1?'s':''} · note ${l.note.toFixed(1)}`;
+  $('#shDesc').textContent=l.d;
+  $('#shAmen').innerHTML=l.a.map(a=>`<li>${a}</li>`).join('');
+  $('#shInit').textContent=l.h[0]; $('#shHost').textContent='Hôte : '+l.h; $('#shHostSub').textContent='Répond en général dans la journée';
+  $('#bkP').innerHTML=`${fcfa(l.p)} <small>la nuit</small>`;
+  $('#bkPax').innerHTML=Array.from({length:l.pax},(_,i)=>`<option>${i+1}</option>`).join('');
+  $('#bkPax').value=Math.min(pax,l.pax);
+  const a=$('#fIn').value||d2s(new Date(Date.now()+864e5*7)), b=$('#fOut').value||d2s(new Date(Date.now()+864e5*10));
+  $('#bkIn').value=a; $('#bkOut').value=b;
+  $('#bkForm').hidden=false; $('#bkDone').hidden=true;
+  calc(); dlg.showModal();
+  const dr=dlg.getBoundingClientRect(); dlg.style.setProperty('--ox',((lastClick.x-dr.left)/dr.width*100)+'%'); dlg.style.setProperty('--oy',((lastClick.y-dr.top)/dr.height*100)+'%'); dlg.style.animation='none'; void dlg.offsetWidth; dlg.style.animation='';
+}
+function calc(){
+  if(!cur)return {nights:0,total:0};
+  const a=new Date($('#bkIn').value), b=new Date($('#bkOut').value);
+  let nights=Math.round((b-a)/864e5);
+  if(!(nights>0)) nights=0;
+  const sub=nights*cur.p, menage=nights?7500:0, frais=Math.round(sub*0.07), total=sub+menage+frais;
+  $('#bkLines').innerHTML=nights
+    ? `<dt>${fcfa(cur.p)} × ${nights} nuit${nights>1?'s':''}</dt><dd>${fcfa(sub)}</dd><dt>Frais de ménage</dt><dd>${fcfa(menage)}</dd><dt>Frais de service (7 %)</dt><dd>${fcfa(frais)}</dd><dt class="tot">Total</dt><dd class="tot">${fcfa(total)}</dd>`
+    : `<dt>Choisissez vos dates</dt><dd>—</dd>`;
+  return {nights,total};
+}
+$('#bkIn').addEventListener('change',calc); $('#bkOut').addEventListener('change',calc);
+$('#bkForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const {nights,total}=calc(); if(!nights) return;
+  const code='KS-'+Math.floor(1000+Math.random()*9000);
+  const name=$('#bkName').value.trim(), pay=$('#bkPay').value;
+  const bookings=loadJSON('kasa_bookings',[]);
+  bookings.push({code,listing:cur.n,in:$('#bkIn').value,out:$('#bkOut').value,pax:+$('#bkPax').value,total,name,pay});
+  saveJSON('kasa_bookings',bookings);
+  $('#bkRef').textContent=`Référence ${code} · ${cur.n}`;
+  $('#bkRecap').textContent=`${name}, votre séjour de ${nights} nuit${nights>1?'s':''} (${$('#bkIn').value} → ${$('#bkOut').value}) est enregistré pour ${fcfa(total)} (${pay}).`;
+  $('#bkForm').hidden=true; $('#bkDone').hidden=false;
+});
+$('#bkAgain').onclick=()=>{$('#bkDone').hidden=true;$('#bkForm').hidden=false;};
+$('#dlgX').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+
+/* Publier un logement */
+const hostDlg=$('#hostDlg');
+const POS={Cotonou:[45,58],'Abomey-Calavi':[39,49],'Porto-Novo':[65,55],Ouidah:[29,65],'Grand-Popo':[18,73],Avlékété:[23,71],Tanguiéta:[32,14]};
+const IMGS={guest:['l1','l4','l7'],appart:['l2','a2','a4'],villa:['v1','v3','v4'],studio:['l3','l8','a1']};
+$('#openHostNav').onclick=$('#openHostSec').onclick=()=>hostDlg.showModal();
+$('#hostDlgX').onclick=()=>hostDlg.close();
+hostDlg.addEventListener('click',e=>{if(e.target===hostDlg)hostDlg.close();});
+$('#hostForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const k=$('#hKind').value, v=$('#hCity').value, pos=POS[v]||[45,58];
+  const item={
+    id:Date.now(), n:$('#hTitle').value.trim(), k, ville:v, q:$('#hQuartier').value.trim(),
+    p:+$('#hPrice').value, pax:+$('#hPax').value, ch:+$('#hCh').value, note:5.0,
+    img:IMGS[k]||['l1','a1','a2'], x:pos[0]+(Math.random()*4-2), y:pos[1]+(Math.random()*4-2),
+    h:$('#hHost').value.trim(), d:$('#hDesc').value.trim(),
+    a:['Wi-Fi','Climatisation','Arrivée flexible','Nouvelle annonce']
+  };
+  L.unshift(item);
+  custom.unshift(item);
+  saveJSON('kasa_custom',custom);
+  renderListings();
+  favOnly=false; $('#favBtn').classList.remove('active'); $('#favBtn').setAttribute('aria-pressed','false');
+  filt='tout'; ville=''; $('#fVille').value='';
+  if(item.p>max){max=item.p;$('#fMax').max=Math.max(+$('#fMax').max,item.p);$('#fMax').value=item.p;$('#maxOut').textContent=fcfa(item.p);}
+  $$('#chips button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f==='tout'));
+  apply();
+  hostDlg.close();
+  e.target.reset();
+  $('#annonces').scrollIntoView({behavior:reduce?'auto':'smooth'});
+});
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:reduce?'auto':'smooth'});}}));
+})();
+</script>
+</body>
+</html>

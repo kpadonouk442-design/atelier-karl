@@ -1,0 +1,145 @@
+/* MODE COMPACT MOBILE : outil partagé par les sites de démonstration.
+   Sur téléphone (≤ 700 px) : les longues grilles de cartes deviennent des rangées
+   qu'on fait glisser du doigt, et les sections « épinglées » raccourcissent.
+   Chaque site déclare son nom avec <html data-site="..."> ; on règle ici ce qui change. */
+@media (max-width:700px){
+
+/* 1. Grilles de cartes -> rangées glissantes (une carte + un aperçu de la suivante) */
+html[data-site=kasa] .cards,
+html[data-site=ebene] .rail,
+html[data-site=ebene] .serv-grid,
+html[data-site=ebene] .gal-grid,
+html[data-site=kubik] :has(> .mod),
+html[data-site=kubik] .ref-grid,
+html[data-site=baingres] .grid,
+html[data-site=baingres] .cats,
+html[data-site=shop] .grid{
+  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  gap:12px!important;margin-inline:calc(var(--gut,16px)*-1)!important;padding-inline:var(--gut,16px)!important;scroll-padding-inline:var(--gut,16px);padding-bottom:14px;
+  scrollbar-width:none;transform:none!important;width:auto!important;height:auto!important;perspective:none!important;
+}
+html[data-site=kasa] .cards::-webkit-scrollbar,
+html[data-site=ebene] .rail::-webkit-scrollbar,
+html[data-site=ebene] .serv-grid::-webkit-scrollbar,
+html[data-site=ebene] .gal-grid::-webkit-scrollbar,
+html[data-site=kubik] :has(> .mod)::-webkit-scrollbar,
+html[data-site=kubik] .ref-grid::-webkit-scrollbar,
+html[data-site=baingres] .grid::-webkit-scrollbar,
+html[data-site=baingres] .cats::-webkit-scrollbar,
+html[data-site=shop] .grid::-webkit-scrollbar{display:none}
+html[data-site=kasa] .cards>*,
+html[data-site=ebene] .rail>*,
+html[data-site=ebene] .serv-grid>*,
+html[data-site=ebene] .gal-grid>*,
+html[data-site=kubik] :has(> .mod)>.mod,
+html[data-site=kubik] .ref-grid>*,
+html[data-site=baingres] .grid>*,
+html[data-site=baingres] .cats>*,
+html[data-site=shop] .grid>*{
+  flex:0 0 78%!important;min-width:0;max-width:78%;scroll-snap-align:start;grid-column:auto!important;grid-row:auto!important;margin:0!important;
+}
+html[data-site=ebene] .gal-grid>*{flex-basis:70%!important;max-width:70%}
+
+/* 2. Sections « épinglées » : moins de défilement à faire */
+html[data-site=goi] .chap{height:250vh!important}
+html[data-site=shop] .feat{height:115vh!important}
+html[data-site=studio] .zoom{height:115vh!important}
+html[data-site=studio] .ap-list{padding-bottom:30px!important}
+
+/* GOI : la frise « chantiers » devient une rangée glissante native */
+html[data-site=goi] .hz{height:auto!important}
+html[data-site=goi] .hz-sticky{position:static!important;height:auto!important;padding:56px 0 40px!important;overflow:visible!important}
+html[data-site=goi] .hz-track{width:auto!important;transform:none!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:12px}
+html[data-site=goi] .hz-track::-webkit-scrollbar{display:none}
+html[data-site=goi] .hz-track>*{scroll-snap-align:start;flex:0 0 78%}
+
+/* 3. Moins d'air entre les sections */
+html[data-site] section:not(.hero):not([class*=hero]){scroll-margin-top:64px}
+html[data-site=kasa] .annonces,html[data-site=ebene] .chambres,html[data-site=ebene] .services,html[data-site=kubik] .gammes,html[data-site=shop] .collection,html[data-site=studio] .projets{padding-block:48px!important}
+
+/* 4. Défilement plus fluide sur écran tactile */
+html[data-site]{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+html[data-site] img{content-visibility:auto}
+
+/* 5. Blocs repliables (voir mobile-compact.js) */
+html[data-site] .mf-h{display:flex;width:100%;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;margin:6px 0 0;background:none;border:0;border-top:1px solid rgba(128,128,128,.28);color:inherit;font:inherit;font-weight:600;text-align:left;cursor:pointer}
+html[data-site] .mf-h i{font-style:normal;flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:currentColor;transition:transform .3s}
+html[data-site] .mf-h i::before{content:"";}
+html[data-site] .mf-h i{color:inherit;background:rgba(128,128,128,.18)}
+html[data-site] .mf-h.mf-on i{transform:rotate(180deg)}
+html[data-site] .mf-body:not(.mf-open){display:none!important}
+html[data-site] .mf-h.mf-col{border-top:1px solid rgba(128,128,128,.22);margin:0;padding:12px 0;font-size:.95rem}
+html[data-site] footer .fcols,html[data-site] footer .fgrid{gap:0!important;grid-template-columns:1fr!important}
+html[data-site] footer .mf-body{padding:0 0 12px;display:grid;gap:6px}
+
+/* 6. Corrections site par site */
+/* GOI */
+html[data-site=goi] .hero-in .eyebrow,html[data-site=goi] .hero .eyebrow{line-height:1.35}
+html[data-site=goi] .hz-track{padding-inline:var(--gut,16px)!important;scroll-padding-inline:var(--gut,16px)}
+html[data-site=goi] .acc-row .pic{aspect-ratio:16/7!important;height:auto!important}
+html[data-site=goi] .acc-row article{gap:10px!important}
+/* KASA : les arches ne recouvrent plus le texte */
+html[data-site=kasa] .arch{--y:0%!important}
+html[data-site=kasa] .arches{margin-top:14px!important}
+html[data-site=kasa] .arch:nth-child(3){max-width:none}
+/* KUBIK : le bouton du haut ne dépasse plus de l'écran */
+html[data-site=kubik] .nav .btn,html[data-site=kubik] .nav a.btn{padding:.6em .9em!important;font-size:.82rem!important;white-space:nowrap}
+html[data-site=kubik] .nav{gap:10px!important}
+html[data-site=kubik] .nav .brand small,html[data-site=kubik] .nav .logo small{display:none}
+/* BAIN & GRÈS : accueil épuré */
+html[data-site=baingres] .hero-bar,
+html[data-site=baingres] .spec-tbl,
+html[data-site=baingres] .mosaic,
+html[data-site=baingres] .strip,
+html[data-site=baingres] #selection .count,
+html[data-site=baingres] .pro .pic,
+html[data-site=baingres] .map-wrap{display:none!important}
+html[data-site=baingres] .hero-grid{grid-template-columns:1fr!important;min-height:0!important}
+html[data-site=baingres] .hero{padding-bottom:28px!important}
+html[data-site=baingres] .shop-head{flex-direction:column;align-items:flex-start!important;gap:10px}
+html[data-site=baingres] .why{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+html[data-site=baingres] .why article{padding:16px!important}
+html[data-site=baingres] .why article p{display:none}
+html[data-site=baingres] .why b{font-size:1.6rem!important}
+html[data-site=baingres] .why h3{font-size:1rem!important}
+html[data-site=baingres] .visit{gap:10px!important}
+/* ASSISE */
+html[data-site=shop] .why{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+html[data-site=shop] .why>*{padding:16px 18px!important}
+html[data-site=shop] .why>* p{font-size:.9rem}
+/* STUDIO : grille de projets en 2 colonnes, images toujours visibles */
+html[data-site=studio] .pgrid{grid-template-columns:1fr 1fr!important;gap:12px!important}
+html[data-site=studio] .pcard,html[data-site=studio] .pcard.half{grid-column:auto!important}
+html[data-site=studio] .pcard.big{grid-column:1/-1!important}
+html[data-site=studio] .pcard .shot,html[data-site=studio] .pcard.half .shot{aspect-ratio:4/5!important}
+html[data-site=studio] .pcard .shot img{clip-path:none!important;transform:none!important}
+html[data-site=studio] .pcard .shot::after{display:none}
+html[data-site=studio] .pmeta{flex-direction:column;align-items:flex-start!important;gap:2px}
+html[data-site=studio] .pmeta h3{font-size:1.15rem!important}
+html[data-site=studio] .pmeta span{font-size:.75rem}
+html[data-site=studio] body{overflow-x:hidden}
+}@media (max-width:700px){
+html[data-site=shop] .why article{display:grid!important;grid-template-columns:auto 1fr;column-gap:14px;align-items:baseline}
+html[data-site=shop] .why article b{font-size:1.4rem!important;grid-row:span 2}
+html[data-site=shop] .why article h3{font-size:1.15rem!important}
+html[data-site=shop] .why article p{grid-column:2;margin:0}
+}
+@media (max-width:700px){
+html[data-site=ebene] .rail{margin-inline:0!important}
+html[data-site=studio] .pcard.big{grid-column:auto!important}
+html[data-site] .mf-h i{width:32px;height:32px;font-size:1.05rem;font-weight:700}
+}
+@media (max-width:700px){
+/* ASSISE : la section « Dessinée pour durer » devient une image fixe, sans animation au défilement */
+html[data-site=shop] .feat{height:auto!important}
+html[data-site=shop] .feat-s{position:relative!important;height:86svh!important}
+html[data-site=shop] .feat-img{clip-path:none!important}
+html[data-site=shop] .feat-img img{transform:none!important}
+html[data-site=shop] .feat h2,html[data-site=shop] .feat h2 span{transform:none!important;opacity:1!important}
+/* BAIN & GRÈS, catalogue : grille de 2 produits par ligne au lieu d'un carrousel */
+html[data-site=baingres] #grid{display:grid!important;grid-template-columns:1fr 1fr!important;overflow:visible!important;margin-inline:0!important;padding-inline:0!important;gap:10px!important}
+html[data-site=baingres] #grid>*{flex:none!important;max-width:none!important}
+html[data-site=baingres] #grid h3{font-size:.95rem!important}
+html[data-site=baingres] .sidebar{margin-top:0}
+}
