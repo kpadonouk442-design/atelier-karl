@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KUBIK — Bureaux et modules dépliables</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="KUBIK, marque de modules dépliables et containers aménagés. dépliage, gammes, configurateur.">
+<meta name="description" content="KUBIK, marque de modules dépliables et conteneurs aménagés. dépliage, gammes, configurateur.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -177,7 +177,7 @@ footer{background:var(--steel);color:#aeb6be;padding:clamp(34px,5vw,60px) var(--
       <path d="M8 14v9M12 16v9M16 17.5v9" stroke="#f6f5f2" stroke-width="1.4" stroke-linecap="round"/>
       <path d="M27 17.5l9-3.6v10l-9 3.6v-10Z" fill="#d6511c" fill-opacity=".9"/>
     </svg>
-    <div><span>KUBIK</span><small>Containers dépliables</small></div>
+    <div><span>KUBIK</span><small>Conteneurs dépliables</small></div>
   </a>
   <nav aria-label="Navigation"><ul>
     <li><a href="#deplie">Comment ça se déplie</a></li><li><a href="#gammes">Modèles</a></li><li><a href="#configurateur">Configurateur</a></li><li><a href="#chantiers">En service</a></li>
@@ -212,8 +212,8 @@ footer{background:var(--steel);color:#aeb6be;padding:clamp(34px,5vw,60px) var(--
 <!-- Démonstration du dépliage (plus bas dans la page, avec vraies photos) -->
 <section class="demo-seq" id="deplie">
   <div class="demo-head">
-    <div><span class="tag">Démonstration en 4 étapes</span><h2>Un vrai container qui se déplie</h2></div>
-    <p>Cliquez sur chaque étape pour voir comment un container standard se transforme en espace de travail vitré.</p>
+    <div><span class="tag">Démonstration en 4 étapes</span><h2>Un vrai conteneur qui se déplie</h2></div>
+    <p>Cliquez sur chaque étape pour voir comment un conteneur standard se transforme en espace de travail vitré.</p>
   </div>
   <div class="unfold-grid">
     <div class="unfold-stage" id="uStage">
@@ -221,12 +221,11 @@ footer{background:var(--steel);color:#aeb6be;padding:clamp(34px,5vw,60px) var(--
       <img src="img/real4.jpg" alt="Container avec paroi latérale et auvent ouverts" data-u="1">
       <img src="img/real3.png" alt="Module vitré et isolé posé sur gravier" data-u="2">
       <img src="img/real5.png" alt="Ensemble modulaire de bureaux en service" data-u="3">
-      <div class="unfold-cap"><b id="uTag">Étape 01</b><span id="uCap">Transport compact par camion standard, portes verrouillées</span></div>
     </div>
     <div class="unfold-steps" id="uSteps" role="tablist" aria-label="Étapes de dépliage">
       <button class="ustep" role="tab" aria-selected="true" data-u="0" data-cap="Transport compact par camion standard, portes verrouillées">
         <small>01</small><h3>Livré fermé</h3>
-        <p>Le module arrive plié au format container classique. Un seul camion peut transporter jusqu'à trois unités d'un coup.</p>
+        <p>Le module arrive plié au format conteneur classique. Un seul camion peut transporter jusqu'à trois unités d'un coup.</p>
       </button>
       <button class="ustep" role="tab" aria-selected="false" data-u="1" data-cap="Ouverture des parois et de l'auvent sans grue lourde">
         <small>02</small><h3>Déplié sur place</h3>
@@ -350,9 +349,9 @@ const uSteps=$$('#uSteps .ustep'), uImgs=$$('#uStage img');
 function setUnfold(i){
   uSteps.forEach(b=>b.setAttribute('aria-selected',b.dataset.u===i));
   uImgs.forEach(im=>im.classList.toggle('on',im.dataset.u===i));
-  $('#uTag').textContent='Étape 0'+(+i+1);
+  if($('#uTag'))$('#uTag').textContent='Étape 0'+(+i+1);
   const active=uSteps.find(b=>b.dataset.u===i);
-  if(active) $('#uCap').textContent=active.dataset.cap;
+  if(active&&$('#uCap')) $('#uCap').textContent=active.dataset.cap;
 }
 uSteps.forEach(b=>b.addEventListener('click',()=>setUnfold(b.dataset.u)));
 
