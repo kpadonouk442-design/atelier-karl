@@ -273,8 +273,8 @@ em.s{color:var(--mute)!important}
   .nav .me-pc .ak{height:30px}
 
   .hpc{--k:#161614;position:relative;display:block;min-height:100svh;color:var(--k);font-family:"Inter Tight","Inter",system-ui,sans-serif}
-  .view[data-view="accueil"]{position:relative;isolation:isolate;background:#eceae6;--k:#161614;--fr:max(var(--gut),calc((100% - 1180px)/2))}
-  .view[data-view="accueil"]::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;mix-blend-mode:multiply;pointer-events:none;
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]){position:relative;isolation:isolate;background:#eceae6;--k:#161614;--fr:max(var(--gut),calc((100% - 1180px)/2))}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"])::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;mix-blend-mode:multiply;pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   .hpc-in{position:relative;min-height:100svh;width:min(1180px,calc(100% - 2*var(--gut)));margin:0 auto;padding:120px 0 52px;
     display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto auto 1fr auto;column-gap:20px}
@@ -311,59 +311,135 @@ em.s{color:var(--mute)!important}
   .nav ul{font-family:"Inter Tight",sans-serif;font-weight:600;font-size:1rem;letter-spacing:-.03em}
   .nav .cta{background:#161614;color:#f2efe6;font-family:"Inter Tight",sans-serif;font-weight:600;letter-spacing:-.02em}
 
-  .view[data-view="accueil"] .tag{font:600 1.15rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;text-transform:none;color:var(--k)}
-  .view[data-view="accueil"] em.s{font:500 1em/1 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 34;font-style:normal;letter-spacing:-.04em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .tag{font:600 1.15rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;text-transform:none;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) em.s{font:500 1em/1 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 34;font-style:normal;letter-spacing:-.04em}
 
   /* chiffres */
-  .view[data-view="accueil"] .facts{display:grid;padding:clamp(40px,6vw,90px) var(--fr) 0;gap:clamp(20px,3vw,50px);grid-template-columns:repeat(12,1fr)}
-  .view[data-view="accueil"] .facts div{background:none!important;border:0;border-top:1px solid var(--k);border-radius:0;padding:18px 0 0;grid-column:span 5;gap:10px}
-  .view[data-view="accueil"] .facts div:nth-child(2){grid-column:8/13}
-  .view[data-view="accueil"] .facts b{font:500 clamp(4.4rem,9vw,8.6rem)/.9 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 30;letter-spacing:-.04em;color:var(--k)}
-  .view[data-view="accueil"] .facts span{font:600 1.15rem/1.1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .facts{display:grid;padding:clamp(40px,6vw,90px) var(--fr) 0;gap:clamp(20px,3vw,50px);grid-template-columns:repeat(12,1fr)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .facts div{background:none!important;border:0;border-top:1px solid var(--k);border-radius:0;padding:18px 0 0;grid-column:span 5;gap:10px}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .facts div:nth-child(2){grid-column:8/13}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .facts b{font:500 clamp(4.4rem,9vw,8.6rem)/.9 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 30;letter-spacing:-.04em;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .facts span{font:600 1.15rem/1.1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--k)}
 
   /* en bref */
-  .view[data-view="accueil"] .band{background:none;padding:clamp(90px,12vw,190px) var(--fr);margin-top:0!important;display:grid;grid-template-columns:repeat(12,1fr)}
-  .view[data-view="accueil"] .band .tag{grid-column:1/13;text-align:right}
-  .view[data-view="accueil"] .band .manifest{grid-column:3/12;max-width:none;margin-top:30px!important;font:600 clamp(2.6rem,5.2vw,5.4rem)/1 "Inter Tight",sans-serif;letter-spacing:-.06em;color:var(--k)}
-  .view[data-view="accueil"] .band .manifest .w:nth-child(11){background:var(--k);color:#f2efe6;padding:0 .12em .04em;margin:0 .04em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .band{background:none;padding:clamp(90px,12vw,190px) var(--fr);margin-top:0!important;display:grid;grid-template-columns:repeat(12,1fr)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .band .tag{grid-column:1/13;text-align:right}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .band .manifest{grid-column:3/12;max-width:none;margin-top:30px!important;font:600 clamp(2.6rem,5.2vw,5.4rem)/1 "Inter Tight",sans-serif;letter-spacing:-.06em;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .band .manifest .w:nth-child(11){background:var(--k);color:#f2efe6;padding:0 .12em .04em;margin:0 .04em}
 
   /* titres de section */
-  .view[data-view="accueil"] .sec{padding:clamp(70px,9vw,140px) var(--fr)}
-  .view[data-view="accueil"] .sec-h{align-items:end;border-top:1px solid var(--k);padding-top:26px;margin-bottom:clamp(36px,5vw,76px)}
-  .view[data-view="accueil"] .sec-h h2{font:600 clamp(3.6rem,8.4vw,8.6rem)/.9 "Inter Tight",sans-serif!important;letter-spacing:-.065em}
-  .view[data-view="accueil"] .sec-h h2 em{color:var(--k)}
-  .view[data-view="accueil"] .more{font:600 1.2rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;color:var(--k);border-bottom:2px solid var(--k);padding-bottom:6px;margin:0}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .sec{padding:clamp(70px,9vw,140px) var(--fr)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .sec-h{align-items:end;border-top:1px solid var(--k);padding-top:26px;margin-bottom:clamp(36px,5vw,76px)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .sec-h h2{font:600 clamp(3.6rem,8.4vw,8.6rem)/.9 "Inter Tight",sans-serif!important;letter-spacing:-.065em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .sec-h h2 em{color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .more{font:600 1.2rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;color:var(--k);border-bottom:2px solid var(--k);padding-bottom:6px;margin:0}
 
   /* projets */
-  .view[data-view="accueil"] .feat{gap:clamp(60px,8vw,120px)}
-  .view[data-view="accueil"] .fcard{grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);align-items:end;color:var(--k)}
-  .view[data-view="accueil"] .fcard>.fimg{grid-column:1/8}
-  .view[data-view="accueil"] .fcard>div:not(.fimg){grid-column:8/13}
-  .view[data-view="accueil"] .fcard:nth-child(even){grid-template-columns:repeat(12,1fr)}
-  .view[data-view="accueil"] .fcard:nth-child(even)>.fimg{grid-column:6/13;order:2}
-  .view[data-view="accueil"] .fcard:nth-child(even)>div:not(.fimg){grid-column:1/6;order:1}
-  .view[data-view="accueil"] .fimg{border-radius:0;box-shadow:none;border:1px solid var(--k);aspect-ratio:16/10}
-  .view[data-view="accueil"] .chip{background:none;color:var(--k);padding:0;border-radius:0;font:600 .95rem/1 "Inter Tight",sans-serif;letter-spacing:-.03em;text-transform:none}
-  .view[data-view="accueil"] .chip::before{content:"+ ";font-weight:700}
-  .view[data-view="accueil"] .fcard h3{font:600 clamp(2.8rem,5vw,5rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em;margin:18px 0 16px}
-  .view[data-view="accueil"] .fcard p{color:var(--k);opacity:.72;font:500 1.12rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
-  .view[data-view="accueil"] .fcard .more{color:var(--k);margin-top:26px}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .feat{gap:clamp(60px,8vw,120px)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard{grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);align-items:end;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard>.fimg{grid-column:1/8}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard>div:not(.fimg){grid-column:8/13}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard:nth-child(even){grid-template-columns:repeat(12,1fr)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard:nth-child(even)>.fimg{grid-column:6/13;order:2}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard:nth-child(even)>div:not(.fimg){grid-column:1/6;order:1}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fimg{border-radius:0;box-shadow:none;border:1px solid var(--k);aspect-ratio:16/10}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .chip{background:none;color:var(--k);padding:0;border-radius:0;font:600 .95rem/1 "Inter Tight",sans-serif;letter-spacing:-.03em;text-transform:none}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .chip::before{content:"+ ";font-weight:700}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard h3{font:600 clamp(2.8rem,5vw,5rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em;margin:18px 0 16px}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard p{color:var(--k);opacity:.72;font:500 1.12rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .fcard .more{color:var(--k);margin-top:26px}
 
   /* services : la ligne passe en noir au survol */
-  .view[data-view="accueil"] .slist{border-top:1px solid var(--k)}
-  .view[data-view="accueil"] .acc{border-bottom:1px solid var(--k)}
-  .view[data-view="accueil"] .acc summary{margin:0 calc(-1 * clamp(12px,1.6vw,24px));padding:clamp(24px,3vw,40px) clamp(12px,1.6vw,24px);grid-template-columns:5ch minmax(0,1.5fr) minmax(0,1fr);cursor:default;transition:background .35s var(--ease),color .35s var(--ease)}
-  .view[data-view="accueil"] .acc summary:hover{background:var(--k);color:#f2efe6}
-  .view[data-view="accueil"] .acc summary b{font:600 1rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em;color:inherit}
-  .view[data-view="accueil"] .acc summary h3{font:600 clamp(2.4rem,4.8vw,4.8rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
-  .view[data-view="accueil"] .acc .body{color:inherit;opacity:.72;font:500 1.1rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .slist{border-top:1px solid var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc{border-bottom:1px solid var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc summary{margin:0 calc(-1 * clamp(12px,1.6vw,24px));padding:clamp(24px,3vw,40px) clamp(12px,1.6vw,24px);grid-template-columns:5ch minmax(0,1.5fr) minmax(0,1fr);cursor:default;transition:background .35s var(--ease),color .35s var(--ease)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc summary:hover{background:var(--k);color:#f2efe6}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc summary b{font:600 1rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em;color:inherit}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc summary h3{font:600 clamp(2.4rem,4.8vw,4.8rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .acc .body{color:inherit;opacity:.72;font:500 1.1rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
 
   /* appel final */
-  .view[data-view="accueil"] .cta{background:none;border-top:1px solid var(--k);text-align:left;justify-items:start;padding:clamp(90px,11vw,170px) var(--fr) clamp(90px,10vw,150px);gap:44px;color:var(--k)}
-  .view[data-view="accueil"] .cta h2{font:600 clamp(4rem,10vw,10rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
-  .view[data-view="accueil"] .cta h2 em,.view[data-view="accueil"] .cta h2 em.s{color:#f2efe6!important;display:table;background:var(--k);color:#f2efe6;font:500 1em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 40;font-style:normal;letter-spacing:-.04em;padding:.04em .12em .1em;margin-top:.12em}
-  .view[data-view="accueil"] .cta .btn{background:none;color:var(--k);border-radius:0;padding:0 0 8px;border-bottom:2px solid var(--k);font:600 1.5rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;transition:gap .35s var(--ease)}
-  .view[data-view="accueil"] .cta .btn:hover{background:none;gap:1.1em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta{background:none;border-top:1px solid var(--k);text-align:left;justify-items:start;padding:clamp(90px,11vw,170px) var(--fr) clamp(90px,10vw,150px);gap:44px;color:var(--k)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta h2{font:600 clamp(4rem,10vw,10rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta h2 em,.view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta h2 em.s{color:#f2efe6!important;display:table;background:var(--k);color:#f2efe6;font:500 1em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 40;font-style:normal;letter-spacing:-.04em;padding:.04em .12em .1em;margin-top:.12em}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta .btn{background:none;color:var(--k);border-radius:0;padding:0 0 8px;border-bottom:2px solid var(--k);font:600 1.5rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;transition:gap .35s var(--ease)}
+  .view:is([data-view="accueil"],[data-view="projets"],[data-view="services"],[data-view="apropos"],[data-view="contact"]) .cta .btn:hover{background:none;gap:1.1em}
+
+    /* ---------- autres pages : meme langage ---------- */
+  .pg-h{padding:clamp(130px,13vw,180px) var(--fr) clamp(30px,4vw,56px);gap:22px;color:var(--k)}
+  .pg-h .tag::before,.ab-h .tag::before,.ct .tag::before{content:"+ ";font-weight:700}
+  .pg-h h1{font:600 clamp(5rem,15vw,15rem)/.86 "Inter Tight",sans-serif!important;letter-spacing:-.07em!important}
+  .pg-h h1 .blk{display:inline-block;background:var(--k);color:#f2efe6;font:500 .92em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 60;letter-spacing:-.04em;padding:.02em .1em .16em;margin-left:-.02em}
+  .pg-h p{font:500 clamp(1.2rem,1.7vw,1.6rem)/1.15 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--k);opacity:.75;max-width:30ch}
+
+  /* manege : on garde l'animation, on change l'habillage */
+  .ring a{border-radius:0;box-shadow:0 0 0 1px var(--k),0 30px 50px -30px rgba(22,22,20,.45)}
+  .ring a b{background:var(--k);color:#f2efe6;border-radius:0;font:600 .72rem/1 "Inter Tight",sans-serif;letter-spacing:-.01em;text-transform:none}
+  .ring-cap{justify-items:start;text-align:left;padding:30px var(--fr) clamp(80px,9vw,130px);grid-template-columns:auto 1fr auto;align-items:end;column-gap:28px;border-top:1px solid var(--k);margin:0 var(--fr);padding-left:0;padding-right:0}
+  .ring-cap .tag{grid-row:1;grid-column:1;font:600 1rem/1 "Inter Tight",sans-serif;letter-spacing:-.03em;text-transform:none}
+  .ring-cap b{grid-column:2;grid-row:1/3;font:600 clamp(2.6rem,5vw,5rem)/.9 "Inter Tight",sans-serif;letter-spacing:-.065em}
+  .ring-cap small{grid-column:1;grid-row:2;font:500 1rem "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--k);opacity:.7;margin:0}
+  .ring-cap .btn{grid-column:3;grid-row:1/3;background:none;color:var(--k);border-radius:0;padding:0 0 8px;border-bottom:2px solid var(--k);font:600 1.3rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em}
+  .ring-cap .tag:last-child{display:none}
+
+  /* services : liste en lignes */
+  .srv{grid-template-columns:1fr;gap:0;padding:clamp(40px,5vw,70px) var(--fr) 0}
+  .srv details{background:none;border:0;border-top:1px solid var(--k);border-radius:0;padding:clamp(28px,3.4vw,48px) 0;color:var(--k)}
+  .srv details:last-child{border-bottom:1px solid var(--k)}
+  .srv details{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);column-gap:clamp(20px,3vw,48px);align-items:start}
+  .srv summary{grid-column:1;grid-row:1/3;display:block}
+  .srv summary>div{display:grid;gap:18px}
+  .srv summary i{display:none}
+  .srv details>p{grid-column:2;grid-row:1;padding-top:.5em}
+  .srv details>ul{grid-column:2;grid-row:2}
+  .srv h3{font:600 clamp(2.8rem,5.6vw,5.6rem)/.9 "Inter Tight",sans-serif;letter-spacing:-.065em;margin:0}
+  .srv .tag{color:var(--k)}
+  .srv p{font:500 1.15rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--k);opacity:.75;max-width:34ch;margin:0}
+  .srv ul{margin-top:20px}
+  .srv li{background:none;border:1px solid var(--k);border-radius:0;font:600 .85rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em}
+  .steps{gap:clamp(20px,3vw,48px)}
+  .steps article{background:none;border-radius:0;border-top:1px solid var(--k);padding:18px 0 0;color:var(--k)}
+  .steps b{font:500 clamp(4rem,6vw,6rem)/.9 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 30;font-style:normal;color:var(--k);letter-spacing:-.04em}
+  .steps h3{font:600 1.7rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em}
+  .steps p{font:500 1.05rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--k);opacity:.72}
+  .faq{max-width:none}
+  .faq details{border-top:1px solid var(--k);padding:26px 0}
+  .faq details:last-child{border-bottom:1px solid var(--k)}
+  .faq summary{font:600 clamp(1.5rem,2.6vw,2.4rem)/1.05 "Inter Tight",sans-serif;letter-spacing:-.055em}
+  .faq summary::after{color:var(--k)}
+  .faq p{font:500 1.15rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--k);opacity:.75}
+
+  /* a propos */
+  .ab-h{padding:clamp(130px,13vw,180px) var(--fr) clamp(60px,8vw,110px);grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);align-items:start;color:var(--k)}
+  .ab-h>div:first-child{grid-column:1/9}
+  .ab-h h1{font:600 clamp(4rem,8.6vw,9rem)/.9 "Inter Tight",sans-serif;letter-spacing:-.07em;margin-top:28px!important}
+  .ab-h h1 em.s{display:table;background:var(--k);color:#f2efe6!important;font:500 1em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 50;letter-spacing:-.04em;padding:.02em .1em .1em;margin-top:.1em}
+  .ab-h .acts{margin-top:44px;gap:30px}
+  .ab-h .btn,.ct .btn{background:none;color:var(--k);border-radius:0;box-shadow:none;padding:0 0 8px;border-bottom:2px solid var(--k);font:600 1.3rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em}
+  .fiche{grid-column:9/13;margin-top:70px;background:none;border:0;border-radius:0;border-top:1px solid var(--k);padding:0;color:var(--k)}
+  .fiche>div{border-bottom:1px solid var(--k);grid-template-columns:6.5em 1fr;padding:16px 0}
+  .fiche small{font:600 .85rem "Inter Tight",sans-serif;letter-spacing:-.02em;text-transform:none;opacity:.6}
+  .fiche b{font:600 1.05rem/1.2 "Inter Tight",sans-serif;letter-spacing:-.03em}
+  .ab-b{padding:clamp(60px,8vw,120px) var(--fr) clamp(90px,11vw,160px);border-top:1px solid var(--k);grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);color:var(--k)}
+  .ab-b .manifest{grid-column:1/9;max-width:none;font:600 clamp(2.4rem,4.6vw,4.8rem)/1 "Inter Tight",sans-serif;letter-spacing:-.06em;color:var(--k)}
+  .ab-b>div{grid-column:9/13;padding-top:12px}
+  .ab-b>div p{font:500 1.15rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--k);opacity:.78;max-width:30ch}
+
+  /* contact */
+  .ct{padding:clamp(130px,13vw,180px) var(--fr) clamp(90px,11vw,150px);grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);align-items:start;color:var(--k)}
+  .ct>div:first-child{grid-column:1/7}
+  .ct h1{font:600 clamp(4rem,8vw,8.4rem)/.9 "Inter Tight",sans-serif;letter-spacing:-.07em;margin-top:28px!important}
+  .ct h1 em.s{display:table;background:var(--k);color:#f2efe6!important;font:500 1em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 50;letter-spacing:-.04em;padding:.02em .1em .1em;margin-top:.1em}
+  .mailbox{background:none;border:0;border-top:1px solid var(--k);border-radius:0;padding:22px 0 0;margin-top:56px;color:var(--k)}
+  .mailbox small{font:600 .85rem "Inter Tight",sans-serif;letter-spacing:-.02em;text-transform:none;opacity:.6}
+  .mail{font:600 clamp(1.5rem,2.4vw,2.4rem)/1.1 "Inter Tight",sans-serif;letter-spacing:-.055em}
+  .copy{background:none;color:var(--k);border-radius:0;padding:0 0 4px;border-bottom:1.5px solid var(--k);font:600 .95rem/1 "Inter Tight",sans-serif;letter-spacing:-.03em;text-transform:none;margin-top:10px}
+  .ways span{background:none;border:1px solid var(--k);border-radius:0;font:600 .9rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em}
+  .fbox{grid-column:8/13;margin-top:70px;background:none;border:0;border-top:1px solid var(--k);border-radius:0;color:var(--k)}
+  .fbox summary{font:600 1.6rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;padding:22px 0}
+  .fbox label{font:600 .9rem "Inter Tight",sans-serif;letter-spacing:-.02em;color:var(--k)}
+  .fbox input,.fbox select,.fbox textarea{background:none;border:0;border-bottom:1px solid var(--k);border-radius:0;color:var(--k);font:500 1.05rem "Inter Tight",sans-serif;padding:.6em 0}
+  .fbox input:focus,.fbox select:focus,.fbox textarea:focus{outline:0;border-bottom-width:2px}
 
   /* pied de page */
   footer{background:none;color:var(--k,#161614);border-top:1px solid #161614;font:600 .9rem/1.2 "Inter Tight",sans-serif;letter-spacing:-.02em;padding:30px max(var(--gut),calc((100% - 1180px)/2));align-items:center}
@@ -453,7 +529,7 @@ em.s{color:var(--mute)!important}
 </div>
 
 <div class="view" data-view="projets">
-  <section class="pg-h"><span class="tag c-sun">Sélection · 7 projets</span><h1>Projets</h1><p>Faites tourner le manège et touchez un site pour l'ouvrir.</p></section>
+  <section class="pg-h"><span class="tag c-sun">Sélection · 7 projets</span><h1><span class="blk">Projets</span></h1><p>Faites tourner le manège et touchez un site pour l'ouvrir.</p></section>
   <section class="ring-view" id="ringView" aria-label="Manège des projets"><div class="ring" id="ring"></div></section>
   <div class="ring-cap"><span class="tag" id="ringN">01 / 07</span><b id="ringT">Gros Œuvre International</b><small id="ringK">Site vitrine · BTP</small><a class="btn" id="ringGo" href="#goi">Ouvrir le projet</a><span class="tag">Glissez pour faire tourner</span></div>
 </div>
@@ -461,7 +537,7 @@ em.s{color:var(--mute)!important}
 <div class="view" data-view="case" id="case"></div>
 
 <div class="view" data-view="services">
-  <section class="pg-h"><span class="tag c-mint">Services</span><h1>Services</h1><p>Quatre types de sites, une même exigence : rapides, clairs et pensés pour le téléphone.</p></section>
+  <section class="pg-h"><span class="tag c-mint">Services</span><h1><span class="blk">Services</span></h1><p>Quatre types de sites, une même exigence : rapides, clairs et pensés pour le téléphone.</p></section>
   <section class="srv" id="srv"></section>
   <section class="sec" style="padding-top:clamp(40px,6vw,80px)">
     <div class="sec-h"><h2>Comment <em class="s c-sun">je travaille</em></h2></div>
