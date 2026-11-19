@@ -7,7 +7,7 @@
 <meta name="description" content="Karl Orphé Kpadonou, développeur web. Sites vitrines, boutiques en ligne, plateformes et sites animés, pensés d'abord pour le téléphone.">
 <meta name="theme-color" content="#fdfdfc">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/goi-long.webp?v=6"><link rel="preload" as="image" href="img/kasa-long.webp?v=6"><link rel="preload" as="image" href="img/ebene-long.webp?v=6">
 <style>
 :root{--bg:#fdfdfc;--bg2:#f4f3ef;--bg3:#e9e8e3;--ink:#21201c;--mute:#63635e;--line:rgba(33,32,28,.12);
@@ -261,6 +261,116 @@ em.s{color:var(--mute)!important}
 .deck-cap b{font-size:1.3rem}
 .ring-cap b{font-size:clamp(1.6rem,4vw,2.6rem)}
 .ab-b p.manifest{font-size:clamp(1.7rem,3.4vw,3rem);color:var(--ink);max-width:20ch}
+
+/* ====== ACCUEIL PC : poster typographique "atelier karl." ======
+   Visible seulement sur grand ecran avec souris (>=1024px). Mobile et tablette : accueil inchange. */
+.hpc,.nav .me-pc,.ak-f{display:none}
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){
+  .hero{display:none}                                   /* ancien accueil = version mobile */
+  .nav .me i,.nav .me b{display:none}
+  .nav .me-pc{display:flex;align-items:center;gap:12px}
+  .ak{display:block;aspect-ratio:1224/686;background:currentColor;-webkit-mask:url(img/logo-ak.png) center/contain no-repeat;mask:url(img/logo-ak.png) center/contain no-repeat}
+  .nav .me-pc .ak{height:30px}
+
+  .hpc{--k:#161614;position:relative;display:block;min-height:100svh;color:var(--k);font-family:"Inter Tight","Inter",system-ui,sans-serif}
+  .view[data-view="accueil"]{position:relative;isolation:isolate;background:#eceae6;--k:#161614;--fr:max(var(--gut),calc((100% - 1180px)/2))}
+  .view[data-view="accueil"]::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;mix-blend-mode:multiply;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hpc-in{position:relative;min-height:100svh;width:min(1180px,calc(100% - 2*var(--gut)));margin:0 auto;padding:120px 0 52px;
+    display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto auto 1fr auto;column-gap:20px}
+
+  .plus{font:600 1.7rem/1 "Inter Tight",sans-serif}
+  .p1{grid-column:1/2;grid-row:1;align-self:start;margin-top:.1em}
+  .t-line{grid-column:6/13;grid-row:1;font:600 clamp(1.3rem,1.9vw,1.85rem)/1.12 "Inter Tight",sans-serif;letter-spacing:-.05em}
+  .meta3{grid-column:2/13;grid-row:2;display:grid;grid-template-columns:repeat(3,1fr);margin-top:26px;font:600 .82rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em}
+  .meta3 span:nth-child(2){justify-self:start;padding-left:calc(50% - 12px)}.meta3 span:nth-child(3){justify-self:end}
+  .meta3 span:nth-child(1){padding-left:0}
+
+  .mid{grid-column:3/13;grid-row:3;align-self:center;justify-self:start;width:max-content;max-width:100%;padding:40px 0}
+  .lab{display:block;text-align:right;font:600 1.15rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;margin-bottom:22px}
+  .wm{font:500 clamp(4.4rem,10.4vw,10.2rem)/.92 "Bodoni Moda",Georgia,serif;letter-spacing:-.045em;display:flex;align-items:stretch;white-space:nowrap}
+  .wm .a{display:block;padding:.04em .06em 0 0;overflow:hidden}
+  .wm .blk{display:block;position:relative;background:var(--k);color:#f2efe6;padding:.04em .1em .08em .08em;animation:hpcWipe 1.05s var(--ease) .15s both}
+  .wm .a{animation:hpcRise .9s var(--ease) both}
+  @keyframes hpcWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes hpcRise{from{opacity:0;transform:translateY(.14em)}to{opacity:1;transform:none}}
+  .def{margin-top:30px;max-width:21ch;font:600 clamp(1.5rem,2.1vw,2.05rem)/1.04 "Inter Tight",sans-serif;letter-spacing:-.055em}
+
+  .bot{grid-column:1/13;grid-row:4;display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;position:relative}
+  .sig{display:flex;align-items:center;gap:14px;font:600 .82rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em}
+  .ak-s{height:34px}
+  .lnk{display:flex;gap:34px;padding-right:46px}
+  .lnk a{display:inline-flex;align-items:center;gap:10px;font:600 1.25rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;border-bottom:2px solid var(--k);padding-bottom:6px;transition:gap .35s var(--ease)}
+  .lnk a:hover{gap:16px}
+  .lnk svg{width:18px;height:18px}
+  .p2{position:absolute;right:0;bottom:2px}
+  .hpc a:focus-visible{outline:3px solid var(--k);outline-offset:5px}
+
+  /* ---------- sections de l'accueil, meme langage que le hero ---------- */
+  .nav{background:rgba(236,234,230,.84)}
+  .nav ul{font-family:"Inter Tight",sans-serif;font-weight:600;font-size:1rem;letter-spacing:-.03em}
+  .nav .cta{background:#161614;color:#f2efe6;font-family:"Inter Tight",sans-serif;font-weight:600;letter-spacing:-.02em}
+
+  .view[data-view="accueil"] .tag{font:600 1.15rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;text-transform:none;color:var(--k)}
+  .view[data-view="accueil"] em.s{font:500 1em/1 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 34;font-style:normal;letter-spacing:-.04em}
+
+  /* chiffres */
+  .view[data-view="accueil"] .facts{display:grid;padding:clamp(40px,6vw,90px) var(--fr) 0;gap:clamp(20px,3vw,50px);grid-template-columns:repeat(12,1fr)}
+  .view[data-view="accueil"] .facts div{background:none!important;border:0;border-top:1px solid var(--k);border-radius:0;padding:18px 0 0;grid-column:span 5;gap:10px}
+  .view[data-view="accueil"] .facts div:nth-child(2){grid-column:8/13}
+  .view[data-view="accueil"] .facts b{font:500 clamp(4.4rem,9vw,8.6rem)/.9 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 30;letter-spacing:-.04em;color:var(--k)}
+  .view[data-view="accueil"] .facts span{font:600 1.15rem/1.1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--k)}
+
+  /* en bref */
+  .view[data-view="accueil"] .band{background:none;padding:clamp(90px,12vw,190px) var(--fr);margin-top:0!important;display:grid;grid-template-columns:repeat(12,1fr)}
+  .view[data-view="accueil"] .band .tag{grid-column:1/13;text-align:right}
+  .view[data-view="accueil"] .band .manifest{grid-column:3/12;max-width:none;margin-top:30px!important;font:600 clamp(2.6rem,5.2vw,5.4rem)/1 "Inter Tight",sans-serif;letter-spacing:-.06em;color:var(--k)}
+  .view[data-view="accueil"] .band .manifest .w:nth-child(11){background:var(--k);color:#f2efe6;padding:0 .12em .04em;margin:0 .04em}
+
+  /* titres de section */
+  .view[data-view="accueil"] .sec{padding:clamp(70px,9vw,140px) var(--fr)}
+  .view[data-view="accueil"] .sec-h{align-items:end;border-top:1px solid var(--k);padding-top:26px;margin-bottom:clamp(36px,5vw,76px)}
+  .view[data-view="accueil"] .sec-h h2{font:600 clamp(3.6rem,8.4vw,8.6rem)/.9 "Inter Tight",sans-serif!important;letter-spacing:-.065em}
+  .view[data-view="accueil"] .sec-h h2 em{color:var(--k)}
+  .view[data-view="accueil"] .more{font:600 1.2rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;color:var(--k);border-bottom:2px solid var(--k);padding-bottom:6px;margin:0}
+
+  /* projets */
+  .view[data-view="accueil"] .feat{gap:clamp(60px,8vw,120px)}
+  .view[data-view="accueil"] .fcard{grid-template-columns:repeat(12,1fr);gap:0 clamp(20px,3vw,48px);align-items:end;color:var(--k)}
+  .view[data-view="accueil"] .fcard>.fimg{grid-column:1/8}
+  .view[data-view="accueil"] .fcard>div:not(.fimg){grid-column:8/13}
+  .view[data-view="accueil"] .fcard:nth-child(even){grid-template-columns:repeat(12,1fr)}
+  .view[data-view="accueil"] .fcard:nth-child(even)>.fimg{grid-column:6/13;order:2}
+  .view[data-view="accueil"] .fcard:nth-child(even)>div:not(.fimg){grid-column:1/6;order:1}
+  .view[data-view="accueil"] .fimg{border-radius:0;box-shadow:none;border:1px solid var(--k);aspect-ratio:16/10}
+  .view[data-view="accueil"] .chip{background:none;color:var(--k);padding:0;border-radius:0;font:600 .95rem/1 "Inter Tight",sans-serif;letter-spacing:-.03em;text-transform:none}
+  .view[data-view="accueil"] .chip::before{content:"+ ";font-weight:700}
+  .view[data-view="accueil"] .fcard h3{font:600 clamp(2.8rem,5vw,5rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em;margin:18px 0 16px}
+  .view[data-view="accueil"] .fcard p{color:var(--k);opacity:.72;font:500 1.12rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
+  .view[data-view="accueil"] .fcard .more{color:var(--k);margin-top:26px}
+
+  /* services : la ligne passe en noir au survol */
+  .view[data-view="accueil"] .slist{border-top:1px solid var(--k)}
+  .view[data-view="accueil"] .acc{border-bottom:1px solid var(--k)}
+  .view[data-view="accueil"] .acc summary{margin:0 calc(-1 * clamp(12px,1.6vw,24px));padding:clamp(24px,3vw,40px) clamp(12px,1.6vw,24px);grid-template-columns:5ch minmax(0,1.5fr) minmax(0,1fr);cursor:default;transition:background .35s var(--ease),color .35s var(--ease)}
+  .view[data-view="accueil"] .acc summary:hover{background:var(--k);color:#f2efe6}
+  .view[data-view="accueil"] .acc summary b{font:600 1rem/1 "Inter Tight",sans-serif;letter-spacing:-.02em;color:inherit}
+  .view[data-view="accueil"] .acc summary h3{font:600 clamp(2.4rem,4.8vw,4.8rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
+  .view[data-view="accueil"] .acc .body{color:inherit;opacity:.72;font:500 1.1rem/1.3 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:30ch}
+
+  /* appel final */
+  .view[data-view="accueil"] .cta{background:none;border-top:1px solid var(--k);text-align:left;justify-items:start;padding:clamp(90px,11vw,170px) var(--fr) clamp(90px,10vw,150px);gap:44px;color:var(--k)}
+  .view[data-view="accueil"] .cta h2{font:600 clamp(4rem,10vw,10rem)/.92 "Inter Tight",sans-serif;letter-spacing:-.065em}
+  .view[data-view="accueil"] .cta h2 em,.view[data-view="accueil"] .cta h2 em.s{color:#f2efe6!important;display:table;background:var(--k);color:#f2efe6;font:500 1em/.95 "Bodoni Moda",Georgia,serif;font-variation-settings:"opsz" 40;font-style:normal;letter-spacing:-.04em;padding:.04em .12em .1em;margin-top:.12em}
+  .view[data-view="accueil"] .cta .btn{background:none;color:var(--k);border-radius:0;padding:0 0 8px;border-bottom:2px solid var(--k);font:600 1.5rem/1 "Inter Tight",sans-serif;letter-spacing:-.05em;transition:gap .35s var(--ease)}
+  .view[data-view="accueil"] .cta .btn:hover{background:none;gap:1.1em}
+
+  /* pied de page */
+  footer{background:none;color:var(--k,#161614);border-top:1px solid #161614;font:600 .9rem/1.2 "Inter Tight",sans-serif;letter-spacing:-.02em;padding:30px max(var(--gut),calc((100% - 1180px)/2));align-items:center}
+  footer .ft-l{display:inline-flex;align-items:center;gap:14px}
+  .ak-f{display:block;height:26px}
+  footer a:hover{color:inherit;text-decoration:underline}
+}
 </style>
 </head>
 <body>
@@ -268,7 +378,7 @@ em.s{color:var(--mute)!important}
 <div class="wipe" id="wipe" aria-hidden="true"><b id="wipeT"></b></div>
 
 <header class="nav">
-  <a class="me" href="#accueil" aria-label="Accueil"><i>KK</i><b data-me="nom">Karl Orphé Kpadonou</b></a>
+  <a class="me" href="#accueil" aria-label="atelier karl, accueil"><i>KK</i><b data-me="nom">Karl Orphé Kpadonou</b><span class="me-pc" aria-hidden="true"><span class="ak"></span></span></a>
   <div class="right">
     <nav aria-label="Navigation"><ul>
       <li><a href="#accueil">Accueil</a></li><li><a href="#projets">Projets</a></li><li><a href="#services">Services</a></li><li><a href="#apropos">À propos</a></li>
@@ -283,6 +393,26 @@ em.s{color:var(--mute)!important}
 
 <main>
 <div class="view on" data-view="accueil">
+  <section class="hpc" id="heroPc" aria-label="Accueil">
+    <div class="hpc-in">
+      <span class="plus p1" aria-hidden="true">+</span>
+      <p class="t-line">un atelier de sites sur-mesure,<br>pensés d'abord pour le téléphone.</p>
+      <div class="meta3"><span>développeur web</span><span>expert SEO</span><span>7 projets réalisés</span></div>
+
+      <div class="mid">
+        <span class="lab">accueil</span>
+        <h1 class="wm"><span class="a">atelier</span><span class="blk"><span>karl.</span></span></h1>
+        <p class="def">lieu où l'on fabrique, à la main, des sites rapides, animés et pensés pour être trouvés sur Google.</p>
+      </div>
+
+      <div class="bot">
+        <div class="sig"><span class="ak ak-s" aria-hidden="true"></span><span>par Karl Orphé Kpadonou</span></div>
+        <div class="lnk"><a href="#projets">voir les projets<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="#contact">me contacter<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a></div>
+        <span class="plus p2" aria-hidden="true">+</span>
+      </div>
+    </div>
+  </section>
+
   <section class="hero" id="hero">
     <div class="h-txt">
       <span class="tag c-sky">Développeur web · Créateur de sites</span>
@@ -391,7 +521,7 @@ em.s{color:var(--mute)!important}
 </div>
 </main>
 
-<footer><span>© 2026 <span data-me="nom">Karl Orphé Kpadonou</span></span><nav><a href="#projets">Projets</a><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav></footer>
+<footer><span class="ft-l"><i class="ak ak-f" aria-hidden="true"></i>© 2026 <span data-me="nom">Karl Orphé Kpadonou</span></span><nav><a href="#projets">Projets</a><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav></footer>
 
 <script>
 /* ======================= VOS INFORMATIONS ======================= */
