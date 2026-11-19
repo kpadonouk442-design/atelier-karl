@@ -660,7 +660,7 @@ const _n=ME.nom.trim().split(/\s+/);ME.nomfam=_n.length>1?_n.pop():ME.nom;ME.pre
 $$('[data-me]').forEach(e=>e.textContent=ME[e.dataset.me]);
 $('#mail').textContent=ME.email;$('#mail').href='mailto:'+ME.email;
 $('#edu').innerHTML=ME.formation.map(f=>`<b>${f.t}</b><small>${f.s}</small>`).join('<br>');$('#eduWrap').hidden=!ME.formation.length;
-$('#ways').innerHTML=(ME.tel?`<span>WhatsApp · ${ME.tel}</span>`:'')+`<span>Réponse sous 24 h</span><span>Premier échange gratuit</span>`;
+$('#ways').innerHTML=(ME.tel?`<span>WhatsApp · ${ME.tel}</span>`:'')+`<span>Réponse sous 24 h</span>`;
 if(ME.tel){const a=$('#waBtn');a.href='https://wa.me/'+ME.tel.replace(/\D/g,'')+'?text='+encodeURIComponent("Bonjour, j'aimerais échanger sur un projet de site web.");a.hidden=false;}
 
 $('#feat').innerHTML=PJ.slice(0,3).map(p=>`<a class="fcard up" href="#${p.id}" style="--c:${p.c}"><div class="fimg"><img src="img/${p.img}-1.webp${V}" alt="Site ${p.n}" decoding="async"></div><div><span class="chip">${p.kind}</span><h3>${p.n}</h3><p>${p.d}</p><span class="more">Voir le projet →</span></div></a>`).join('');
